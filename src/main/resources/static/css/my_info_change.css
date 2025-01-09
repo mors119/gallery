@@ -1,0 +1,87 @@
+.my_infoC_container .con_wrap .my_page_tit {
+    margin-top: 0;
+}
+
+.my_infoC_container .confirm_area {
+    padding: 80px 50px;
+    border: 1px solid #DDD;
+    text-align: center;
+}
+
+.my_infoC_container .confirm_area h4 {
+    display: inline-block;
+    padding-left: 25px;
+    background: url(/images/my_page/ico-password-lock.png) no-repeat left center;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 28px;
+}
+
+.my_infoC_container .confirm_area p {
+    margin-top: 10px;
+    margin-bottom: 40px;
+    color: var(--gray-500);
+    line-height: 26px;
+}
+
+.my_infoC_container .confirm_area .confirm_input {
+    margin: 20px auto 0;
+    max-width: 420px;
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    height: 60px;
+    border: 1px solid #F8F8F8;
+    background: #F8F8F8;
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 60px;
+}
+
+.my_infoC_container .confirm_area .confirm_input:first-of-type {
+    margin-top: 0;
+}
+
+.my_infoC_container .confirm_btn_wrap {
+    padding-top: 60px;
+    border-top: none;
+    font-size: 0;
+    text-align: center;
+}
+
+.my_infoC_container .confirm_btn_wrap > * {
+    position: relative;
+    display: inline-block;
+    max-width: 260px;
+    margin-right: 20px;
+    width: 100%;
+    vertical-align: middle;
+    font-size: 15px;
+    border: 1px solid #AAA;
+    color: var(--gray-500);
+    line-height: 50px;
+    transition: all .4s ease;
+    font-weight: 500;
+    text-align: center;
+    background-color: transparent;
+}
+
+.my_infoC_container .confirm_btn:hover {
+    background: #AAA;
+    color: #FFF;
+}
+
+.my_infoC_container .confirm_btn_point {
+    border-color: var(--point-color1) !important;
+    color: var(--point-color1) !important;
+    cursor: pointer;
+}
+
+.my_infoC_container .confirm_btn_point:hover {
+    background-color: var(--point-color1) !important;
+    color: #FFF !important;
+}
+
+.my_infoC_container #id_check {
+    display: none;
+}

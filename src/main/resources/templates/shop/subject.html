@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/subject_list.css">
+</head>
+<body>
+<main id="container" class="subject_list" layout:fragment="content">
+    <div th:replace="~{fragments :: commonTitle('SUBJECT', '주제별로 다양한 작품을 만나보세요.')}"></div>
+
+    <div class="content">
+        <div class="inner">
+            <div class="main_content">
+                <div class="sticky_select">
+                    <h3>Subject List</h3>
+                    <ul>
+                        <li th:class="${param.keyword == null ? 'on' : ''}">
+                            <a href="/shop/subject">
+                                <span>All</span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Spring') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Spring">
+                                <span>봄<strong>Spring</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Summer') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Summer">
+                                <span>여름<strong>Summer</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Fall') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Fall">
+                                <span>가을<strong>Fall</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Winter') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Winter">
+                                <span>겨울<strong>Winter</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Animal') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Animal">
+                                <span>동물<strong>Animal</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Plant') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Plant">
+                                <span>식물<strong>Plant</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'City') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=City">
+                                <span>도시<strong>City</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Child') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Child">
+                                <span>어린이<strong>Child</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Indoor') ? 'on' : ''}">
+                            <a href="/shop/subject?keyword=Indoor">
+                                <span>실내<strong>Indoor</strong></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="artist">
+                    <p>총 <span th:text="${totalCount}"></span>개의 상품이 있습니다.</p>
+
+                    <div class="artist_template">
+                        <div class="template" th:each="sub : ${list}">
+                            <div class="image_wrap">
+                                <img th:src="${'/images/goods/' + sub.poster}" th:alt="${sub.name_kr}">
+                                <div>
+                                    <div class="cover">
+                                        <div th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${sub.no})}"></div>
+                                        <div th:replace="~{fragments :: iconWrap(${sub.no}, ${wishList})}"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail_wrap">
+                                <a th:href="@{'/shop/view/' + ${sub.no}}" th:text="${sub.title}"></a>
+                                <div class="artist">
+                                    <span th:text="${sub.name_kr}"></span>
+                                </div>
+                                <div class="item_size">
+                                    <p>30.0cm x 30.0cm</p>
+                                </div>
+                                <div class="item_price">
+                                    <span><strong th:text="${#numbers.formatInteger(sub.price, 3, 'COMMA')}"></strong>원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <th:block th:utext="${paging}" />
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

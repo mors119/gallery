@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/my_page.css">
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <script src="/js/my_page.js"></script>
+</head>
+<body>
+<main id="container" class="my_page_container" layout:fragment="content">
+    <section class="my_page_wrap">
+        <div class="my_page_inner">
+            <!-- 좌측 네비게이션 -->
+            <div th:replace="~{my_page/nav :: nav}"></div>
+            <!-- 우측 회원 정보 -->
+            <div class="con_wrap">
+                <!-- 회원 등급, 쿠폰, 적립금 -->
+                <div th:replace="~{fragments :: my_info}"></div>
+
+                <!-- 진행 중인 주문 -->
+                <div class="progress">
+                    <div class="my_page_tit">
+                        <h3>진행 중인 주문</h3>
+                    </div>
+                    <ul>
+                        <li><span>0</span>입금확인중</li>
+                        <li><span>0</span>입금완료</li>
+                        <li><span>0</span>상품준비중</li>
+                        <li><span>0</span>상품배송</li>
+                        <li><span>0</span>배송완료</li>
+                    </ul>
+                </div>
+                <!-- 최근 주문 정보 -->
+                <div class="order">
+                    <div class="order_tit">
+                        <div class="my_page_tit">
+                            <h3>최근 주문 정보</h3>
+                        </div>
+                    </div>
+                    <div class="order_info">
+                        <!-- 주문 정보가 없을 때 -->
+                        <div class="empty_con">
+                            <img src="/images/my_page/ico-information-big.png" alt="주문 정보 없음">
+                            <p>주문하신 내용이 없습니다.</p>
+                        </div>
+                    </div>
+                    <a href="#" class="read_more_btn">Read More</a>
+                </div>
+
+                <!-- 찜 리스트 -->
+                <div class="wish">
+                    <div class="my_page_tit">
+                        <h3>찜 리스트</h3>
+                    </div>
+                    <div class="wish_list">
+                        <div class="item_wrap" th:each="wish : ${wishList}">
+                            <div class="img_wrap">
+                                <img th:src="${'/images/goods/' + wish.poster}" th:alt="${wish.title}">
+                                <div class="view_more_wrap">
+                                    <div th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${wish.no})}"></div>
+                                    <div class="icon_wrap">
+                                        <a th:href="|/shop/view/${wish.no}|" class="sight_icon"></a>
+                                        <a th:href="|/my/deleteWish?no=${wish.no}&like=1|" class="delete_icon"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="detail_wrap">
+                                <a th:href="|/shop/view/${wish.no}|" th:text="${wish.title}"></a>
+                                <div class="artist">
+                                    <span th:text="${wish.name_kr}"></span>
+                                </div>
+                                <div class="item_size">
+                                    <p>30.0cm x 30.0cm</p>
+                                </div>
+                                <div class="item_price">
+                                    <span><strong th:text="${#numbers.formatInteger(wish.price, 3, 'COMMA')}"></strong>원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="/my/wish" class="read_more_btn">Read More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

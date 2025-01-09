@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <script src="/js/my_page.js"></script>
+</head>
+<body>
+<!-- 좌측 네비게이션 -->
+<div class="nav_wrap" th:fragment="nav">
+    <h2><a href="/my/main">MYPAGE</a></h2>
+    <div class="my_page_depth">
+        <h3>쇼핑정보</h3>
+        <ul>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/inquiry') ? 'on':''}"><a href="/my/inquiry" class="preparing">주문목록/배송조회</a></li>
+            <li><a href="/shop/cart">장바구니</a></li>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/wish') ? 'on':''}"><a href="/my/wish">찜리스트</a></li>
+        </ul>
+    </div>
+    <div class="my_page_depth">
+        <h3>혜택관리</h3>
+        <ul>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/coupon') ? 'on':''}"><a href="/my/coupon">쿠폰</a></li>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/mileage') ? 'on':''}"><a href="/my/mileage">마일리지</a>
+            </li>
+        </ul>
+    </div>
+    <div class="my_page_depth">
+        <h3>고객센터</h3>
+        <ul>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/qna') ? 'on':''}"><a href="/my/qna">1:1문의</a></li>
+        </ul>
+    </div>
+    <div class="my_page_depth">
+        <h3>회원정보</h3>
+        <ul>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/info_change') ? 'on':''}"><a href="/my/info_change">회원정보
+                변경</a></li>
+            <li th:class="${#strings.startsWith(request.requestURI, '/my/info_delete') ? 'on':''}"><a href="/my/info_delete">회원탈퇴</a>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

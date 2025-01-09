@@ -1,0 +1,232 @@
+/* inner 공통 */
+.support_container .inner {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+/* 내용 */
+.support_container .support_wrap {
+    padding-bottom: 150px;
+}
+
+.support_container .support_wrap .support_form {
+    display: flex;
+    gap: 0 80px;
+    padding: 80px 40px;
+    border-top: 1px solid var(--gray-600);
+    border-bottom: 1px solid #ddd;
+}
+
+.support_container .support_form .left {
+    overflow: hidden;
+    width: calc(50% - 80px);
+    position: relative;
+}
+
+.support_container .support_form .left .imgbox {
+    background: url(/images/support/support-img01.jpg) no-repeat center / cover;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+}
+
+.support_container .support_form .right {
+    width: calc(50% + 80px);
+}
+
+.support_container .support_form .form_box_wrap {
+    box-sizing: border-box;
+}
+
+.support_container .form_box_wrap .form_box {
+    display: flex;
+    line-height: 60px;
+}
+
+.support_container .form_box_wrap .form_box:not(:first-child) {
+    margin-top: 30px;
+}
+
+.support_container .form_box_wrap .form_box .left_con {
+    width: 160px;
+    font-size: 18px;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.support_container .f_color {
+    margin-right: 5px;
+    color: var(--point-color1);
+}
+
+.support_container .form_box_wrap .form_box .right_con {
+    flex: 1;
+}
+
+.support_container .form_box_wrap .form_box .inp_type01 {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    height: 60px;
+    border: 1px solid #f8f8f8;
+    background: #f8f8f8;
+    font-size: 15px;
+    color: var(--gray-600);
+    transition: all 0.4s ease;
+}
+
+.support_container .form_box_wrap .form_box .inp_type01:focus,
+.support_container .form_box_wrap .form_box .textarea_type01:focus {
+    border-color: var(--point-color1);
+    background-color: #fff;
+}
+
+.support_container .form_box_wrap .form_box .textarea_type01 {
+    width: 100%;
+    height: 200px;
+    padding: 10px;
+    background: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    font-size: 15px;
+    color: var(--gray-600);
+    line-height: 1.4;
+    transition: all 0.4s ease;
+}
+
+/* 개인처리방침 */
+.support_container .support_agree {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
+    background: #f8f8f8;
+}
+
+.support_container .support_agree .right .box_action a {
+    width: 160px;
+    height: 45px;
+    line-height: 45px;
+}
+
+.support_container .support_btnwrap {
+    margin-top: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.support_container .support_btnwrap .box_action a {
+    width: 180px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+
+/* 글쓰기 */
+.qna_container .qna_list .qna_write_wrap {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0;
+}
+
+
+/* 개인정보처리 방침 팝업 */
+.support_container .support_pop_wrap {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9999;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    transition: all 0.3s ease-in-out;
+}
+
+.support_container .support_pop_wrap .pop_inner {
+    overflow-y: auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 1200px;
+    padding: 60px;
+    max-height: 96%;
+    width: calc(100% - 40px);
+    background-color: #fff;
+    transform: translate(-50%, -50%);
+    transition: all 0.3s ease-in-out;
+}
+
+.support_container .support_pop_wrap .pop_tit {
+    font-size: 22px;
+    color: #080808;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', 'EB Garamond', sans-serif;
+    line-height: 30px;
+}
+
+.support_container .support_pop_wrap .pop_con_wrap {
+    margin-top: 20px;
+    padding: 30px;
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+}
+
+.support_container .support_pop_wrap .pop_con_wrap .scroll_box {
+    padding: 30px;
+    background: #f8f8f8;
+    max-height: 627px;
+    overflow-y: scroll;
+    display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.support_container .scroll_box > dl > dt {
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    color: #333333;
+    line-height: 27px;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', 'EB Garamond', sans-serif;
+    font-weight: 700;
+}
+
+.support_container .scroll_box > dl + dl {
+    margin-top: 30px;
+}
+
+.support_container .scroll_box > dl dd {
+    color: var(--gray-500);
+    line-height: 26px;
+}
+
+.support_container .scroll_box > dl > dd:not(:first-child) {
+    margin-top: 10px;
+}
+
+.support_container .scroll_box > dl dl dt {
+    font-size: 16px;
+    color: var(--gray-600);
+    font-weight: 500;
+    line-height: 27px;
+}
+
+.support_container .pop_inner .btn_pop_close {
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    width: 18px;
+    height: 18px;
+    background: url(/images/common/ico-pop-close.png) no-repeat;
+    border: none;
+}

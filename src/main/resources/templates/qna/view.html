@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/qna.css">
+    <script src="/js/qna.js"></script>
+</head>
+<body>
+<main id="container" class="qna_view_container" layout:fragment="content">
+    <div class="inner">
+        <!-- 타이틀 -->
+        <div class="qnaview_con_tit">
+            <span>Q&A</span>
+            <h2 th:text="${qna.title}">백상 갤러리 오픈하였습니다.</h2>
+            <p>
+                <span class="state" th:if="${qna.answer == null}">답변대기</span>
+                <span class="state" th:if="${qna.answer != null}">답변완료</span>
+                <span class="date" th:text="${qna.regdate}">2022.05.12</span>
+            </p>
+        </div>
+
+        <!-- 내용 -->
+        <div class="qnaview_con_wrap">
+            <h3 class="blind">본문</h3>
+            <!-- 관리자 이거나 글 작성자인 경우 -->
+            <ul th:if="${session.user != null and (#strings.equals(session.user.isadmin, 'Y') or #strings.equals(session.user.id, qna.id)) }">
+                <li><a th:href="@{'/qna/update/' + ${qna.no}}">수정</a></li>
+                <li><a href="#" class="qna_delete_btn" th:attr="data-no=${qna.no}">삭제</a></li>
+            </ul>
+
+            <div class="qnaview_con" th:utext="${qna.content}"></div>
+
+            <div class="qnaview_file_wrap" th:if="${qna.ofile != null}">
+                <h3>첨부파일</h3>
+                <a th:href="@{'/qna/download/' + ${qna.no}}">
+                    <img src="/images/common/ico-file.png" alt="">
+                    <strong th:text="${qna.ofile}"></strong>
+                </a>
+            </div>
+        </div>
+
+        <!-- 답변 -->
+        <div class="qnaview_answer">
+            <img src="/images/common/ico-information-big.png" alt="답변">
+            <p th:if="${qna.answer == null}">문의에 대한 답변을 준비중입니다.</p>
+            <p th:if="${qna.answer != null}" th:utext="${qna.answer}"></p>
+        </div>
+
+        <!-- 관리자인 경우 -->
+<!--        <th:block th:if="${session.member.id == 'admin'}">-->
+<!--            <form action="#" method="post">-->
+<!--                <textarea name="answer" id="qnaViewEditor" data-editor th:utext="${qna.answer}"></textarea>-->
+<!--            </form>-->
+<!--        </th:block>-->
+
+        <!-- 하단 (버튼) -->
+        <div class="qnaview_con_move">
+            <ul>
+                <li class="prev">
+<!--                    <a href="#" th:attr="data-no=${qna.prev_no}" class="move">-->
+<!--                        <span>PREV</span>-->
+<!--                        <em th:if="${qna.prev_no != null}" th:text="${qna.prev_title}"></em>-->
+<!--                        <em th:if="${qna.prev_no == null}">이전글이 없습니다.</em>-->
+<!--                    </a>-->
+                </li>
+                <li class="mid">
+                    <a href="/qna/list" title="목록으로"><span class="blind">목록으로</span></a>
+                </li>
+                <li class="next">
+<!--                    <a href="#" th:attr="data-no=${qna.next_no}" class="move">-->
+<!--                        <span>NEXT</span>-->
+<!--                        <em th:if="${qna.next_no != null}" th:text="${qna.next_title}"></em>-->
+<!--                        <em th:if="${qna.next_no == null}">다음글이 없습니다.</em>-->
+<!--                    </a>-->
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

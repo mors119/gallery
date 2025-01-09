@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    페이징 기본 구조
+    SELECT * FROM 테이블명
+    ORDER BY 정렬기준
+    LIMIT 페이지당_행수 OFFSET (페이지번호 - 1) * 페이지당_행수;
+-->
+<mapper namespace="com.bxgs.gallery.mapper.ArtistMapper">
+    <select id="selectAll" resultType="artistVO" parameterType="com.bxgs.gallery.common.Pagination">
+        select *
+          from author
+        <if test="searchMap.keyword != null">
+            <where>
+                <choose>
+                    <when test="searchMap.keyword == '1100'">
+                        <![CDATA[ name_kr ~ '^[가-깋]' ]]> -- ㄱ ~ ㄲ
+                    </when>
+                    <when test="searchMap.keyword == '1105'">
+                        <![CDATA[ name_kr ~ '^[나-닣]' ]]> -- ㄴ
+                    </when>
+                    <when test="searchMap.keyword == '1108'">
+                        <![CDATA[ name_kr ~ '^[다-딯]' ]]> -- ㄷ ~ ㄸ
+                    </when>
+                    <when test="searchMap.keyword == '110C'">
+                        <![CDATA[ name_kr ~ '^[라-맇]' ]]> -- ㄹ
+                    </when>
+                    <when test="searchMap.keyword == '110F'">
+                        <![CDATA[ name_kr ~ '^[마-밓]' ]]> -- ㅁ
+                    </when>
+                    <when test="searchMap.keyword == '1112'">
+                        <![CDATA[ name_kr ~ '^[바-빟]' ]]> -- ㅂ
+                    </when>
+                    <when test="searchMap.keyword == '1116'">
+                        <![CDATA[ name_kr ~ '^[사-싷]' ]]> -- ㅅ
+                    </when>
+                    <when test="searchMap.keyword == '111A'">
+                        <![CDATA[ name_kr ~ '^[아-잏]' ]]> -- ㅇ
+                    </when>
+                    <when test="searchMap.keyword == '111D'">
+                        <![CDATA[ name_kr ~ '^[자-짛]' ]]> -- ㅈ
+                    </when>
+                    <when test="searchMap.keyword == '1121'">
+                        <![CDATA[ name_kr ~ '^[차-칳]' ]]> -- ㅊ
+                    </when>
+                    <when test="searchMap.keyword == '1124'">
+                        <![CDATA[ name_kr ~ '^[카-킿]' ]]> -- ㅋ
+                    </when>
+                    <when test="searchMap.keyword == '1127'">
+                        <![CDATA[ name_kr ~ '^[타-틣]' ]]> -- ㅌ
+                    </when>
+                    <when test="searchMap.keyword == '112A'">
+                        <![CDATA[ name_kr ~ '^[파-핗]' ]]> -- ㅍ
+                    </when>
+                    <when test="searchMap.keyword == '112D'">
+                        <![CDATA[ name_kr ~ '^[하-힣]' ]]> -- ㅎ
+                    </when>
+                </choose>
+            </where>
+        </if>
+         limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <select id="totalCount" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*) from author
+        <if test="searchMap.keyword != null">
+            <where>
+                <choose>
+                    <when test="searchMap.keyword == '1100'">
+                        <![CDATA[ name_kr ~ '^[가-깋]' ]]> -- ㄱ ~ ㄲ
+                    </when>
+                    <when test="searchMap.keyword == '1105'">
+                        <![CDATA[ name_kr ~ '^[나-닣]' ]]> -- ㄴ
+                    </when>
+                    <when test="searchMap.keyword == '1108'">
+                        <![CDATA[ name_kr ~ '^[다-딯]' ]]> -- ㄷ ~ ㄸ
+                    </when>
+                    <when test="searchMap.keyword == '110C'">
+                        <![CDATA[ name_kr ~ '^[라-맇]' ]]> -- ㄹ
+                    </when>
+                    <when test="searchMap.keyword == '110F'">
+                        <![CDATA[ name_kr ~ '^[마-밓]' ]]> -- ㅁ
+                    </when>
+                    <when test="searchMap.keyword == '1112'">
+                        <![CDATA[ name_kr ~ '^[바-빟]' ]]> -- ㅂ
+                    </when>
+                    <when test="searchMap.keyword == '1116'">
+                        <![CDATA[ name_kr ~ '^[사-싷]' ]]> -- ㅅ
+                    </when>
+                    <when test="searchMap.keyword == '111A'">
+                        <![CDATA[ name_kr ~ '^[아-잏]' ]]> -- ㅇ
+                    </when>
+                    <when test="searchMap.keyword == '111D'">
+                        <![CDATA[ name_kr ~ '^[자-짛]' ]]> -- ㅈ
+                    </when>
+                    <when test="searchMap.keyword == '1121'">
+                        <![CDATA[ name_kr ~ '^[차-칳]' ]]> -- ㅊ
+                    </when>
+                    <when test="searchMap.keyword == '1124'">
+                        <![CDATA[ name_kr ~ '^[카-킿]' ]]> -- ㅋ
+                    </when>
+                    <when test="searchMap.keyword == '1127'">
+                        <![CDATA[ name_kr ~ '^[타-틣]' ]]> -- ㅌ
+                    </when>
+                    <when test="searchMap.keyword == '112A'">
+                        <![CDATA[ name_kr ~ '^[파-핗]' ]]> -- ㅍ
+                    </when>
+                    <when test="searchMap.keyword == '112D'">
+                        <![CDATA[ name_kr ~ '^[하-힣]' ]]> -- ㅎ
+                    </when>
+                </choose>
+            </where>
+        </if>
+    </select>
+
+    <select id="selectGoods" resultType="shopVO">
+        select *
+          from goods
+         where author_no = #{no}
+    </select>
+
+    <select id="selectOne" resultType="artistVO">
+        select *
+          from author
+         where no = #{no}
+    </select>
+
+    <delete id="delete">
+        delete from author where no = #{no}
+    </delete>
+</mapper>

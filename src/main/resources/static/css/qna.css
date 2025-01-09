@@ -1,0 +1,481 @@
+/* inner 공통 */
+.qna_container .inner {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+/* 리스트 */
+.qna_container .qna_list {
+    padding-bottom: 160px;
+}
+
+.qna_container .qna_list .list_opt {
+    margin-bottom: 40px;
+    font-weight: 500;
+}
+
+.qna_container .qna_list .list_opt strong {
+    color: var(--point-color1);
+}
+
+/* 목록 */
+.qna_container .qna_list .list_cont {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #ddd;
+}
+
+.qna_container .qna_list .list_cont table tr:hover td {
+    background: #f7f6f5;
+}
+
+.qna_container .qna_list .list_cont table td {
+    height: 90px;
+    border-top: 1px solid #ddd;
+    text-align: center;
+}
+
+.qna_container .qna_list .list_cont .td_num {
+    color: var(--gray-500);
+    font-family: 'EB Garamond', sans-serif;
+}
+
+.qna_container .qna_list .list_cont .td_sub {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.qna_container .qna_list .list_cont .td_sub a {
+    position: relative;
+    padding-right: 25px;
+    color: var(--gray-600);
+    line-height: 26px;
+}
+
+.qna_container .qna_list .list_cont .td_sub a:hover {
+    color: var(--point-color1);
+    text-decoration: underline;
+}
+
+.qna_container .qna_list .list_cont .td_sub a img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: 1px;
+    transform: translateY(-50%);
+}
+
+.qna_container .qna_list .list_cont .td_name {
+    color: var(--gray-400);
+}
+
+.qna_container .qna_list .list_cont .td_date {
+    color: var(--gray-400);
+    font-family: 'EB Garamond', sans-serif;
+}
+
+.qna_container .qna_list .list_cont .td_state {
+    padding: 0 20px;
+}
+
+.qna_container .qna_list .list_cont .td_state .answer_rdy {
+    display: block;
+    background: #ededed;
+    color: var(--gray-400);
+    border-radius: 40px;
+    line-height: 40px;
+}
+
+.qna_container .qna_list .list_cont .td_state .answer_rdy.complete {
+    color: var(--point-color1);
+}
+
+
+/* 글쓰기 */
+.qna_container .qna_list .qna_write_wrap {
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px 0;
+}
+
+/* write */
+.qna_container .f_color {
+    color: var(--point-color1);
+    margin-right: 5px;
+}
+
+.qna_container .qna_write {
+    padding-bottom: 160px;
+}
+
+.qna_container .qna_write form {
+    padding: 60px 40px;
+    border-top: 1px solid var(--gray-600);
+}
+
+.qna_container .qna_write .form_box {
+    display: flex;
+    margin-top: 30px;
+}
+
+.qna_container .qna_write .form_box:nth-of-type(1) {
+    margin-top: 0;
+}
+
+.qna_container .qna_write .form_box .left {
+    width: 200px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 27px;
+    padding-top: 17px;
+}
+
+.qna_container .qna_write .form_box .right {
+    flex: 1;
+}
+
+.qna_container .qna_write .form_box .inp_type01 {
+    display: block;
+    width: 100%;
+    padding: 0 20px;
+    height: 60px;
+    border: 1px solid #f8f8f8;
+    background: #f8f8f8;
+    font-size: 15px;
+    line-height: 60px;
+    transition: all 0.4s ease;
+}
+
+.qna_container .qna_write .form_box .inp_type01:focus {
+    border-color: var(--point-color1);
+    background-color: #fff;
+}
+
+/* 파일 */
+.qna_container .qna_write .form_box .file_box {
+    display: flex;
+    max-width: 690px;
+}
+
+.qna_container .qna_write .form_box .file_box .file_name {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    width: 70%;
+    background: #f8f8f8;
+    height: 60px;
+}
+
+.qna_container .qna_write .form_box .file_box .file_btn {
+    position: relative;
+    margin-left: 10px;
+    max-width: 180px;
+    width: 30%;
+}
+
+.qna_container .qna_write .form_box .file_box .file_btn label {
+    display: block;
+    height: 60px;
+    background: #aaaaaa;
+    font-size: 16px;
+    color: #fff;
+    line-height: 60px;
+    box-sizing: border-box;
+    text-align: center;
+    cursor: pointer;
+}
+
+.qna_container .qna_write .form_box .file_box .file_btn input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 0;
+    opacity: 0;
+}
+
+.qna_container .qna_write .form_box .form_info {
+    margin-top: 10px;
+    font-size: 15px;
+    color: var(--gray-400);
+    line-height: 25px;
+}
+
+.qna_container .qna_btn_wrap {
+    margin-top: 60px;
+    padding-top: 80px;
+    display: flex;
+    justify-content: center;
+    border-top: 1px solid #ddd;
+}
+
+.qna_container .qna_btn_wrap .box_action a {
+    width: 180px;
+    height: 50px;
+    font-size: 18px;
+    line-height: 50px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+    letter-spacing: -0.5px;
+}
+
+
+/* 상세보기 */
+.qna_view_container {
+    padding-bottom: 160px;
+}
+
+.qna_view_container .inner {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.qna_view_container .qnaview_con_tit {
+    padding: 160px 0 50px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.qna_view_container .qnaview_con_tit > span {
+    display: inline-block;
+    margin-bottom: 24px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+    color: var(--point-color1);
+}
+
+.qna_view_container .qnaview_con_tit .state {
+    display: inline-block;
+    position: relative;
+    padding-right: 21px;
+    margin-right: 20px;
+    color: var(--point-color1);
+    font-family: 'Noto Sans KR', 'EB Garamond', 'Noto Serif KR', 'Malgun Gothic', dotum, sans-serif;
+    line-height: 26px;
+}
+
+.qna_view_container .qnaview_con_tit .state::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -5px;
+    width: 1px;
+    height: 12px;
+    background-color: #ddd;
+}
+
+.qna_view_container .qnaview_con_tit .date {
+    color: var(--gray-400);
+}
+
+.qna_view_container .qnaview_con_tit > h2 {
+    margin-bottom: 40px;
+    font-size: 35px;
+    font-weight: 700;
+    line-height: 45px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.qna_view_container .qnaview_con_wrap {
+    color: var(--gray-500);
+    line-height: 26px;
+}
+
+.qna_view_container .qnaview_con_wrap > ul {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 10px;
+    padding: 20px 0;
+}
+
+.qna_view_container .qnaview_con_wrap > ul li a {
+    display: block;
+    position: relative;
+    border: 1px solid #aaa;
+    padding: 0 15px;
+    font-size: 15px;
+    color: #666;
+    line-height: 38px;
+    transition: all 0.4s ease;
+    font-weight: 500;
+    text-align: center;
+}
+
+.qna_view_container .qnaview_con_wrap > ul li a:hover {
+    background-color: #aaa;
+    color: #fff;
+}
+
+.qna_view_container .qnaview_con {
+    padding: 80px;
+}
+
+.qna_view_container .qnaview_file_wrap {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0 30px;
+}
+
+.qna_view_container .qnaview_file_wrap h3 {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 26px;
+}
+
+.qna_view_container .qnaview_file_wrap a {
+    display: flex;
+    align-items: center;
+    gap: 0 7px;
+}
+
+.qna_view_container .qnaview_file_wrap a img {
+    width: 12px;
+    height: 16px;
+}
+
+.qna_view_container .qnaview_file_wrap a strong {
+    position: relative;
+}
+
+.qna_view_container .qnaview_file_wrap a strong::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    width: 0;
+    height: 1px;
+    background-color: #666;
+    transition: width 0.3s ease;
+}
+
+.qna_view_container .qnaview_file_wrap a strong:hover::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+
+/* 답변 */
+.qna_view_container .qnaview_answer {
+    margin-top: 80px;
+    padding: 75px 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #000;
+    text-align: center;
+}
+
+.qna_view_container .qnaview_answer p {
+    margin-top: 20px;
+    line-height: 26px;
+}
+
+/* 하단 */
+.qna_view_container .qnaview_con_move {
+    padding: 60px 0;
+    border-top: 1px solid var(--gray-500);
+}
+
+.qna_view_container .qnaview_con_move ul {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.qna_view_container .qnaview_con_move ul li.prev {
+    flex: 1;
+}
+
+.qna_view_container .qnaview_con_move ul li.next {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.qna_view_container .qnaview_con_move ul li span {
+    display: block;
+    position: relative;
+    margin-bottom: 18px;
+    font-size: 20px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+
+.qna_view_container .qnaview_con_move ul li em {
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    max-width: 500px;
+    color: var(--gray-500);
+    line-height: 26px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.qna_view_container .qnaview_con_move ul li.mid a {
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    border: 1px solid var(--point-color1);
+    background: var(--point-color1) url(/images/qna/ico-board-list.png) no-repeat center;
+    transition: all 0.3s ease;
+}
+
+.qna_view_container .qnaview_con_move ul li.mid a:hover {
+    background-color: #fff;
+    background-image: url(/images/qna/ico-board-list-on.png);
+}
+
+.qna_view_container .qnaview_con_move ul li.prev:hover span {
+    padding-left: 20px;
+    color: var(--point-color1);
+}
+
+.qna_view_container .qnaview_con_move ul li.prev a span::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -8px;
+    width: 8px;
+    height: 16px;
+    background: url(/images/qna/bu-move-prev.png) no-repeat left center;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.qna_view_container .qnaview_con_move ul li.prev:hover span::before {
+    opacity: 1;
+}
+
+.qna_view_container .qnaview_con_move ul li.next a span {
+    text-align: right;
+}
+
+.qna_view_container .qnaview_con_move ul li.next:hover span {
+    padding-right: 20px;
+    color: var(--point-color1);
+}
+
+.qna_view_container .qnaview_con_move ul li.next a span::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -8px;
+    width: 8px;
+    height: 16px;
+    background: url(/images/qna/bu-move-next.png) no-repeat left center;
+    transition: all 0.3s ease;
+    opacity: 0;
+}
+
+.qna_view_container .qnaview_con_move ul li.next:hover span::after {
+    opacity: 1;
+}

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/cart.css">
+    <script src="/js/cart.js"></script>
+</head>
+<body>
+<main id="container" class="cart_container" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle2('CART')}"></div>
+
+    <!-- 내용 -->
+    <section class="cart_wrap">
+        <div class="inner">
+            <div class="cart_order">
+                <table>
+                    <caption>장바구니 리스트</caption>
+                    <thead>
+                    <tr>
+                        <th style="width: 60px;">
+                            <input type="checkbox" id="chk_all" checked="checked" class="select_chk" autocomplete="off">
+                            <label for="chk_all"><b class="blind">상품 전체</b></label>
+                        </th>
+                        <th>Product</th>
+                        <th style="width: 225px;">Unit price</th>
+                        <th style="width: 100px;">Quantity</th>
+                        <th style="width: 225px;">Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+
+                <!-- 버튼 -->
+                <div class="cart_btns">
+                    <button type="button" id="select_del">선택삭제</button>
+                    <button type="button" id="all_del">장바구니 비우기</button>
+                </div>
+
+                <!-- 결제금액 -->
+                <div class="cart_price_wrap">
+                    <ul>
+                        <li class="sod_bsk_cos">
+                            <span>총 상품금액</span>
+                            <strong id="totalCost"></strong>
+                            <em>원</em>
+                        </li>
+                        <li class="sod_bsk_dvr">
+                            <i>+</i>
+                            <span>배송비</span>
+                            <strong id="delivery"></strong>
+                            <em>원</em>
+                        </li>
+                        <li class="sod_bsk_cnt">
+                            <i>=</i>
+                            <span>총 결제금액</span>
+                            <strong id="totalPay"></strong>
+                            <em>원</em>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 컨펌 -->
+                <div class="cart_confirm_wrap">
+                    <a href="/shop/best">쇼핑 계속하기</a>
+                    <a href="/shop/order" class="active">선택상품 주문</a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,99 @@
+.footer_wrap {
+    padding: 60px 0;
+    background: #272727;
+    color: var(--gray-400);
+    font-weight: 500;
+    width: 100%;
+}
+
+.footer {
+    margin: 0 auto;
+    max-width: 1400px;
+    width: calc(100% - 100px);
+}
+
+.footer a {
+    color: var(--gray-400);
+}
+
+.footer .ft_policy {
+    display: flex;
+}
+
+.footer .ft_policy li {
+    margin-left: 25px;
+}
+
+.footer .ft_policy li:first-child {
+    margin: 0;
+}
+
+.footer .ft_policy li > a:hover {
+    color: #fff;
+}
+
+.footer .ft_adress {
+    margin-top: 20px;
+}
+
+.footer .ft_adress li {
+    display: flex;
+    margin-top: 10px;
+}
+
+.footer .ft_adress li > p {
+    position: relative;
+    padding-left: 11px;
+    margin-left: 10px;
+}
+
+.footer .ft_adress li > p:first-child {
+    padding: 0;
+    margin: 0;
+}
+
+.footer .ft_adress li > p::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 10px;
+    width: 1px;
+    height: 10px;
+    background: #88888880;
+}
+
+.footer .ft_adress li > p:first-child::after {
+    display: none;
+}
+
+.footer .ft_adress .ft_email:hover {
+    font-weight: 700;
+}
+
+.footer .ft_copyright {
+    margin-top: 10px;
+    font-family: 'EB Garamond';
+}
+
+/* 위로가기버튼 */
+.top_btn {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    right: 25px;
+    bottom: 25px;
+    transition: all 0.3s ease;
+}
+
+.top_btn.fixed {
+    visibility: visible;
+    opacity: 1;
+}
+
+.top_btn .go_top {
+    display: block;
+    position: relative;
+    width: 50px;
+    height: 50px;
+    background: var(--point-color1) url(/images/header/ico-go-top.png) no-repeat center;
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/notice.css">
+    <script src="/js/notice.js"></script>
+</head>
+<body>
+<main id="container" class="board_container" layout:fragment="content">
+    <div class="inner">
+        <!-- 타이틀 -->
+        <div class="board_con_tit">
+            <span>NOTICE</span>
+            <h2 th:text="${data.title}"></h2>
+            <p>
+                <span class="blind">작성일</span>
+                <span class="date" th:text="${data.regdate}"></span>
+            </p>
+        </div>
+
+        <!-- 내용 -->
+        <div class="board_con_wrap">
+            <h3 class="blind">본문</h3>
+            <ul th:if="${session.user != null and #strings.equals(session.user.isadmin, 'Y')}">
+                <li><a th:href="@{'/notice/update/' + ${data.no}}">수정</a></li>
+                <li><a href="#" class="notice_delete_btn" th:attr="data-no=${data.no}">삭제</a></li>
+            </ul>
+
+            <div class="board_con" th:utext="${data.content}"></div>
+
+            <div class="noticeview_file_wrap" th:if="${data.ofile != null}">
+                <h3>첨부파일</h3>
+                <a th:href="@{'/notice/download/' + ${data.no}}">
+                    <img src="/images/common/ico-file.png" alt="">
+                    <strong th:text="${data.ofile}"></strong>
+                </a>
+            </div>
+        </div>
+
+        <!-- 하단 (버튼) -->
+        <div class="board_con_move">
+            <ul>
+                <li class="prev">
+                    <a th:attr="data-no=${data.prev_no}, data-link=${link}" class="move">
+                        <span>PREV</span>
+                        <em th:if="${data.prev_no != null}" th:text="${data.prev_title}"></em>
+                        <em th:if="${data.prev_no == null}">이전글이 없습니다.</em>
+                    </a>
+                </li>
+                <li class="mid">
+                    <a th:href="@{${link} + '/list'}"><span class="blind">목록으로</span></a>
+                </li>
+                <li class="next">
+                    <a th:attr="data-no=${data.next_no}, data-link=${link}" class="move">
+                        <span>NEXT</span>
+                        <em th:if="${data.next_no != null}" th:text="${data.next_title}"></em>
+                        <em th:if="${data.next_no == null}">다음글이 없습니다.</em>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

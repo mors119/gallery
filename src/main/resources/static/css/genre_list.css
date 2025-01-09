@@ -1,0 +1,221 @@
+/* sticky tab */
+.genre_list .inner {
+    width: calc(100% - 100px);
+    margin: 0 auto;
+    letter-spacing: -0.4px;
+}
+
+.genre_list .main_content {
+    display: flex;
+    position: relative;
+    align-items: flex-start;
+}
+
+.genre_list .sticky_select {
+    position: sticky;
+    left: 0;
+    top: 20px;
+    width: 380px;
+    padding-bottom: 20px;
+    transition: top .3s ease;
+}
+
+.genre_list .sticky_select h3 {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    background: var(--point-color1);
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'EB Garamond', 'Noto Serif', sans-serif;
+    height: 80px;
+    color: #FFF;
+    line-height: 30px;
+}
+
+.genre_list .sticky_select ul {
+    padding: 10px 20px;
+    border: 1px solid #DDD;
+}
+
+.genre_list .sticky_select li.on * {
+    color: var(--point-color1);
+}
+
+.genre_list .sticky_select li:first-child a {
+    border-top: none;
+}
+
+.genre_list .sticky_select a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 20px;
+    height: 68px;
+    line-height: 1.267em;
+    border-top: 1px solid #DDD;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+    color: var(--gray-600);
+}
+
+.genre_list .sticky_select a:hover * {
+    color: var(--point-color1);
+}
+
+.genre_list .sticky_select span {
+    position: relative;
+}
+
+.genre_list .sticky_select span::after {
+    display: none;
+    content: '';
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-left: 10px;
+    margin-top: -0.5px;
+    width: 15px;
+    height: 1px;
+    background-color: var(--point-color1);
+}
+
+.genre_list .sticky_select li.on span::after {
+    display: block;
+}
+
+.genre_list .sticky_select span > strong {
+    font-size: 15px;
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+    color: var(--gray-400);
+    margin-left: 10px;
+}
+
+/* artist */
+.genre_list .main_content > .artist {
+    padding: 0 0 160px 120px;
+    width: calc(100% - 380px);
+    height: 3000px;
+}
+
+.genre_list .main_content .artist p {
+    font-weight: 500;
+}
+
+.genre_list .main_content .artist p span {
+    color: var(--point-color1);
+}
+
+.genre_list .main_content .artist_template {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    row-gap: 60px;
+}
+
+.genre_list .main_content .artist_template .template .image_wrap {
+    position: relative;
+}
+
+.genre_list .main_content .artist_template .image_wrap .cover {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .4s;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: inset(0 100% 0 0);
+}
+
+.genre_list .main_content .artist_template .image_wrap .cover .icon_wrap {
+    position: absolute;
+    bottom: 30px;
+}
+
+.genre_list .main_content .artist_template .image_wrap .cover .box_action a {
+    width: 160px;
+    height: 45px;
+    line-height: 45px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.genre_list .main_content .artist_template .image_wrap:hover .cover {
+    opacity: 1;
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+}
+
+.genre_list .main_content .artist_template img {
+    aspect-ratio: 1 / 1;
+    display: inline-block;
+    object-fit: cover;
+    width: 100%;
+}
+
+.genre_list .main_content .artist_template .template h6 {
+    font-family: 'EB Garamond', 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+.genre_list .main_content .artist_template .template h6 a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.genre_list .main_content .artist_template .template p {
+    font-family: 'EB Garamond', serif;
+    color: var(--point-color1);
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+.genre_list .main_content .artist_template .detail_wrap {
+    margin-top: 30px;
+}
+
+.genre_list .main_content .artist_template .detail_wrap a {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Noto Serif KR', 'EB Garaomnd', sans-serif;
+}
+
+.genre_list .main_content .artist_template .detail_wrap .artist {
+    margin-top: 20px;
+    color: var(--point-color1);
+    line-height: 20px;
+}
+
+.genre_list .main_content .artist_template .detail_wrap .item_size {
+    margin-top: 10px;
+    color: var(--gray-400);
+    line-height: 20px;
+}
+
+.genre_list .main_content .artist_template .detail_wrap .item_price {
+    display: flex;
+    margin-top: 28px;
+    color: var(--gray-500);
+}
+
+.genre_list .main_content .artist_template .detail_wrap .item_price span {
+    font-family: 'Noto Serif KR', sans-serif;
+}
+
+.genre_list .main_content .artist_template .detail_wrap .item_price strong {
+    font-size: 26px;
+    font-weight: 500;
+    font-family: 'EB Garamond', sans-serif;
+    color: var(--gray-600);
+}

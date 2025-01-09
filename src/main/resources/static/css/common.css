@@ -1,0 +1,799 @@
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 400;
+    font-display: swap;
+    src: local('NotoSansKR Regular'),
+    url(/fonts/NotoSansKR-Regular.ttf) format('woff2'),
+    url(/fonts/NotoSansKR-Regular.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 500;
+    font-display: swap;
+    src: local('NotoSansKR Medium'),
+    url(/fonts/NotoSansKR-Medium.ttf) format('woff2'),
+    url(/fonts/NotoSansKR-Medium.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Sans KR';
+    font-weight: 700;
+    font-display: swap;
+    src: local('NotoSansKR Bold'),
+    url(/fonts/NotoSansKR-Bold.ttf) format('woff2'),
+    url(/fonts/NotoSansKR-Bold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'EB Garamond';
+    font-weight: 400;
+    font-display: swap;
+    src: local('EBGaramond Regular'),
+    url(/fonts/EBGaramond-Regular.ttf) format('woff2'),
+    url(/fonts/EBGaramond-Regular.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'EB Garamond';
+    font-weight: 500;
+    font-display: swap;
+    src: local('EBGaramond Medium'),
+    url(/fonts/EBGaramond-Medium.ttf) format('woff2'),
+    url(/fonts/EBGaramond-Medium.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'EB Garamond';
+    font-weight: 700;
+    font-display: swap;
+    src: local('EBGaramond Bold'),
+    url(/fonts/EBGaramond-Bold.ttf) format('woff2'),
+    url(/fonts/EBGaramond-Bold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Serif KR';
+    font-weight: 400;
+    font-display: swap;
+    src: local('NotoSerifKR Regular'),
+    url(/fonts/NotoSerifKR-Regular.ttf) format('woff2'),
+    url(/fonts/NotoSerifKR-Regular.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Serif KR';
+    font-weight: 500;
+    font-display: swap;
+    src: local('NotoSerifKR Medium'),
+    url(/fonts/NotoSerifKR-Medium.ttf) format('woff2'),
+    url(/fonts/NotoSerifKR-Medium.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Noto Serif KR';
+    font-weight: 700;
+    font-display: swap;
+    src: local('NotoSerifKR Bold'),
+    url(/fonts/NotoSerifKR-Bold.ttf) format('woff2'),
+    url(/fonts/NotoSerifKR-Bold.woff) format('woff');
+}
+
+
+/* 반응형, 모바일에서 모든요소의 패딩,선을 크기안에 포함시킴 */
+*,
+::before,
+::after {
+    box-sizing: border-box;
+}
+
+/* 컬러 변수 */
+/* :root는 html을 의미 */
+:root {
+    --point-color1: #c9ab81;
+    --point-color2: #211e1f;
+    --gray-400: #888;
+    --gray-500: #666;
+    --gray-600: #333;
+}
+
+/* rem단위사용시 주석풀고 사용 */
+/* 브라우저 기본폰트크기 16:10 = 100:x x=62.5% */
+/* html {
+  font-size: 62.5%;
+} */
+
+/* body에 들어갈수있는 모든태그의 여백빼기 */
+html,
+body,
+div,
+span,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+address,
+code,
+em,
+img,
+strong,
+sub,
+sup,
+b,
+u,
+i,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+main,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+}
+
+/* html5추가 시멘틱엘리먼트를 익스하위버전에서 블럭으로 인식되도록함 */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section,
+main {
+    display: block;
+}
+
+/* button태그에 손모양 커서 */
+button {
+    cursor: pointer;
+}
+
+/* 익스하위버전에서 이미지 선없애기 */
+fieldset,
+img {
+    border: 0;
+    vertical-align: top;
+}
+
+/* 모바일, 반응형에서 이미지가 원본보다 커지지않게하고 뷰포트에 따라 줄어들게 */
+img {
+    max-width: 100%;
+}
+
+/* 리스트 기호 빼기 */
+ol,
+ul {
+    list-style: none;
+}
+
+/* 기울임꼴 제거 */
+address,
+em {
+    font-style: normal;
+}
+
+strong {
+    font-weight: normal;
+}
+
+/* 벤더프리픽스: 브라우저 제조사를 의미 */
+/* -webkit- 크롬, 사파리, 다른브라우저에서 사용하기도함 */
+a {
+    text-decoration: none;
+    color: var(--gray-600);
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* iframe으로 외부컨텐츠 연결시 외부컨텐츠 안쪽내용이 페이지에 영향을 주지못하도록 가려줌*/
+iframe {
+    overflow: hidden;
+    border: 0;
+}
+
+/* 칸의 선 합치고 간격없애기, 가로를 늘려줌, 테이블의 데이터가 길면 늘어나므로 fixed로 크기고정 */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    table-layout: fixed;
+}
+
+/* 굵기 빼고 폰트크기를 body 폰트크기와 일치시킴 */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: normal;
+    font-size: 100%;
+}
+
+/* 폼요소 높이 다를때 요소끼리 세로정렬시킴 */
+/* border-radius:0 -> iOS 테두리 둥글게 제거 */
+/* -webkit-appearance: none -> iOS 폼요소 기본모양 제거 */
+/* -webkit-: 크롬, 사파리 -moz-: 파이어폭스 -ms-:IE -o-: 오페라 */
+input,
+select,
+textarea,
+button {
+    vertical-align: middle;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+    outline: none;
+}
+
+/* textarea 리사이즈 막기 */
+textarea {
+    resize: none;
+}
+
+/* 모바일 크롬, 사파리 텍스트 자동확대 방지 */
+body {
+    -webkit-text-size-adjust: none;
+}
+
+/*********************** 공통스타일 *************************/
+/* body에 높이가 없어도 hidden이 걸리면 스크롤바가 사라짐(데스크탑) */
+body.on {
+    overflow: hidden;
+}
+
+/* iOS 사파리는 페이지최상단에서만 hidden이 걸리므로 페이지 위로 올라오게함(모바일,반응형) */
+/* body.on { overflow: hidden; position: fixed; left:0; top:0; width:100%; } */
+body,
+input,
+select,
+textarea,
+button,
+table {
+    font-family: 'Noto Sans KR', '맑은 고딕', 'malgun gothic', 'Apple SD Gothic Neo',
+    sans-serif;
+    /* font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", sans-serif; */
+    font-size: 16px;
+    letter-spacing: -0.4px;
+    color: var(--gray-600);
+}
+
+/* 스킵 네비 */
+#skip_navi {
+    position: relative;
+}
+
+#skip_navi a {
+    position: absolute;
+    left: 0;
+    top: -999px;
+    width: 100%;
+    padding: 10px 0;
+    background: #fff;
+    z-index: 99999;
+    text-align: center;
+}
+
+#skip_navi a:hover,
+#skip_navi a:active,
+#skip_navi a:focus {
+    top: 0;
+}
+
+/* 스크롤바 */
+/* ::-webkit-scrollbar {
+  width: 10px;
+  background: #f5f5f5;
+}
+::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border:2px solid #fff;
+  border-radius: 10px;
+} */
+
+/* 스크롤바 안보이게 */
+/* IE */
+/* * {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+} */
+/* ::-webkit-scrollbar {
+  display: none;
+} */
+
+/* 텍스트 선택 컬러 */
+/* ::selection {
+  background: #000;
+  color: #fff;
+} */
+
+/* legend,caption, 섹션제목 안보이게 */
+/* 제자리에서 띄워 다른내용에 영향 안가게 */
+/* 넘친내용을 가려줌 */
+/* 선도 가려줌 */
+/* 원래위치로 이동 */
+/* 0이면 스크린리더에서 글자 읽지않으므로 */
+legend,
+caption,
+.blind {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    margin: -1px;
+    width: 1px;
+    height: 1px;
+}
+
+/* float해제 */
+/* .clearfix:after {
+  content: '';
+  display: block;
+  clear: both;
+} */
+
+/********************** 폼요소 ********************/
+/* 입력필드 */
+/* placeholder */
+::-webkit-input-placeholder {
+    color: #c7c8cc;
+    font-weight: 400;
+}
+
+/* Webkit,크롬,사파리 */
+:-moz-placeholder {
+    color: #c7c8cc;
+    font-weight: 400;
+}
+
+/* Firefox 4-18 */
+::-moz-placeholder {
+    color: #c7c8cc;
+    opacity: 1;
+    font-weight: 400;
+}
+
+/* Firefox 19+ */
+:-ms-input-placeholder {
+    color: #c7c8cc !important;
+    font-weight: 400;
+}
+
+/* IE10+ */
+
+/* IE x버튼, password 눈모양 제거 */
+input::-ms-clear,
+input::-ms-reveal {
+    display: none;
+}
+
+/* input search x버튼 제거 */
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+    display: none;
+}
+
+/* input number 위아래 화살표제거 */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}
+
+input[type='text'],
+input[type='search'],
+input[type='password'],
+input[type='number'] {
+    border: 1px solid #333;
+    height: 40px;
+    padding: 0 10px;
+}
+
+/*
+checkbox ex)
+	<div class="checkbox_wrap">
+		<input id="is_login" type="checkbox" />
+		<label for="is_login"> 로그인상태유지 </label>
+	</div>
+
+*/
+
+.checkbox_wrap {
+    display: inline-block;
+}
+
+input[type='checkbox'] + label {
+    color: #333;
+    cursor: pointer;
+    display: inline-flex;
+    /* 폰트크기 16 * 줄간격(1.4내외) =  23px이하인 경우 하단 간격 발생 */
+    vertical-align: top;
+    align-items: center;
+    gap: 0 8px;
+}
+
+input[type='checkbox'] + label::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    border: 1px solid #999;
+}
+
+input[type='checkbox']:checked + label::before {
+    border: 1px solid #c9ab81;
+    background: url(/images/common/ico-checkbox-on.png) no-repeat 50% 50% / 60%;
+}
+
+.checkbox {
+    display: inline-flex;
+    align-items: center;
+    gap: 0 10px;
+    cursor: pointer;
+}
+
+.checkbox::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border: 1px solid #999;
+    border-radius: 50%;
+}
+
+/* :has - ios 15.4부터 지원 */
+/* .checkbox:has(input[type='checkbox']:checked)::before {
+  background: url(/images/sqr-check.svg) no-repeat 50% 50% / 100%;
+} */
+
+/* radio 공통 */
+.radio_wrap {
+    display: inline-block;
+}
+
+input[type='radio'] + label {
+    cursor: pointer;
+    position: relative;
+    display: inline-flex;
+    vertical-align: top;
+    align-items: center;
+    gap: 0 8px;
+}
+
+input[type='radio'] + label::before {
+    content: '';
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    border: 1px solid #ddd;
+}
+
+input[type='radio']:checked + label::before {
+    background: url(/images/common/ico-radio-on.png) no-repeat 50% 50% / 10px;
+    border: 1px solid var(--point-color1);
+}
+
+.radio {
+    display: inline-flex;
+    align-items: center;
+    gap: 0 5px;
+    cursor: pointer;
+}
+
+.radio::before {
+    content: '';
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 1px solid #999;
+}
+
+/* :has - ios 15.4부터 지원 */
+/* .radio:has(input[type='radio']:checked)::before {
+  background: url(/images/circle.svg) no-repeat 50% 50% / 14px;
+} */
+
+/* textarea */
+/* textarea {
+  width: 100%;
+  border: none;
+  background: #f8f8f8;
+  padding: 15px;
+} */
+
+/* 버튼 */
+.btn {
+    border: 1px solid #666;
+    color: var(--gray-600);
+    /* 버튼디자인에 아이콘이 포함된 경우
+    글자와 아이콘의 높이가 다르면 inline-flex이용하여 버튼을 좌우배치하고 align-items로 수직정렬해줌 */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 40px;
+    padding: 0 15px;
+    background: none;
+}
+
+/* 라벨 버튼 */
+[class*='label_btn'] {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 8px;
+    height: 40px;
+    border: 1px solid #999;
+    padding: 0 10px;
+}
+
+[class*='label_btn']::before {
+    content: '';
+    width: 24px;
+    height: 24px;
+}
+
+.delete_label_btn::before {
+    background: url(/images/common/delete.svg) no-repeat 0 0 / 100%;
+}
+
+.send_label_btn {
+    flex-direction: row-reverse;
+}
+
+.send_label_btn::before {
+    background: url(/images/common/send.svg) no-repeat 0 0 / 100%;
+}
+
+main#container {
+    padding-top: 100px;
+}
+
+/* 타이틀 공통 */
+.common_wrap {
+    padding: 120px 0 140px;
+    text-align: center;
+}
+
+.common_wrap .inner .txt {
+    display: block;
+    margin-bottom: 12px;
+    font-size: 20px;
+    color: var(--point-color1);
+    line-height: 30px;
+    letter-spacing: -1px;
+    word-break: keep-all;
+    font-family: 'Noto Serif KR', sans-serif;
+}
+
+.common_wrap .inner .tit {
+    display: inline-block;
+    position: relative;
+    padding: 0 80px;
+    font-size: 50px;
+    color: var(--point-color2);
+    font-weight: 500;
+    letter-spacing: 5.5px;
+    line-height: 1;
+    font-family: 'EB Garamond', sans-serif;
+}
+
+.common_wrap .inner .tit::before {
+    content: "";
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    margin-top: -0.5px;
+    width: 170px;
+    height: 1px;
+    background: var(--point-color2);
+}
+
+.common_wrap .inner .tit::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin-top: -0.5px;
+    width: 170px;
+    height: 1px;
+    background: var(--point-color2);
+}
+
+/* 버튼 공통 */
+.box_action a {
+    display: inline-block;
+    position: relative;
+    width: 130px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 15px;
+    color: var(--gray-600);
+    font-weight: 500;
+    text-align: center;
+}
+
+.box_action a:hover svg rect {
+    stroke-dashoffset: -121%;
+}
+
+.box_action a svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.box_action a svg rect {
+    fill: transparent;
+    stroke: var(--point-color1);
+    -webkit-transition: 2s;
+    -o-transition: 2s;
+    transition: 2s;
+    stroke-width: 2px;
+    stroke-dashoffset: 240%;
+    stroke-dasharray: 338% 27;
+    width: 100%;
+    height: 100%;
+}
+
+/* 아이콘 공통 */
+.icon_wrap {
+    display: flex;
+}
+
+.icon_wrap .sight_icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+
+.icon_wrap .sight_icon {
+    background: url(/images/goods/ico-sight.png) no-repeat 100%;
+}
+
+.icon_wrap .sight_icon:hover {
+    background-image: url(/images/goods/ico-sight-hover.png);
+}
+
+.icon_wrap .like_icon {
+    position: relative;
+    background: url(/images/goods/ico-like.png) no-repeat 100%;
+    width: 20px;
+    height: 20px;
+    border: none;
+    margin-left: 42px;
+}
+
+.icon_wrap .like_icon:hover {
+    background-image: url(/images/goods/ico-like-hover.png);
+}
+
+.icon_wrap .like_icon.on {
+    background: url(/images/goods/ico-like-on.png) no-repeat center 100%;
+    background-size: 18px;
+    left: 2px;
+    bottom: 1px;
+}
+
+.icon_wrap .like_icon.on:hover {
+    background-image: url(/images/goods/ico-like-on-hover.png);
+}
+
+.icon_wrap .like_icon::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 2px;
+    width: 2px;
+    height: 16px;
+    background-color: #AAA;
+    cursor: default;
+}
+
+.icon_wrap .like_icon.on::before {
+    left: -22px;
+    top: 3px;
+}
+
+/* 페이지네이션 */
+.pagination {
+    margin-top: 95px;
+    padding: 10px 0;
+    text-align: center;
+}
+.pagination .page_num {
+    display: inline-block;
+    margin: 0 3px;
+    min-width: 30px;
+    height: 30px;
+    background-color: transparent;
+    font-size: 18px;
+    color: var(--gray-400);
+    font-family: 'EB Garamond', 'Noto Sans KR', 'Noto Serif KR', sans-serif;
+    vertical-align: middle;
+    line-height: 28px;
+    font-weight: 500;
+}
+.pagination .page_num.active {
+    position: relative;
+    color: var(--point-color1);
+}
+.pagination .page_num.active::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    margin-left: -6px;
+    width: 12px;
+    height: 2px;
+    background-color: var(--point-color1);
+}
+.pagination .page_num.page_prev {
+    font-size: 0;
+    background: url(/images/common/bu-paging-first.png) no-repeat center;
+}
+.pagination .page_num.page_next {
+    font-size: 0;
+    background: url(/images/common/bu-paging-last.png) no-repeat center;
+}
+.pagination .page_num.page_prev:hover {
+    background-image: url(/images/common/bu-paging-first-on.png);
+}
+.pagination .page_num.page_next:hover {
+    background-image: url(/images/common/bu-paging-last-on.png);
+}
+
+
+/* 테이블 캡션 버그 대응 */
+caption.nohead {
+    position: static;
+}
+
+@media (max-width: 1200px) {
+}
+
+@media (max-width: 767px) {
+}
+
+/********** 공통스타일 끝  **********/

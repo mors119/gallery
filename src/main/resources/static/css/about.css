@@ -1,0 +1,341 @@
+.about_page .inner {
+    padding: 0 50px 50px;
+    margin: 0 auto;
+}
+
+/* 메인 배경 */
+.about_page .inner .main_bg {
+    height: calc(100vh - 150px);
+    position: relative;
+    overflow: hidden;
+}
+
+.about_page .inner .main_bg .background {
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    animation: 4s ease both main_bg;
+}
+
+.about_page .inner .main_bg .background img {
+    height: 100%;
+}
+
+@keyframes main_bg {
+    0% {
+        transform: scale(110%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+
+.about_page .main_bg .main_bg_tit {
+    color: #fff;
+    text-align: center;
+    word-break: keep-all;
+    font-family: 'EB Garamond', serif;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.about_page .main_bg_tit strong {
+    display: block;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: bold;
+    letter-spacing: 0;
+    margin-bottom: 25px;
+}
+
+.about_page .main_bg_tit .split_txt {
+    font-size: 70px;
+    line-height: 80px;
+    font-weight: bold;
+}
+
+.about_page .main_bg_tit .split_txt .split_letter {
+    opacity: 0;
+    animation: 2s fadeIn 0.5s forwards;
+}
+
+/* 애니메이션 설정 */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.about_page .main_bg_tit p {
+    margin-top: 45px;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: "Noto Serif KR", serif;
+    line-height: 28px;
+}
+
+.about_page .main_bg .scroll {
+    color: #fff;
+    font-family: 'EB Garamond', serif;
+    letter-spacing: 0;
+    position: absolute;
+    left: calc(50% - 30px);
+    bottom: 0;
+    padding-bottom: 80px;
+    animation: 2s ease-in view_scroll;
+}
+
+@keyframes view_scroll {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.about_page .main_bg .scroll i:first-child {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    width: 1px;
+    height: 70px;
+    background: rgba(255, 255, 255, 0.5);
+    display: block;
+}
+
+.about_page .main_bg .scroll i:last-child {
+    position: absolute;
+    margin-left: -0.2px;
+    left: 50%;
+    bottom: 45px;
+    width: 1px;
+    height: 25px;
+    background: #fff;
+    display: block;
+    animation: 4s infinite cubic-bezier(0.22, 1, 0.36, 1) scroll_main;
+}
+
+@keyframes scroll_main {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(70px);
+    }
+}
+
+/* sub - title */
+.about_page .sub_tit {
+    display: flex;
+    padding-top: 200px;
+}
+
+.about_page .sub_tit .left_tit {
+    width: 808px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.about_page .sub_tit .left_tit .left_inner {
+    /*width: 55%;*/
+}
+
+.about_page .sub_tit .left_tit span {
+    margin-left: 3px;
+    font-weight: 500;
+    font-size: 24px;
+    font-family: 'EB Garamond', serif;
+    color: var(--point-color1);
+    position: relative;
+    line-height: 30px;
+    letter-spacing: 0;
+}
+
+.about_page .sub_tit .left_tit span::after {
+    content: '';
+    position: absolute;
+    right: -120px;
+    top: 50%;
+    margin-top: 3px;
+    background: var(--point-color1);
+    height: 1px;
+    width: 100px;
+}
+
+.about_page .sub_tit .left_tit p {
+    font-family: "Noto Serif KR", serif;
+    font-size: 56px;
+    line-height: 80px;
+    font-weight: 700;
+    margin-top: 17px;
+    letter-spacing: 4px;
+}
+
+.about_page .sub_tit .right_photo img {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.about_page .info_txt {
+    padding-top: 120px;
+    font-size: 20px;
+    font-family: "Noto Serif KR", serif;
+    font-weight: 500;
+    word-break: keep-all;
+    letter-spacing: 0.8px;
+    color: var(--point-color2);
+    line-height: 36px;
+    text-align: center;
+    overflow: hidden;
+}
+
+.about_page .info_txt strong {
+    font-weight: 700;
+}
+
+.about_page .info_txt p {
+    padding-bottom: 40px;
+}
+
+.about_page .flow_left {
+    padding-bottom: 90px;
+    font-size: 230px;
+    font-family: 'EB Garamond', serif;
+    white-space: nowrap;
+    color: #f7f7f7;
+    line-height: 1.3;
+    display: flex;
+    gap: 5%;
+    animation: 20s infinite linear flow_left;
+}
+
+@keyframes flow_left {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+
+.about_page .show_art_wrap {
+    background: #f5f0e9;
+    padding: 120px 0 70px;
+    overflow: hidden;
+}
+
+.about_page .show_art_wrap .text_wrap {
+    color: var(--point-color2);
+    text-align: center;
+    padding-bottom: 60px;
+}
+
+.about_page .show_art_wrap .text_wrap p {
+    font-family: "Noto Serif KR", serif;
+    font-weight: 600;
+    line-height: 36px;
+}
+
+.about_page .show_art_wrap .text_wrap h3 {
+    font-family: 'EB Garamond', serif;
+    font-weight: 500;
+    font-size: 60px;
+    line-height: 70px;
+}
+
+.about_page .show_art_wrap .text_wrap a {
+    margin-top: 50px;
+    height: 50px;
+    display: inline-block;
+    width: 180px;
+    position: relative;
+}
+
+.about_page .show_art_wrap .text_wrap svg {
+    /*border: 1px solid var(--point-color1);*/
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.about_page .show_art_wrap .text_wrap svg rect {
+    fill: transparent;
+    stroke: #c9ab81;
+    stroke-width: 2px;
+    stroke-dashoffset: 240%;
+    stroke-dasharray: 338% 27;
+    width: 100%;
+    height: 100%;
+    transition: all 2s;
+}
+
+.about_page .show_art_wrap .text_wrap a:hover svg rect {
+    stroke-dashoffset: -121%;
+}
+
+.about_page .show_art_wrap .text_wrap span {
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-size: 18px;
+    font-family: 'EB Garamond', sans-serif;
+    line-height: 50px;
+    width: 180px;
+
+}
+
+.about_page .show_art_wrap .show_wrap {
+    display: flex;
+    flex-shrink: 0;
+    gap: 140px;
+    animation: 60s infinite linear flow_left;
+}
+
+.about_page .show_art_wrap .show_art {
+    height: 500px;
+    width: 2000px;
+    gap: 50px;
+    display: flex;
+    flex-shrink: 0;
+}
+
+.about_page .show_art_wrap .show_art div {
+    flex-shrink: 1;
+    width: 25%;
+}
+
+.about_page .show_art_wrap .show_art img {
+    display: inline-block;
+}
+
+.about_page .show_art_wrap .show_art .art1 {
+    padding-left: 120px;
+}
+
+.about_page .show_art_wrap .show_art .art2 {
+    padding: 160px 0 0 150px;
+}
+
+.about_page .show_art_wrap .show_art .art3 {
+    padding: 25px 0 0 120px;
+}
+
+.about_page .show_art_wrap .show_art .art4 {
+    padding: 70px 0 0 90px;
+}
+
+/* swiper 끊김없이 사용할 때 */
+/*.about_page .show_art_wrap .swiper-wrapper{-webkit-transition-timing-function:linear!important; transition-timing-function:linear!important; }*/

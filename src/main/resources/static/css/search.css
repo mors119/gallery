@@ -1,0 +1,496 @@
+/* 서브타이틀 */
+.search_container .search_tit {
+    padding: 120px 0 140px;
+    margin: 0 auto;
+    max-width: 1400px;
+    text-align: center;
+}
+
+.search_container .search_tit h2 {
+    display: inline-block;
+    position: relative;
+    padding: 0 80px;
+    font-size: 50px;
+    font-weight: 500;
+    color: var(--point-color2);
+    letter-spacing: 5.5px;
+    line-height: 1;
+    font-family: 'EB Garamond', 'Noto Sans KR', serif;
+}
+
+.search_container .search_tit h2::before {
+    content: '';
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    width: 170px;
+    height: 1px;
+    background: var(--point-color2);
+}
+
+.search_container .search_tit h2::after {
+    content: "";
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    width: 170px;
+    height: 1px;
+    background: var(--point-color2);
+}
+
+/* 검색창 */
+.search_container .search_word_wrap {
+    margin: 0 auto;
+    padding-bottom: 6px;
+    max-width: 682px;
+    width: 90%;
+}
+
+.search_container .search_word_wrap .word_box {
+    position: relative;
+}
+
+.search_container .search_word_wrap .word_box input {
+    padding: 0 60px 0 20px;
+    width: 100%;
+    height: 52px;
+    color: var(--gray-500);
+    line-height: 52px;
+    background-color: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    transition: all 0.30s ease-in-out;
+}
+
+.search_container .search_word_wrap .word_box input:focus {
+    background-color: #fff;
+    border: 1px solid var(--point-color1);
+    transition: all 0.30s ease-in-out;
+}
+
+.search_container .search_word_wrap .word_box button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 52px;
+    height: 52px;
+    border: none;
+    background: url(/images/search/ico-search-result.png) no-repeat center;
+}
+
+/* 검색창 check */
+.search_container .search_word_wrap .word_chk {
+    margin-top: 21px;
+    margin-left: -4px;
+}
+
+.search_container .search_word_wrap .word_chk label {
+    position: relative;
+    letter-spacing: -0.7px;
+}
+
+.search_container .word_chk input[type='checkbox'] + label {
+    gap: 0 13px;
+    cursor: default;
+}
+
+.search_container .word_chk input[type='checkbox'] + label::before {
+    border-color: #ddd;
+}
+
+.search_container .word_chk input[type="checkbox"]:checked + label::before {
+    border-color: var(--point-color1);
+    background: url(/images/search/ico-checkbox-on.png) no-repeat center;
+}
+
+/* 검색결과 */
+.search_container .search_list_wrap {
+    margin: 75px 50px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: relative;
+}
+
+/* 검색 필터 */
+.search_container .search_list_wrap .search_filter {
+    position: sticky;
+    left: 0;
+    top: 20px;
+    padding-bottom: 20px;
+    width: 380px;
+    z-index: 10;
+}
+
+.search_container .search_list_wrap .search_filter h3 {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    height: 80px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    background: var(--point-color1);
+    color: #fff;
+    font-family: 'EB Garamond', 'Noto Sans KR', serif;
+}
+
+.search_container .search_list_wrap .search_filter button {
+    position: absolute;
+    right: 20px;
+    top: 30px;
+    width: 20px;
+    height: 20px;
+    border: none;
+    background: url(/images/search/ico-reset-white.png) no-repeat center;
+}
+
+.search_container .search_filter .sort_list_wrap {
+    padding: 10px 20px;
+    border: 1px solid #ddd;
+}
+
+.search_container .search_filter .sort_list_wrap > li {
+    position: relative;
+}
+
+.search_container .search_filter .sort_list_wrap > li a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 20px;
+    margin: -2px 0 2px;
+    height: 68px;
+    border-top: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: 500;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', serif;
+}
+
+.search_container .search_filter .sort_list_wrap > li:first-child a {
+    border-top: none;
+}
+
+.search_container .search_filter .sort_list_wrap > li a::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 29px;
+    width: 15px;
+    height: 15px;
+    background: url(/images/search/ico-combine-sort.png) no-repeat center;
+    transform: rotate(0);
+    transition: transform 0.4s ease;
+}
+
+.search_container .search_filter .sort_list_wrap > li.on a {
+    color: var(--point-color1);
+}
+
+.search_container .search_filter .sort_list_wrap > li.on a::after {
+    background: url(/images/search/ico-combine-sort-on.png) no-repeat center;
+    transform: rotate(180deg);
+}
+
+.search_container .search_filter .sort_list_wrap .sort_list {
+    visibility: hidden;
+    overflow: hidden;
+    max-height: 0;
+    background-color: #f8f8f8;
+    transition: max-height .5s cubic-bezier(0.22, 1, 0.36, 1), visibility .5s, margin-bottom .5s;
+}
+
+.search_container .search_filter .sort_list_wrap > li.on .sort_list {
+    visibility: visible;
+    max-height: 500px;
+    margin-bottom: 20px;
+    transition: max-height .5s cubic-bezier(0.22, .6, 0.36, .6), visibility .5s, margin-bottom .5s;
+}
+
+.search_container .search_filter .sort_list_wrap > li:nth-of-type(n+3).on .sort_list {
+    max-height: 220px;
+}
+
+.search_container .search_filter .sort_list {
+    padding: 0 20px;
+}
+
+.search_container .search_filter .sort_list > li:first-child {
+    padding-top: 15px;
+}
+
+.search_container .search_filter .sort_list > li:last-child {
+    padding-bottom: 15px;
+}
+
+.search_container .search_filter .sort_list_wrap .sort_list label {
+    position: relative;
+    color: var(--gray-500);
+    line-height: 36px;
+    font-weight: 500;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.search_container .search_filter .sort_list input[type='checkbox'] + label {
+    gap: 0 13px;
+}
+
+.search_container .search_filter .sort_list input[type='checkbox'] + label::before {
+    margin-left: -4px;
+    border-color: #ddd;
+    background: #fff;
+}
+
+.search_container .search_filter .sort_list input[type='checkbox']:checked + label::before {
+    border-color: var(--point-color1);
+    background: url(/images/search/ico-checkbox-on.png) no-repeat center #fff;
+}
+
+/* 검색리스트 */
+.search_container .search_list_wrap .search_list {
+    padding: 0 0 160px 120px;
+    max-width: 1230px;
+    width: 100%;
+}
+
+/* 검색리스트 탭 */
+.search_container .search_list .list_tab {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 40px;
+}
+
+.search_container .search_list .list_tab .tab_left {
+    font-weight: 500;
+    letter-spacing: -0.7px;
+}
+
+.search_container .search_list .list_tab .tab_left .tt_color {
+    font-weight: 500;
+    color: var(--point-color1);
+    margin-right: -3px;
+}
+
+.search_container .search_list .list_tab .tab_right {
+    display: flex;
+    align-items: center;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box {
+    position: relative;
+    padding-left: 20px;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box:first-child {
+    padding-left: 0;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box > a {
+    display: block;
+    position: relative;
+    padding: 0 60px 0 25px;
+    min-width: 230px;
+    height: 52px;
+    border: 1px solid #f8f8f8;
+    background-color: #f8f8f8;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 52px;
+    transition: all 0.4s ease;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box > a::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -3px;
+    width: 16px;
+    height: 8px;
+    background: url(/images/search/bu-grid-opt.png) no-repeat center;
+    transition: all 0.3s;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box.on > a {
+    border: 1px solid var(--point-color1);
+    background-color: #fff;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box.on > a::after {
+    transform: rotate(-180deg);
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box ul {
+    opacity: 0;
+    visibility: hidden;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    z-index: 100;
+    margin-top: 4px;
+    width: 230px;
+    max-height: 150px;
+    background-color: #fff;
+    border: 1px solid #eee;
+    transition: all 0.3s ease;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box.on ul {
+    opacity: 1;
+    visibility: visible;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box ul li {
+    display: block;
+    padding: 0 25px;
+    line-height: 40px;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.search_container .search_list .list_tab .tab_right .tab_box ul li:hover {
+    background-color: #f6f6f6;
+}
+
+/* 리스트 공통 */
+.search_container .view_more_wrap {
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    left: 30px;
+    right: 30px;
+    bottom: 30px;
+    top: 30px;
+    background-color: #ffffffcc;
+    clip-path: inset(0 100% 0 0);
+    font-family: 'EB Garamond', 'Noto Sans KR', serif;
+}
+
+.search_container .sct_img:hover .view_more_wrap {
+    opacity: 1;
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+    transition: all 0.4s cubic-bezier(.48, .57, .42, .92);
+}
+
+.search_container .view_more_wrap .icon_wrap {
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+}
+
+.search_container .view_more_wrap .sight_icon {
+    display: inline-block;
+    background: url(/images/main/ico-sight.png) no-repeat 100%;
+    width: 20px;
+    height: 20px;
+}
+
+.search_container .view_more_wrap .sight_icon:hover {
+    background: url(/images/main/ico-sight-on.png) no-repeat 100%;
+}
+
+.search_container .view_more_wrap .like_icon {
+    position: relative;
+    background: url(/images/main/ico-like.png) no-repeat 100%;
+    width: 20px;
+    height: 20px;
+    border: none;
+    margin-left: 42px;
+}
+
+.search_container .view_more_wrap .like_icon:hover {
+    background: url(/images/main/ico-like-on.png) no-repeat 100%;
+}
+
+.search_container .view_more_wrap .like_icon::before {
+    content: '';
+    position: absolute;
+    left: -20px;
+    top: 2px;
+    width: 2px;
+    height: 16px;
+    background-color: #AAA;
+    cursor: default;
+}
+
+/* 검색리스트 내용 */
+.search_container .search_list .list_detail {
+    overflow: hidden;
+}
+
+.search_container .search_list .list_detail .detail_sct {
+    margin-top: -60px;
+    margin-left: -30px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li {
+    margin: 60px 0 0 30px;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_img {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 100%;
+    height: 0;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_img img {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ddd;
+    object-fit: cover;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_txt {
+    margin: 30px 0 0;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_txt a {
+    overflow: hidden;
+    display: inline-block;
+    max-width: 100%;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 30px;
+    vertical-align: middle;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_desc {
+    margin-top: 20px;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_desc span {
+    display: block;
+    color: var(--point-color1);
+    line-height: 20px;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_desc p {
+    margin-top: 8px;
+    color: var(--gray-400);
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_cost {
+    margin-top: 25px;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_cost span {
+    font-weight: 500;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.search_container .search_list .list_detail .detail_sct .sct_li .sct_cost strong {
+    font-size: 26px;
+    font-weight: 500;
+    font-family: 'EB Garamond', 'Noto Sans KR', serif;
+}

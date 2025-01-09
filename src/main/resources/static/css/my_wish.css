@@ -1,0 +1,270 @@
+.my_wish_container .my_wish_wrap {
+    padding: 120px 0 140px;
+    letter-spacing: -0.4px;
+}
+
+.my_wish_container .my_page_inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin: 0 auto;
+    max-width: 1400px;
+    width: calc(100% - 100px);
+    line-height: 19px;
+}
+
+/* 좌측 네비게이션 */
+.my_wish_wrap .nav_wrap {
+    padding: 50px 30px 30px;
+    width: 280px;
+    background: #F8F8F8;
+}
+
+.my_wish_wrap .nav_wrap h2 {
+    padding-bottom: 18px;
+    margin-bottom: 30px;
+    border-bottom: 2px solid var(--gray-600);
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+    line-height: 34px;
+}
+
+.my_wish_wrap .my_page_depth {
+    margin-bottom: 40px;
+}
+
+.my_wish_wrap .my_page_depth h3 {
+    margin-bottom: 25px;
+    font-size: 18px;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.my_wish_wrap .my_page_depth li {
+    margin-top: 10px;
+}
+
+.my_wish_wrap .my_page_depth li:first-child {
+    margin: 0;
+}
+
+.my_wish_wrap .my_page_depth li > a {
+    display: inline-block;
+    font-size: 16px;
+    color: var(--gray-500);
+    line-height: 26px;
+    vertical-align: middle;
+}
+
+.my_wish_wrap .my_page_depth li.on > a {
+    color: var(--point-color1);
+}
+
+/* 우측 회원 정보 */
+.my_wish_wrap .con_wrap {
+    width: calc(100% - 360px);
+}
+
+/* 고객 등급, 쿠폰, 적립금 */
+.my_wish_wrap .my_page_info {
+    display: flex;
+    padding: 29px 90px 29px 60px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #DDD;
+}
+
+.my_wish_wrap .my_page_info * {
+    font-family: 'EB Garamond', 'Noto Sans KR', sans-serif;
+}
+
+.my_wish_wrap .my_page_info .info_txt_wrap {
+    display: flex;
+    align-items: center;
+}
+
+.my_wish_wrap .info_txt_wrap .info_txt {
+    padding-left: 25px;
+}
+
+.my_wish_wrap .info_txt_wrap .info_txt p:nth-of-type(1) {
+    font-size: 18px;
+    line-height: 28px;
+    color: var(--gray-500);
+}
+
+.my_wish_wrap .info_txt_wrap .info_txt strong {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--gray-600);
+}
+
+.my_wish_wrap .info_txt_wrap .info_txt p:nth-of-type(2) {
+    font-size: 15px;
+    color: #929292;
+    line-height: 25px;
+}
+
+.my_wish_wrap .info_txt_wrap .info_txt span {
+    color: var(--point-color1) !important;
+}
+
+.my_wish_wrap .my_page_info .info_mile {
+    display: flex;
+}
+
+.my_wish_wrap .my_page_info .my_coupon {
+    padding-left: 60px;
+    margin-right: 40px;
+    background: url(/images/my_page/ico-coupon.png) no-repeat left center;
+}
+
+.my_wish_wrap .my_page_info .my_mile {
+    position: relative;
+    padding-left: 60px;
+    margin-left: 40px;
+    background: url(/images/my_page/ico-point.png) no-repeat left center;
+}
+
+.my_wish_wrap .my_page_info h3 {
+    font-size: 16px;
+    color: var(--gray-600);
+    font-weight: 400;
+    line-height: 26px;
+}
+
+.my_wish_wrap .my_page_info .info_mile span {
+    color: var(--point-color1);
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.my_wish_wrap .my_page_info .my_mile::after {
+    content: '';
+    position: absolute;
+    left: -40px;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: #DDD;
+}
+
+/* 우측 컨텐츠 공통 제목 */
+.my_wish_wrap .my_wish_tit {
+    margin: 80px 0 30px;
+}
+
+.my_wish_wrap .my_wish_tit h3 {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 700;
+    font-family: 'Noto Serif KR', 'EB Garamond', sans-serif;
+    color: var(--gray-600);
+    line-height: 34px;
+}
+
+/* 테이블 */
+.my_wish_wrap table {
+    width: 100%;
+    border-top: 1px solid var(--gray-600);
+}
+
+.my_wish_wrap table th {
+    position: relative;
+    padding: 22px 0;
+    border-bottom: 1px solid #DDD;
+    font-weight: 500;
+    line-height: 26px;
+}
+
+.my_wish_wrap div.checkbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;;
+}
+
+.my_wish_wrap input[type=checkbox].checked + label::before {
+    border-color: var(--point-color1);
+    background: #FFF url(/images/my_page/ico-checkbox-on.png) no-repeat center;
+}
+
+.my_wish_wrap .checkbox::before {
+    display: none;
+}
+
+.my_wish_wrap tbody td {
+    padding: 20px 10px;
+    border-bottom: 1px solid #DDD;
+    color: var(--gray-500);
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+    text-align: center;
+}
+
+.my_wish_wrap input[type=checkbox] + label {
+    display: block;
+    position: relative;
+    padding: 0 !important;
+    color: var(--gray-500);
+    line-height: 27px;
+    cursor: pointer;
+}
+
+.my_wish_wrap input[type=checkbox] + label::before {
+    content: '';
+    position: static;
+    display: block;
+    width: 22px;
+    height: 22px;
+    background-color: #FFF;
+    border: 1px solid #DDD;
+    margin: 0 auto;
+}
+
+.my_wish_wrap .td_state .delete_wish {
+    display: block;
+    position: relative;
+    border: 1px solid #AAA;
+    border-radius: 0;
+    color: var(--gray-500);
+    width: 80px;
+    line-height: 28px;
+    transition: all .4s ease;
+    font-weight: 500;
+    text-align: center;
+    margin: 0 auto;
+    /*margin-top: 0;*/
+    font-size: 15px;
+}
+
+.my_wish_wrap .td_state .delete_wish:hover {
+    background: #AAA;
+    color: #FFF;
+}
+
+.my_wish_wrap .wish_opt_wrap {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.my_wish_wrap .wish_opt_wrap button {
+    position: relative;
+    display: block;
+    padding: 0 15px;
+    width: auto;
+    height: 40px;
+    line-height: 38px;
+    border: 1px solid #DDD;
+    color: var(--gray-500);
+    font-size: 15px;
+    font-weight: 500;
+    background-color: transparent;
+    text-align: center;
+    transition: all .4s;
+}
+
+.my_wish_wrap .wish_opt_wrap button:hover {
+    background: #AAA;
+    color: #FFF;
+}

@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <script src="/js/main.js"></script>
+    <script src="/js/gsap.min.js"></script>
+</head>
+<body>
+<main id="container" class="main_container" layout:fragment="content">
+    <div class="cursor"></div>
+
+    <!-- 메인 -->
+    <div class="main_slider">
+        <p class="blind">메인 슬라이더</p>
+        <div class="swiper">
+            <div class="swiper-wrapper">
+                <!-- image -->
+                <div class="swiper-slide" th:each="i : ${#numbers.sequence(1, 3)}">
+                    <a href="#">
+                        <img th:src="${'/images/main/main_slider_0' + i + '.jpg'}" th:alt="${'main_slider_0' + i}">
+                    </a>
+                </div>
+            </div>
+            <!-- text -->
+            <div class="txt_box">
+                <div class="slide_txt">
+                    <div class="txt">
+                        <p>ART & DESIGN</p>
+                        <h2>BAEXANG GALLERY SHOP<br>GRAND OPEN</h2>
+                    </div>
+                </div>
+                <div class="slide_txt">
+                    <div class="txt">
+                        <p>BAEXANG GALLERY</p>
+                        <h2>GRAND OPEN</h2>
+                    </div>
+                </div>
+                <div class="slide_txt">
+                    <div class="txt">
+                        <p>Art · Design in</p>
+                        <h2>BAEXANG</h2>
+                    </div>
+                </div>
+            </div>
+            <!-- button -->
+            <div class="swiper-button-prev"><span>PREV</span></div>
+            <div class="swiper-button-next"><span>NEXT</span></div>
+            <!-- pagination -->
+            <div class="swiper-pagination">
+                <div class="swiper-pagination-bullet"></div>
+                <div class="swiper-pagination-bullet"></div>
+                <div class="swiper-pagination-bullet"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 베스트 -->
+    <div class="main_best">
+        <div class="best_tit_wrap">
+            <div th:replace="~{fragments :: commonTitle('BEST ART', '백상에서 가장 인기있는 작품을 소개합니다.')}"></div>
+        </div>
+
+        <div class="best_slider" data-aos="fade-up">
+            <p class="blind">베스트 슬라이더</p>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="sct_img">
+                                <img src="/images/main/The_Langlois_Bridge.jpg" alt="아를의 랑그루아 다리">
+                                <div class="view_more_wrap">
+                                    <th:block th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/1')}"/>
+                                    <div class="icon_wrap">
+                                        <a href="/shop/view/1" class="sight_icon"></a>
+                                        <button class="like_icon" data-no="1"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sct_title">
+                                <a href="/shop/view/1">아를의 랑그루아 다리</a>
+                            </div>
+                            <div class="sct_desc">
+                                <span>빈센트 반 고흐</span>
+                                <p>30.0cm x 30.0cm</p>
+                            </div>
+                            <div class="sct_cost">
+                                <span><strong>38,200</strong>원</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="sct_img">
+                                <img src="/images/main/The_Kiss.jpg" alt="키스">
+                                <div class="view_more_wrap">
+                                    <th:block th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/4')}"/>
+                                    <div class="icon_wrap">
+                                        <a href="/shop/view/4" class="sight_icon"></a>
+                                        <button class="like_icon" data-no="4"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sct_title">
+                                <a href="/shop/view/4">키스</a>
+                            </div>
+                            <div class="sct_desc">
+                                <span>구스타프 클림트</span>
+                                <p>30.0cm x 30.0cm</p>
+                            </div>
+                            <div class="sct_cost">
+                                <span><strong>36,500</strong>원</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="sct_img">
+                                <img src="/images/main/Antibes_In_The_Morning.png" alt="앙티브의 아침">
+                                <div class="view_more_wrap">
+                                    <th:block th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/2')}"/>
+                                    <div class="icon_wrap">
+                                        <a href="/shop/view/2" class="sight_icon"></a>
+                                        <button class="like_icon" data-no="2"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sct_title">
+                                <a href="/shop/view/2">앙티브의 아침</a>
+                            </div>
+                            <div class="sct_desc">
+                                <span>클로드 모네</span>
+                                <p>30.0cm x 30.0cm</p>
+                            </div>
+                            <div class="sct_cost">
+                                <span><strong>35,700</strong>원</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="sct_img">
+                                <img src="/images/main/On_Lake_Attersee.png" alt="아테제 호수">
+                                <div class="view_more_wrap">
+                                    <th:block th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/5')}"/>
+                                    <div class="icon_wrap">
+                                        <a href="/shop/view/5" class="sight_icon"></a>
+                                        <button class="like_icon" data-no="5"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sct_title">
+                                <a href="/shop/view/5">아테제 호수</a>
+                            </div>
+                            <div class="sct_desc">
+                                <span>구스타프 클림트</span>
+                                <p>30.0cm x 30.0cm</p>
+                            </div>
+                            <div class="sct_cost">
+                                <span><strong>42,400</strong>원</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="sct_img">
+                                <img src="/images/main/Effect_Of_Spring_At_Giverny.png" alt="지베르니 봄의 효과">
+                                <div class="view_more_wrap">
+                                    <th:block th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/3')}"/>
+                                    <div class="icon_wrap">
+                                        <a href="/shop/view/3" class="sight_icon"></a>
+                                        <button class="like_icon" data-no="3"></button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="sct_title">
+                                <a href="/shop/view/3">지베르니 봄의 효과</a>
+                            </div>
+                            <div class="sct_desc">
+                                <span>클로드 모네</span>
+                                <p>30.0cm x 30.0cm</p>
+                            </div>
+                            <div class="sct_cost">
+                                <span><strong>36,500</strong>원</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination">
+                    <div class="swiper-pagination-bullet"></div>
+                    <div class="swiper-pagination-bullet"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 추천 -->
+    <div class="main_pick">
+        <div class="pick_tit_wrap">
+            <div th:replace="~{fragments :: commonTitle('MD PICK', '백상 큐레이터가 선정한 추천 작품을 만나보세요.')}"></div>
+        </div>
+        <div class="pick_tab_wrap" data-aos="fade-up">
+            <div class="pick_tab">
+                <ul>
+                    <li class="gnb_tab t_01 on"><a href="#">그림작품</a></li>
+                    <li class="gnb_tab t_02"><a href="#">사진작품</a></li>
+                </ul>
+            </div>
+            <div class="pick_gnb_wrap">
+                <div class="pick_gnb gnb_01 on">
+                    <div class="swiper swiper-img">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="/shop/view/11">
+                                    <img src="/images/main/Forester's_House_In_Weissenbach.png" alt="산지기의 집">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper swiper-txt">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="gnb_info">
+                                    <p>구스타프 클림트</p>
+                                    <div class="txt_desc">
+                                        <span>산지기의 집</span>
+                                        <p>구스타프 클림트의 산지기의 집(House in the garden)입니다. 구스타프 클림트는 오스트리아의 화가. 아르누보 계열의 장식적인
+                                            양식을 선호하며 전통적인 미술에 대항해 ‘빈 분리파’를 결성했다. 관능적인 여성 이미지와 찬란한 황금빛, 화려한 색채를 특징으로 하고
+                                            성(性)과 사랑, 죽음에 대한 알레고리로 많은 사람들을 매혹시켰다.</p>
+                                    </div>
+                                    <div class="view_more_wrap">
+                                        <th:block
+                                                th:replace="~{fragments :: btnActionHref('Read More', '/shop/view/11')}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+                <div class="pick_gnb gnb_02">
+                    <div class="swiper swiper-img">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <a href="/shop/view/14">
+                                    <img src="/images/main/Wheatfield_With_Reaper.jpg" alt="수확하는 사람">
+                                </a>
+                            </div>
+                            <div class="swiper-slide">
+                                <a href="/shop/view/15">
+                                    <img src="/images/main/The_Water-lily_Pond.png" alt="수련연못">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                    <div class="swiper swiper-txt">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide">
+                                <div class="gnb_info">
+                                    <p>빈센트 반 고흐</p>
+                                    <div class="txt_desc">
+                                        <span>수확하는 사람</span>
+                                        <p>빈센트 반 고흐는 장 프랑수아 밀레(Jean Francois Millet)의 &lt;씨 뿌리는 사람&gt;(1850) 및 &lt;이삭 줍는
+                                            여인들-이삭줍기&gt;(1857)와 같은 작품들에서 영감을 받아 농촌에서 행해지는 일들에 관심이 많았고, 그와 관련한 다수의 연작들을
+                                            그렸다. 들에서 수확을 하고 있는 농부의 모습과 더불어 수확기의 황금빛 밀밭의 색채가 내는 효과가 보는 이의 시선을 사로잡는다.</p>
+                                    </div>
+                                    <div class="view_more_wrap">
+                                        <th:block
+                                                th:replace="~{fragments :: btnActionHref('Read More', '/shop/view/14')}"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="swiper-slide">
+                                <div class="gnb_info">
+                                    <p>클로드 모네</p>
+                                    <div class="txt_desc">
+                                        <span>수련연못</span>
+                                        <p>자연 경관을 표한하기 위한 운동을 한 실천한 작가이자 인상주의 회화의 정신을 시작시킨 모네의 작 수련연못 작품입니다. 이는 수련시리즈
+                                            작품중 하나입니다.</p>
+                                    </div>
+                                    <div class="view_more_wrap">
+                                        <th:block
+                                                th:replace="~{fragments :: btnActionHref('Read More', '/shop/view/15')}"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 신작 -->
+    <div class="main_new">
+        <div class="new_tit_wrap">
+            <div th:replace="~{fragments :: commonTitle('NEW ART', '백상과 함께하는 새로운 작품을 소개합니다.')}"></div>
+        </div>
+        <div class="new_slider" data-aos="fade-up">
+            <p class="blind">새로운 작품 슬라이더</p>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="ns_img">
+                            <img src="/images/main/Terrasse_A_Vernon.jpg" alt="베르농의 테라스">
+                        </div>
+                        <div class="ns_info_wrap">
+                            <div class="ns_info">
+                                <p>피에르 보나르</p>
+                                <div class="ns_desc">
+                                    <span>베르농의 테라스</span>
+                                    <p>강렬한 색채와 평면성이 강조된 뚜렷한 윤곽선, 평평한 색면 추구에 열정을 쏟았던 '나비파'의 유산을 느낄 수 있다.</p>
+                                </div>
+                                <div class="ns_btn">
+                                    <a href="/shop/view/6">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="ns_img">
+                            <img src="/images/main/Country_Road_In_The_Provence_By_Night.jpg" alt="밤의 프로방스 시골길">
+                        </div>
+                        <div class="ns_info_wrap">
+                            <div class="ns_info">
+                                <p>빈센트 반 고흐</p>
+                                <div class="ns_desc">
+                                    <span>밤의 프로방스 시골길</span>
+                                    <p>1889년 5월부터 1890년 5월 생레미에서 머문 기간 동안의 작품들은 반 고흐 특유의 소용돌이치며 꿈틀대는 선들로 가득했다. 이 시기 반
+                                        고흐의 마음을 사로잡은 소재는 사이프러스 나무였다.</p>
+                                </div>
+                                <div class="ns_btn">
+                                    <a href="/shop/view/7">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="ns_img">
+                            <img src="/images/main/Woman_With_A_Parasol.jpg" alt="양산을 든 여인 - 카미유와 장">
+                        </div>
+                        <div class="ns_info_wrap">
+                            <div class="ns_info">
+                                <p>클로드 모네</p>
+                                <div class="ns_desc">
+                                    <span>양산을 든 여인 - 카미유와 장</span>
+                                    <p>마네의 도움으로 1871년 모네는 아르장퇴유에 거처를 마련하였다. 양산을 든 여인(1875)는 1875년 여름에서 1876년 사이에 그린 일련의
+                                        작품 시리즈 가운데 하나이다. 이때 그린 시리즈물의 풍경은 파리 외곽인 아르장퇴유의 두 번째 집 주위의 정원을 묘사하고 있다.</p>
+                                </div>
+                                <div class="ns_btn">
+                                    <a href="/shop/view/8">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="ns_img">
+                            <img src="/images/main/Spring_By_The_Seine.png" alt="센강의 봄">
+                        </div>
+                        <div class="ns_info_wrap">
+                            <div class="ns_info">
+                                <p>클로드 모네</p>
+                                <div class="ns_desc">
+                                    <span>센강의 봄</span>
+                                    <p>클로드 모네의 작품</p>
+                                </div>
+                                <div class="ns_btn">
+                                    <a href="/shop/view/9">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="ns_img">
+                            <img src="/images/main/Portrait_Of_Hermine_Gallia.png" alt="헤르민 갈리아의 초상">
+                        </div>
+                        <div class="ns_info_wrap">
+                            <div class="ns_info">
+                                <p>구스타프 클림트</p>
+                                <div class="ns_desc">
+                                    <span>헤르미네 갈리아의 초상</span>
+                                    <p>구스타프 클림트의 작품</p>
+                                </div>
+                                <div class="ns_btn">
+                                    <a href="/shop/view/10">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 갤러리 -->
+    <div class="main_gallery">
+        <div class="gallery_wrap">
+            <h2 class="gallery_txt">
+                <span data-aos="flip-left" data-aos-delay="0">B</span>
+                <span data-aos="flip-left" data-aos-delay="150">A</span>
+                <span data-aos="flip-left" data-aos-delay="300">E</span>
+                <span data-aos="flip-left" data-aos-delay="450">X</span>
+                <span data-aos="flip-left" data-aos-delay="600">A</span>
+                <span data-aos="flip-left" data-aos-delay="750">N</span>
+                <span data-aos="flip-left" data-aos-delay="900">G</span>
+                <span>&nbsp;</span>
+                <span data-aos="flip-left" data-aos-delay="1050">G</span>
+                <span data-aos="flip-left" data-aos-delay="1200">A</span>
+                <span data-aos="flip-left" data-aos-delay="1350">L</span>
+                <span data-aos="flip-left" data-aos-delay="1500">L</span>
+                <span data-aos="flip-left" data-aos-delay="1650">E</span>
+                <span data-aos="flip-left" data-aos-delay="1800">R</span>
+                <span data-aos="flip-left" data-aos-delay="1950">Y</span>
+            </h2>
+            <p>백상 갤러리에서 다양한 그림을 직접 감상하시고 구입하세요.</p>
+            <div class="view_more_wrap">
+                <th:block th:replace="~{fragments :: btnActionHref('Read More', 'javascript:alert(\'준비중입니다.\')')}"/>
+            </div>
+        </div>
+    </div>
+
+    <!-- 후기 -->
+    <div class="main_review">
+        <div class="review_tit_wrap">
+            <div th:replace="~{fragments :: commonTitle('REVIEW', '백상의 작품을 이용한 고객들의 실제 후기입니다.')}"></div>
+        </div>
+        <div class="review_slider" data-aos="fade-up">
+            <p class="blind">리뷰 슬라이더</p>
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="rs_img_wrap">
+                              <span class="rs_date">
+                                <strong>02</strong>
+                                Jun
+                              </span>
+                                <img src="/images/main/On_Lake_Attersee.png" alt="아테제 호수">
+                            </div>
+                            <div class="rs_info_wrap">
+                                <div class="rs_info">
+                                    <div class="rs_desc">
+                                        <span>
+                                            <p>아테제 호수</p>
+                                            <p>구스타프 클림트</p>
+                                        </span>
+                                        <p>
+                                            배송 포장 모두 만족합니다.<br>
+                                            그림 퀄리티는 말할 것도 없고, 색상도 선명하고 무광이라 반사도 적은 것 같아요<br>
+                                            선물 이후에 너무 좋아하셔서 보러갔는데 믿고 살만하네요~
+                                        </p>
+                                    </div>
+                                    <div class="rs_btn">
+                                        <a href="/shop/view/5">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="rs_img_wrap">
+                                <span class="rs_date">
+                                    <strong>02</strong>
+                                    Jun
+                                </span>
+                                <div class="rs_img">
+                                    <img src="/images/main/The_Kiss.jpg" alt="키스">
+                                </div>
+                            </div>
+                            <div class="rs_info_wrap">
+                                <div class="rs_info">
+                                    <div class="rs_desc">
+                                        <span>
+                                            <p>키스</p>
+                                            <p>구스타프 클림트</p>
+                                        </span>
+                                        <p>
+                                            생각했던 것보다 약간 어두운느낌은 있지만, 식탁 옆 벽에 거니까 크기도 적당하고 <br>
+                                            퀄리티도 아주 좋습니다. <br>
+                                            백상에서 다른그림으로 하나 더 구매하려고 해요<br>
+                                            배송빠르게 잘왔습니다 감사합니다
+                                        </p>
+                                    </div>
+                                    <div class="rs_btn">
+                                        <a href="/shop/view/4">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="slide_list">
+                            <div class="rs_img_wrap">
+                                  <span class="rs_date">
+                                    <strong>02</strong>
+                                    Jun
+                                  </span>
+                                <div class="rs_img">
+                                    <img src="/images/main/Almond_Blossoms.jpg" alt="아몬드 나무">
+                                </div>
+                            </div>
+                            <div class="rs_info_wrap">
+                                <div class="rs_info">
+                                    <div class="rs_desc">
+                                        <span>
+                                            <p>꽃 피는 아몬드 나무</p>
+                                            <p>빈센트 반 고흐</p>
+                                        </span>
+                                        <p>
+                                            이사하고 집이 너무 휑한거 같아서 이번 기회에 작품 하나 샀는데 그림 하나도 분위기가 너무 달라졌어요.<br>
+                                            배송도 빠르고 너무 감사합니다.<br>
+                                        </p>
+                                    </div>
+                                    <div class="rs_btn">
+                                        <a href="/shop/view/17">Read More</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-pagination">
+                    <div class="swiper-pagination-bullet"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

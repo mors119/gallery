@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/qna.css">
+    <script src="/js/qna.js"></script>
+</head>
+<body>
+<main id="container" class="qna_container" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle('Q&A', '백상 쇼핑몰에 궁금한 내용을 남겨주세요.')}"></div>
+
+    <!-- 본문 -->
+    <section class="qna_write">
+        <div class="inner">
+            <form action="/qna/update" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="no" th:value="${qna.no}">
+
+                <!-- 제목 -->
+                <div class="form_box">
+                    <div class="left">
+                        <label for="subject"><span class="f_color">*</span>제목</label>
+                    </div>
+                    <div class="right">
+                        <input type="text" name="title" id="subject" class="inp_type01" maxlength="255" placeholder="제목" autocomplete="off" th:value="${qna.title}">
+                    </div>
+                </div>
+
+                <!-- 내용 -->
+                <div class="form_box">
+                    <div class="left">
+                        <label for="subject"><span class="f_color">*</span>내용</label>
+                    </div>
+                    <div class="right">
+                        <textarea name="content" id="qnaEditor" th:attr="data-editor=${qna.content}" th:utext="${qna.content}"></textarea>
+                    </div>
+                </div>
+
+                <!-- 파일 -->
+                <div class="form_box">
+                    <div class="left">첨부파일</div>
+                    <div class="right">
+                        <div class="file_upload">
+                            <div class="file_box">
+                                <div class="file_name" id="bf_file1" th:text="${qna.ofile}"></div>
+                                <div class="file_btn">
+                                    <label for="bf_file"><span class="blind">파일</span>찾아보기</label>
+                                    <input type="file" name="file" id="bf_file"
+                                           title="파일첨부 1 :  용량 5,242,880 바이트 이하만 업로드 가능" class="inp-file uploadBtn"
+                                           autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                        <p class="form_info">* 첨부파일의 용량은 최대 5MB 를 넘을 수 없으며, 등록 가능한 확장자명은 jpg, gif, pdf 입니다.</p>
+                    </div>
+                </div>
+
+                <!-- submit -->
+                <div class="qna_btn_wrap">
+                    <div th:replace="~{fragments :: btnAction('Submit')}"></div>
+                </div>
+            </form>
+        </div>
+    </section>
+</main>
+</body>
+</html>

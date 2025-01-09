@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bxgs.gallery.mapper.QnaMapper">
+    <select id="selectAll" parameterType="com.bxgs.gallery.common.Pagination" resultType="qnaVO">
+        select q.no
+             , q.title
+             , q.answer
+             , q.content
+             , q.regdate
+             , <![CDATA[REGEXP_REPLACE(m.name, '(?<=.)(.)(?=.)', '*', 'g')]]> as id
+             , q.ofile
+             , q.nfile
+          from qna q
+          left outer join member m
+            on m.id = q.id
+         order by no desc
+         limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <select id="totalCount" parameterType="com.bxgs.gallery.common.Pagination" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*) from qna
+    </select>
+
+    <select id="selectQna" parameterType="int" resultType="qnaVO">
+        select a.*
+          from (
+                 select no
+                      , title
+                      , answer
+                      , content
+                      , regdate
+                      , (
+                        select name
+                          from member m, qna q
+                         where m.id = q.id
+                           and no = #{no}
+                        ) as id
+                      , ofile
+                      , nfile
+                      , lag(no)      over(order by no) as prev_no
+                      , lag(title)   over(order by no) as prev_title
+                      , lead(no)     over(order by no) as next_no
+                      , lead(title)  over(order by no) as next_title
+                 from qna
+             ) a
+         where no = #{no}
+    </select>
+
+    <insert id="insert">
+        insert into qna(title, content, id, ofile, nfile) values (#{title}, #{content}, #{id}, #{ofile}, #{nfile});
+    </insert>
+
+    <update id="update">
+        update qna
+           set title = #{title}
+             , content = #{content}
+           <if test="ofile != null and ofile != ''">
+             , ofile = #{ofile}
+           </if>
+           <if test="nfile != null and nfile != ''">
+             , nfile = #{nfile}
+           </if>
+         where no = #{no}
+    </update>
+
+    <delete id="delete">
+        delete from qna where no = #{no}
+    </delete>
+
+    <select id="selectAllById" parameterType="com.bxgs.gallery.common.Pagination" resultType="qnaVO">
+        select q.no
+             , q.title
+             , q.answer
+             , q.content
+             , q.regdate
+             , m.name
+             , q.ofile
+             , q.nfile
+          from qna q
+          left outer join member m
+            on m.id = q.id
+         where m.id = #{searchMap.id}
+         order by no desc
+         limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <select id="totalCountById" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from qna q
+          left outer join member m
+            on m.id = q.id
+         where m.id = #{id}
+    </select>
+</mapper>

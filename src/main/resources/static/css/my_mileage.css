@@ -1,0 +1,100 @@
+/* 마일리지 검색 박스 */
+.my_mileage_container .mile_search_wrap {
+    margin-bottom: 80px;
+    padding: 39px 60px;
+    border: 1px solid #DDD;
+}
+
+.my_mileage_container .mile_search {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.my_mileage_container .mile_price {
+    display: flex;
+}
+
+.my_mileage_container .mile_price h4 {
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    vertical-align: middle;
+    line-height: 40px;
+    padding-left: 20px;
+}
+
+.my_mileage_container .mile_price span {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 500;
+    vertical-align: middle;
+    line-height: 40px;
+    margin-left: 15px;
+    color: var(--point-color1);
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+}
+
+/* 날짜 검색 폼 */
+.my_mileage_container .order_date {
+    display: flex;
+    align-items: center;
+}
+
+.my_mileage_container .date_box_wrap {
+    display: flex;
+    align-items: center;
+}
+
+.my_mileage_container .date_box_wrap .bar {
+    margin: 0 10px;
+}
+
+.my_mileage_container .date_box {
+    position: relative;
+}
+
+.my_mileage_container .date_box lable {
+    display: none;
+}
+
+.my_mileage_container .date_box input[type="date"] {
+    padding: 0 10px;
+    width: 150px;
+    height: 40px;
+    border: 1px solid #DDD;
+    color: var(--gray-500);
+    line-height: 38px;
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+}
+
+.my_mileage_container .order_date .date_submit {
+    display: block;
+    border: 1px solid var(--point-color1);
+    background: var(--point-color1) !important;
+    color: #FFF;
+    letter-spacing: 0;
+    box-shadow: none !important;
+    margin-left: 25px;
+    width: 100px;
+    height: 40px;
+    line-height: 38px;
+    font-weight: 500;
+    transition: all .4s ease;
+    cursor: pointer;
+}
+
+.my_mileage_container .order_date .date_submit:hover {
+    color: var(--point-color1);
+    background: #FFF !important;
+}
+
+/* 마일리지 적립 및 사용내역 테이블 */
+.my_mileage_container .mile_history h4 {
+    margin-bottom: 20px;
+    line-height: 26px;
+}
+
+.my_mileage_container .mile_history span {
+    color: var(--point-color1);
+}

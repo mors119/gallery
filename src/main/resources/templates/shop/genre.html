@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/genre_list.css">
+    <script src="/js/genre_list.js"></script>
+</head>
+<body>
+<main id="container" class="genre_list" layout:fragment="content">
+    <div th:replace="~{fragments :: commonTitle('GENRE', '장르별로 다양한 작품을 만나보세요.')}"></div>
+
+    <div class="content">
+        <div class="inner">
+            <div class="main_content">
+                <div class="sticky_select">
+                    <h3>Genre List</h3>
+                    <ul>
+                        <li th:class="${param.keyword == null ? 'on' : ''}">
+                            <a href="/shop/genre">
+                                <span>All</span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Portrait') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Portrait">
+                                <span>초상화<strong>Portrait</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Abstracts') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Abstracts">
+                                <span>추상화<strong>Abstracts</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Landscape') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Landscape">
+                                <span>풍경<strong>Landscape</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Still') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Still">
+                                <span>정물<strong>Still life</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Typography') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Typography">
+                                <span>타이포그래피<strong>Typography</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Illust') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Illust">
+                                <span>일러스트<strong>Illust</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Poster') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Poster">
+                                <span>포스터<strong>Poster</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Popart') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Popart">
+                                <span>팝아트<strong>Popart</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Surrealism') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Surrealism">
+                                <span>초현실<strong>Surrealism</strong></span>
+                            </a>
+                        </li>
+                        <li th:class="${#strings.equals(param.keyword, 'Cartoons') ? 'on' : ''}">
+                            <a href="/shop/genre?keyword=Cartoons">
+                                <span>카툰<strong>Cartoons</strong></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="artist">
+                    <p>총 <span th:text="${totalCount}"></span>개의 상품이 있습니다.</p>
+
+                    <div class="artist_template">
+                        <div class="template" th:each="genre : ${list}">
+                            <div class="image_wrap">
+                                <img th:src="${'/images/goods/' + genre.poster}" th:alt="${genre.name_kr}">
+                                <div>
+                                    <div class="cover">
+                                        <div th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${genre.no})}"></div>
+                                        <div th:replace="~{fragments :: iconWrap(${genre.no}, ${wishList})}"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="detail_wrap">
+                                <a th:href="@{'/shop/view/' + ${genre.no}}" th:text="${genre.title}"></a>
+                                <div class="artist">
+                                    <span th:text="${genre.name_kr}"></span>
+                                </div>
+                                <div class="item_size">
+                                    <p>30.0cm x 30.0cm</p>
+                                </div>
+                                <div class="item_price">
+                                    <span><strong th:text="${#numbers.formatInteger(genre.price, 3, 'COMMA')}"></strong>원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 페이징 -->
+                    <th:block th:utext="${paging}" />
+                </div>
+
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

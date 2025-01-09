@@ -1,0 +1,141 @@
+/* inner 공통 */
+.event_container .inner {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+/* 본문 */
+.event_container .event_list {
+    padding-bottom: 160px;
+}
+
+.event_container .event_menu {
+    margin-top: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.event_container .event_menu > ul {
+    display: flex;
+    align-items: center;
+}
+
+.event_container .event_menu > ul li {
+    flex: 1;
+    text-align: center;
+}
+
+.event_container .event_menu > ul li a {
+    display: block;
+    position: relative;
+    height: 60px;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 60px;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', 'EB Garamond', sans-serif;
+}
+
+.event_container .event_menu > ul li.on a {
+    color: var(--point-color1);
+}
+
+.event_container .event_menu > ul li a::after {
+    opacity: 0;
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 1px;
+    background-color: var(--point-color1);
+}
+
+.event_container .event_menu > ul li.on a::after {
+    opacity: 1;
+}
+
+/* 리스트 */
+.event_container .event_content {
+    padding-top: 80px;
+}
+
+.event_container .event_content ul {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px 36px;
+}
+
+.event_container .event_content .event_thumb {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 42.524%;
+}
+
+.event_container .event_content .event_thumb .imgbox {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    transition: all .4s;
+}
+
+.event_container .event_content a {
+    cursor: default;
+}
+
+.event_container .event_content a:hover .event_thumb:not(:has(.event_end_box)) .imgbox {
+    transform: scale(1.1);
+    cursor: pointer;
+}
+
+.event_container .event_content .event_thumb .event_end_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    font-size: 18px;
+    color: #fff;
+    font-weight: 500;
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.event_container .event_content .event_info {
+    margin-top: 30px;
+}
+
+.event_container .event_content .event_info h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 32px;
+    letter-spacing: -0.4px;
+    font-family: 'Noto Serif KR', 'EB Garamond', 'Noto Sans KR', sans-serif;
+}
+
+.event_container .event_content .event_info p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    max-height: 52px;
+    font-size: 16px;
+    color: var(--gray-500);
+    line-height: 26px;
+}
+
+.event_container .event_content .event_info .date {
+    margin-top: 20px;
+    display: block;
+    color: var(--gray-400);
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+    line-height: 20px;
+}

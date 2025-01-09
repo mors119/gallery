@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/search.css">
+    <script src="/js/search.js"></script>
+</head>
+<body>
+<main id="container" class="search_container" layout:fragment="content">
+    <div class="inner">
+        <!-- 서브타이틀 -->
+        <div th:replace="~{fragments :: commonTitle2('SEARCH')}"></div>
+
+        <!-- 검색창 -->
+        <div class="search_word_wrap" id="searchWordWrap">
+            <div class="word_box">
+                <form action="/search">
+                    <label>
+                        <input type="text" name="searchWord" class="word_input" size="40" maxlength="30"
+                               placeholder="검색어" autocomplete="off" th:value="${param.searchWord}">
+                    </label>
+                    <input type="hidden" name="type" id="word_type" th:value="${param.type}">
+                    <input type="hidden" name="keyword" id="check_word" th:value="${param.keyword}">
+                    <button type="submit" value="검색"></button>
+                </form>
+            </div>
+            <div class="word_chk">
+                <input type="checkbox" id="word_check" autocomplete="off">
+                <label for="word_check">결과 내 재검색</label>
+            </div>
+        </div>
+        <!-- 메인내용 -->
+        <div class="search_list_wrap">
+            <!-- 결과필터 -->
+            <div class="search_filter">
+                <h3>Filter</h3>
+                <ul class="sort_list_wrap">
+                    <li th:class="${#strings.isEmpty(param.type) or param.type == null or #strings.equals(param.type, 'genre') ? 'on' : ''}">
+                        <a href="#">장르별</a>
+                        <ul class="sort_list genre_list">
+                            <li>
+                                <input type="checkbox" id="ft_genre-all" autocomplete="off" value="all"
+                                       th:checked="${#strings.equals(param.type, 'genre') and (#strings.equals(param.keyword, 'all') or param.keyword == null)}">
+                                <label for="ft_genre-all">전체</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre01" autocomplete="off" value="Portrait"
+                                       th:checked="${#strings.equals(param.keyword, 'Portrait')}">
+                                <label for="ft_genre01">초상화</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre02" autocomplete="off" value="Abstracts"
+                                       th:checked="${#strings.equals(param.keyword, 'Abstracts')}">
+                                <label for="ft_genre02">추상화</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre03" autocomplete="off" value="Landscape"
+                                       th:checked="${#strings.equals(param.keyword, 'Landscape')}">
+                                <label for="ft_genre03">풍경</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre04" autocomplete="off" value="Still"
+                                       th:checked="${#strings.equals(param.keyword, 'Still')}">
+                                <label for="ft_genre04">정물</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre05" autocomplete="off" value="Typography"
+                                       th:checked="${#strings.equals(param.keyword, 'Typography')}">
+                                <label for="ft_genre05">타이포그래피</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre06" autocomplete="off" value="Illust"
+                                       th:checked="${#strings.equals(param.keyword, 'Illust')}">
+                                <label for="ft_genre06">일러스트</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre07" autocomplete="off" value="Poster"
+                                       th:checked="${#strings.equals(param.keyword, 'Poster')}">
+                                <label for="ft_genre07">포스터</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre08" autocomplete="off" value="Popart"
+                                       th:checked="${#strings.equals(param.keyword, 'Popart')}">
+                                <label for="ft_genre08">팝아트</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre09" autocomplete="off" value="Surrealism"
+                                       th:checked="${#strings.equals(param.keyword, 'Surrealism')}">
+                                <label for="ft_genre09">초현실</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_genre10" autocomplete="off" value="Cartoons"
+                                       th:checked="${#strings.equals(param.keyword, 'Cartoons')}">
+                                <label for="ft_genre10">카툰</label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li th:class="${#strings.equals(param.type, 'subject') ? 'on' : ''}">
+                        <a href="#">주제별</a>
+                        <ul class="sort_list subject_list">
+                            <li>
+                                <input type="checkbox" id="ft_subject-all" autocomplete="off" value="all"
+                                       th:checked="${#strings.equals(param.type, 'subject') and (#strings.equals(param.keyword, 'all') or param.keyword == null)}">
+                                <label for="ft_subject-all">전체</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject01" autocomplete="off" value="Spring"
+                                       th:checked="${#strings.equals(param.keyword, 'Spring')}">
+                                <label for="ft_subject01">봄</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject02" autocomplete="off" value="Summer"
+                                       th:checked="${#strings.equals(param.keyword, 'Summer')}">
+                                <label for="ft_subject02">여름</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject03" autocomplete="off" value="Fall"
+                                       th:checked="${#strings.equals(param.keyword, 'Fall')}">
+                                <label for="ft_subject03">가을</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject04" autocomplete="off" value="Winter"
+                                       th:checked="${#strings.equals(param.keyword, 'Winter')}">
+                                <label for="ft_subject04">겨울</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject05" autocomplete="off" value="Animal"
+                                       th:checked="${#strings.equals(param.keyword, 'Animal')}">
+                                <label for="ft_subject05">동물</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject06" autocomplete="off" value="Plant"
+                                       th:checked="${#strings.equals(param.keyword, 'Plant')}">
+                                <label for="ft_subject06">식물</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject07" autocomplete="off" value="City"
+                                       th:checked="${#strings.equals(param.keyword, 'City')}">
+                                <label for="ft_subject07">도시</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject08" autocomplete="off" value="Child"
+                                       th:checked="${#strings.equals(param.keyword, 'Child')}">
+                                <label for="ft_subject08">어린이</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_subject09" autocomplete="off" value="Indoor"
+                                       th:checked="${#strings.equals(param.keyword, 'Indoor')}">
+                                <label for="ft_subject09">실내</label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">Size</a>
+                        <ul class="sort_list">
+                            <li>
+                                <input type="checkbox" id="ft_size-all" autocomplete="off">
+                                <label for="ft_size-all">전체</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_size01" autocomplete="off">
+                                <label for="ft_size01">30 X 30cm</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_size02" autocomplete="off">
+                                <label for="ft_size02">60 X 60cm</label>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#">그림 방향</a>
+                        <ul class="sort_list">
+                            <li>
+                                <input type="checkbox" id="ft_direction-all" autocomplete="off">
+                                <label for="ft_direction-all">전체</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_direction01" autocomplete="off">
+                                <label for="ft_direction01">가로</label>
+                            </li>
+                            <li>
+                                <input type="checkbox" id="ft_direction02" autocomplete="off">
+                                <label for="ft_direction02">세로</label>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <button type="button" value="RESET"></button>
+            </div>
+            <!-- 결과리스트 -->
+            <div class="search_list">
+                <!-- 리스트탭 -->
+                <div class="list_tab">
+                    <div class="tab_left">
+                        검색된 작품은 총
+                        <strong class="tt_color" th:text="${totalCount}"></strong>
+                        개 입니다.
+                    </div>
+                    <div class="tab_right">
+                        <div class="tab_box">
+                            <a href="#" th:text="${sort != null ? sort : '인기순'}">인기순</a>
+                            <ul>
+                                <li data-sort="pop">인기순</li>
+                                <li data-sort="review">후기순</li>
+                                <li data-sort="rating">평점순</li>
+                                <li data-sort="date">등록순</li>
+                                <li data-sort="high">높은가격순</li>
+                                <li data-sort="low">낮은가격순</li>
+                            </ul>
+                        </div>
+                        <div class="tab_box">
+                            <a href="#" th:text="|${size}개씩 보기|"></a>
+                            <ul>
+                                <li data-size="9">9개씩 보기</li>
+                                <li data-size="12">12개씩 보기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- 리스트내용 -->
+                <div class="list_detail">
+                    <div class="detail_wrap">
+                        <ul class="detail_sct">
+                            <li class="sct_li" th:each="search : ${list}">
+                                <div class="sct_wrap">
+                                    <div class="sct_img">
+                                        <img th:src="${'/images/goods/' + search.poster}" th:alt="${search.title}">
+                                        <div class="view_more_wrap">
+                                            <th:block th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${search.no})}"/>
+                                            <div th:replace="~{fragments :: iconWrap(${search.no}, ${wishList})}"></div>
+                                        </div>
+                                    </div>
+                                    <div class="sct_txt">
+                                        <a th:href="@{'/shop/view/' + ${search.no}}" th:text="${search.title}"></a>
+                                    </div>
+                                    <div class="sct_desc">
+                                        <span th:text="${search.name_kr}"></span>
+                                        <p>30.0cm x 30.0cm</p>
+                                    </div>
+                                    <div class="sct_cost">
+                                        <span>
+                                            <strong th:text="${#numbers.formatInteger(search.price, 3, 'COMMA')}"></strong>원
+                                        </span>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+
+                        <!-- 페이징 -->
+                        <th:block th:utext="${paging}"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

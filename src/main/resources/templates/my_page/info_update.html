@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/my_info_change.css">
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <script src="/js/my_page.js"></script>
+    <link rel="stylesheet" href="/css/login.css">
+    <!--  google reCaptcha  -->
+    <script src="/js/api.js" async defer></script>
+    <script src="/js/login.js"></script>
+</head>
+<body>
+<main id="container" class="my_infoC_container my_page_container" layout:fragment="content">
+    <section class="my_page_wrap">
+        <div class="my_page_inner">
+            <!-- 좌측 네비게이션 -->
+            <div th:replace="~{my_page/nav :: nav}"></div>
+            <!-- 회원정보 확인 -->
+            <div class="con_wrap">
+                <div class="my_page_tit">
+                    <h3>회원정보 변경</h3>
+                </div>
+
+                <div th:insert="~{/login/join :: member_update(${session.user})}" class="join_page"></div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

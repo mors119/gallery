@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/event.css">
+    <script src="/js/event.js"></script>
+</head>
+<body>
+<main id="container" class="event_container" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle('EVENT', '다양한 이벤트를 확인해보세요.')}"></div>
+
+    <!-- 본문 -->
+    <section class="event_list">
+        <div class="inner">
+            <nav class="event_menu">
+                <h2 class="blind">카테고리</h2>
+                <ul>
+                    <li th:class="${param.isEnd == null ? 'on' : ''}"><a href="/event/list">전체보기</a></li>
+                    <li th:class="${#strings.equals(param.isEnd, 'N') ? 'on' : ''}"><a href="/event/list?isEnd=N">진행중 이벤트</a></li>
+                    <li th:class="${#strings.equals(param.isEnd, 'Y') ? 'on' : ''}"><a href="/event/list?isEnd=Y">종료된 이벤트</a></li>
+                </ul>
+            </nav>
+
+            <div class="event_content">
+                <ul>
+                    <li th:if="${#lists.isEmpty(list)}">
+                        <p style="text-align: center;">이벤트가 없습니다.</p>
+                    </li>
+                    <li th:each="event, state : ${list}" th:if="${!#lists.isEmpty(list)}">
+                        <a href="#" th:attr="data-no=${event.no}, data-end=${event.isend}">
+                            <div class="event_thumb">
+                                <div class="imgbox" th:style="|background-image:url(/images/event/${event.poster})|">
+                                    <span class="blind">썸네일</span>
+                                </div>
+                                <div class="event_end_box" th:if="${event.isend == 'Y'}">종료된 이벤트입니다.</div>
+                            </div>
+                            <div class="event_info">
+                                <h3 th:text="${event.title}"></h3>
+                                <p th:text="${event.sub}"></p>
+                                <span class="date" th:text="${event.startdate} + ' ~ ' + ${event.enddate}"></span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <th:block th:utext="${paging}"/>
+        </div>
+    </section>
+</main>
+</body>
+</html>

@@ -1,0 +1,695 @@
+/* inner 공통 */
+.cart_container .inner {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.cart_container .f_color {
+    color: var(--point-color1);
+}
+
+/* 내용 */
+.cart_container .cart_wrap {
+    padding-bottom: 160px;
+}
+
+.cart_container .cart_order {
+    border-top: 1px solid #000;
+}
+
+.cart_container .cart_order thead th {
+    padding: 23px 0;
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.6px;
+    line-height: 21px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.cart_container .cart_order tbody td {
+    padding: 30px 5px;
+    border-bottom: 1px solid #ddd;
+    color: #080808;
+    word-break: break-all;
+    text-align: center;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.cart_container .cart_order tbody td.td_prd {
+    text-align: left;
+    display: flex;
+}
+
+.cart_container td.td_prd .sod_img {
+    width: 30.238%;
+}
+
+.cart_container td.td_prd .sod_img img {
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+}
+
+.cart_container td.td_prd .sod_name {
+    padding: 25px 20px 0;
+    width: 69.762%;
+    font-family: 'Noto Serif KR', 'EB Garamond', 'Noto Sans KR', sans-serif;
+}
+
+.cart_container td.td_prd .sod_name dt {
+    margin-bottom: 12px;
+}
+
+.cart_container td.td_prd .sod_name strong {
+    margin-right: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 28px;
+}
+
+.cart_container td.td_prd .sod_name span {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 25px;
+}
+
+.cart_container td.td_prd .sod_name dd {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+}
+
+.cart_container td.td_prd .sod_name span.price_txt {
+    font-size: 16px;
+    font-weight: 700;
+}
+
+/* 삭제버튼 / 장바구니 비우기 */
+.cart_container .cart_btns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.cart_container .cart_btns button {
+    padding: 0 15px;
+    border: 1px solid #ddd;
+    background: #fff;
+    font-size: 15px;
+    color: var(--gray-500);
+    line-height: 40px;
+}
+
+.cart_container .cart_btns button:hover {
+    background: #f3f3f3;
+}
+
+/* 계산 영역 */
+.cart_container .cart_price_wrap {
+    margin-top: 80px;
+    padding: 40px 0;
+    border-top: 1px solid var(--gray-600);
+    background: #f8f8f8;
+}
+
+.cart_container .cart_price_wrap ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart_container .cart_price_wrap ul li span {
+    margin-top: 5px;
+    line-height: 26px;
+    vertical-align: 3px;
+}
+
+.cart_container .cart_price_wrap ul li strong {
+    font-size: 30px;
+    font-weight: 600;
+    line-height: 40px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.cart_container .cart_price_wrap ul li em {
+    font-size: 24px;
+    line-height: 34px;
+}
+
+.cart_container .cart_price_wrap ul li i {
+    margin: 0 20px;
+    font-size: 25px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 35px;
+}
+
+/* 컨펌 */
+.cart_container .cart_confirm_wrap {
+    padding-top: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0 20px;
+}
+
+.cart_container .cart_confirm_wrap a {
+    width: 260px;
+    border: 1px solid #aaa;
+    font-size: 15px;
+    line-height: 50px;
+    transition: all .4s ease;
+    font-weight: 500;
+    text-align: center;
+}
+
+.cart_container .cart_confirm_wrap a:hover {
+    background: #aaa;
+    color: #fff;
+}
+
+.cart_container .cart_confirm_wrap a.active {
+    border: 1px solid var(--point-color1);
+    color: var(--point-color1);
+}
+
+.cart_container .cart_confirm_wrap a.active:hover {
+    background: var(--point-color1);
+    color: #fff;
+}
+
+.cart_container .cart_wrap .item_none {
+    /*display: none;*/
+    padding: 75px 0;
+    text-align: center;
+}
+
+.cart_container .cart_wrap .item_none p {
+    margin-top: 20px;
+    font-family: "Noto Sans KR", sans-serif;
+    color: var(--gray-600);
+}
+
+/* 주문 관련 --------------- order form ------------------- */
+#cart_order {
+    display: flex;
+    margin-top: 80px;
+    gap: 80px;
+}
+
+#cart_order .ordered_info {
+    width: 875px;
+}
+
+#cart_order .ordered_info > div:first-child {
+    padding: 15px;
+    border-bottom: 1px solid #d6d3d3;
+    margin-bottom: 100px;
+}
+
+#cart_order .ordered_info h5 {
+    font-size: 24px;
+    font-family: "Noto Serif KR", 'EB Garamond', serif;
+    line-height: 34px;
+    font-weight: bold;
+    border-bottom: 1px solid #333;
+    padding-bottom: 30px;
+    margin-bottom: 15px;
+}
+
+#cart_order .ordered_info tbody {
+    padding-bottom: 15px;
+}
+
+#cart_order .ordered_info th {
+    width: 160px;
+    padding: 15px 0;
+    text-align: start;
+    height: 90px;
+}
+
+#cart_order .ordered_info td {
+    padding: 15px 0;
+}
+
+#cart_order .info_star {
+    position: relative;
+    left: 10px;
+}
+
+#cart_order .info_star::before {
+    content: '*';
+    position: absolute;
+    left: -10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--point-color1);
+}
+
+#cart_order .ordered_info input {
+    border: 1px solid #f8f8f8;
+    background: #f8f8f8;
+    height: 60px;
+    padding: 0 20px;
+}
+
+#cart_order .ordered_info input:focus {
+    border: 1px solid var(--point-color1);
+    background: #fff;
+}
+
+#cart_order .ordered_info input[type=radio]:focus {
+    border: none;
+    background: none;
+}
+
+#cart_order .ordered_info .css500 {
+    width: 500px;
+}
+
+#cart_order .ordered_info .css100p {
+    width: 100%;
+}
+
+#cart_order .ordered_info .cart_addr > input {
+    margin-top: 10px;
+}
+
+#cart_order .ordered_info .cart_addr > div {
+    display: flex;
+}
+
+#cart_order .ordered_info td a {
+    display: block;
+    text-align: center;
+    color: #fff;
+    background: var(--point-color1);
+    width: 180px;
+    border: 1px solid var(--point-color1);
+    line-height: 58px;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+#cart_order .ordered_info td a:hover {
+    border-color: var(--point-color1);
+    background: #fff;
+    color: var(--point-color1);
+}
+
+#cart_order .ordered_info .delivery_address {
+    padding: 15px 0;
+}
+
+#cart_order .cart_radio {
+    display: flex;
+    align-items: center;
+}
+
+#cart_order .cart_radio input {
+    border: none;
+    background: none;
+    padding: 0;
+}
+
+#cart_order .cart_radio label {
+    height: 60px;
+}
+
+#new_addr {
+    margin-left: 30px;
+}
+
+/*#cart_order .cart_chk {*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    justify-content: space-between;*/
+/*}*/
+/*#cart_order .cart_chk input[type=checkbox] {*/
+/*    border: none;*/
+/*    height: 0;*/
+/*    padding: 0;*/
+/*}*/
+/*#cart_order .cart_chk .checkbox_wrap {*/
+/*    width: 185px;*/
+/*}*/
+/*#cart_order .cart_chk .checkbox_wrap label {*/
+/*    align-items: center;*/
+/*    height: 60px;*/
+/*}*/
+#cart_order .delivery_address .cart_radio a {
+    width: 150px;
+    line-height: 48px;
+}
+
+#cart_order .delivery_address .order_request input {
+    cursor: pointer;
+}
+
+#cart_order .delivery_address .order_request .select {
+    max-height: 0;
+    overflow-y: scroll;
+    cursor: pointer;
+}
+
+#cart_order .delivery_address .order_request .select.on {
+    max-height: 180px;
+}
+
+#cart_order .delivery_address .order_request .select li {
+    line-height: 40px;
+    padding: 0 25px;
+}
+
+#cart_order .delivery_address .order_request textarea {
+    background: #f8f8f8;
+    border: 1px solid #f8f8f8;
+    padding: 20px;
+    height: 100px;
+    margin-top: 5px;
+    display: none;
+}
+
+#cart_order .delivery_address .order_request.text textarea {
+    display: block;
+}
+
+
+/* 최종 결제 금액 */
+#cart_order .receipt {
+    width: 445px;
+}
+
+#cart_order .receipt h6 {
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #000;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#cart_order .receipt > div {
+    background: #f8f8f8;
+    padding: 40px;
+}
+
+#cart_order .receipt .final_price {
+    margin-bottom: 20px;
+}
+
+#cart_order .receipt .final_price th {
+    width: 100%;
+    text-align: start;
+    color: var(--gray-500);
+    font-weight: normal;
+}
+
+#cart_order .receipt .final_price td {
+    width: 200px;
+    padding: 5px 0;
+    text-align: end;
+}
+
+#cart_order .receipt .final_price td strong {
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-weight: bold;
+}
+
+#cart_order .receipt .final_price td p {
+    font-size: 14px;
+    color: #888;
+}
+
+#final_total_pr {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#cart_order .receipt .gold {
+    color: var(--point-color1);
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+}
+
+#final_price_total {
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+#final_price_total p:first-child {
+    font-weight: bold;
+}
+
+#cart_order .receipt .pay_option .pay_dir {
+    padding: 10px;
+}
+
+#cart_order .receipt .pay_option .pay_dir p {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#cart_order .receipt .pay_option .pay_dir strong {
+    font-weight: bold;
+}
+
+#cart_order .receipt .pay_option .pay_dir a {
+    border: 1px solid #eceff4;
+    text-align: center;
+    display: block;
+    width: 180px;
+    line-height: 50px;
+    font-size: 15px;
+    background: #fff;
+    color: var(--gray-500);
+    cursor: pointer;
+}
+
+#cart_order .receipt .pay_option .pay_dir > div {
+    padding: 20px;
+    margin-top: 5px;
+    background: #fff;
+    color: var(--point-color1);
+    display: none;
+}
+
+#cart_order .receipt .pay_option .pay_dir.on > div {
+    display: block;
+}
+
+#cart_order .receipt .pay_option .pay_dir > div p {
+    font-size: 15px;
+}
+
+#cart_order .receipt .pay_option .pay_dir label {
+    color: var(--gray-500);
+    font-size: 16px;
+}
+
+#cart_order .receipt .pay_option .pay_dir input[type=text] {
+    margin-left: 20px;
+    border: 1px solid #ddd;
+    text-align: center;
+    width: 160px;
+    font-weight: 500;
+}
+
+#cart_order .receipt .pay_option .css_wrap {
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 20px;
+    border-top: 1px solid #333;
+}
+
+#cart_order .receipt .pay_option .mileage th {
+    text-align: start;
+    font-weight: normal;
+    color: var(--gray-500);
+    font-size: 15px;
+}
+
+#cart_order .receipt .pay_option .mileage td {
+    text-align: end;
+    line-height: 30px;
+    font-size: 15px;
+    color: var(--gray-500);
+}
+
+#cart_order .receipt .pay_option .mileage th strong {
+    color: var(--gray-600);
+}
+
+#cart_order .receipt .pay_option .mileage td span {
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+}
+
+#cart_order .receipt .pay_option .mileage input[type=text] {
+    width: 120px;
+    height: 40px;
+    text-align: end;
+    line-height: 38px;
+    border: 1px solid #ddd;
+    padding: 0 5px;
+    margin: 20px 0;
+}
+
+#cart_order .receipt .pay_option .or_btn_wrap {
+    padding-top: 40px;
+}
+
+#cart_order .receipt .pay_option .or_btn_wrap button {
+    width: 100%;
+    height: 52px;
+    border: 1px solid var(--point-color1);
+    background: var(--point-color1);
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    margin: 5px 0;
+    transition: all 0.3s;
+}
+
+#cart_order .receipt .pay_option .or_btn_wrap button:hover {
+    background: #fff;
+    color: var(--point-color1);
+}
+
+#cart_order .receipt .pay_option .or_btn_wrap a {
+    width: 100%;
+    display: block;
+    height: 52px;
+    border: 1px solid #aaa;
+    background: #fff;
+    font-weight: 500;
+    text-align: center;
+    transition: all 0.3s;
+    color: var(--gray-500);
+    line-height: 50px;
+    margin: 5px 0;
+}
+
+#cart_order .receipt .pay_option .or_btn_wrap a:hover {
+    background: #f3f3f3;
+}
+
+/* order info */
+
+.order_info .order_number {
+    border-top: 1px solid #333;
+    background: #f8f8f8;
+    border-bottom: 1px solid #ddd;
+    padding: 80px 20px;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.order_info .order_number p {
+    color: var(--gray-500);
+}
+
+.order_info .order_number h3 {
+    color: var(--point-color1);
+    font-size: 30px;
+    margin-top: 30px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-weight: bold;
+    line-height: 40px;
+}
+
+.order_info .info_price {
+    margin-top: 60px;
+}
+
+.order_info .info_price .price {
+    display: flex;
+    background: #f8f8f8;
+    padding: 40px 0;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.order_info .info_price .price > div {
+    width: 100%;
+    padding: 0 40px;
+}
+
+.order_info .info_price .price > div:nth-of-type(2) {
+    border-left: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+}
+
+.order_info .info_price .price tbody > tr:first-child th {
+    padding-bottom: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    color: var(--gray-600);
+}
+
+.order_info .info_price .price tbody > tr:first-child td {
+    padding-bottom: 30px;
+    line-height: 30px;
+    font-size: 18px;
+    color: var(--gray-600);
+}
+
+.order_info .info_price .price tbody > tr:first-child > td > strong {
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-weight: 500;
+}
+
+.order_info .info_price .price strong {
+    font-weight: 500;
+}
+
+.order_info .info_price .price tr {
+    color: var(--gray-500);
+}
+
+.order_info .info_price .price th {
+    font-weight: lighter;
+    text-align: left;
+    padding-bottom: 10px;
+}
+
+.order_info .info_price .price td {
+    text-align: right;
+    padding-bottom: 10px;
+}
+
+.order_info .info_price .price td > span {
+    color: var(--gray-600);
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+}
+
+.order_info .order_info_de h3 {
+    margin: 100px 0 30px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-size: 24px;
+    line-height: 34px;
+    font-weight: bold;
+}
+
+.order_info .order_info_de th {
+    padding: 22px 0;
+    border-bottom: 1px solid #ddd;
+    background: #f8f8f8;
+}
+
+.order_info .order_info_de tr:first-child th {
+    border-top: 1px solid #333;
+}
+
+.order_info .order_info_de tr:first-child td {
+    border-top: 1px solid #333;
+}
+
+.order_info .order_info_de td {
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+}

@@ -1,0 +1,61 @@
+/* 쿠폰 사용유무 */
+.my_coupon_container .coupon_state {
+    display: flex;
+    margin-bottom: 40px;
+}
+
+.my_coupon_container .coupon_state a {
+    display: block;
+    position: relative;
+    font-size: 20px;
+    color: var(--gray-500);
+    margin-left: 20px;
+    padding-left: 21px;
+}
+
+.my_coupon_container .coupon_state a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 4px;
+    width: 1px;
+    height: 12px;
+    background: #DDD;
+}
+
+.my_coupon_container .coupon_state li.on a {
+    color: var(--point-color1);
+}
+
+.my_coupon_container .coupon_state li:first-child a {
+    margin: 0;
+    padding: 0;
+}
+
+.my_coupon_container .coupon_state li:first-child a::after {
+    display: none;
+}
+
+/* 쿠폰 테이블 */
+.my_coupon_container .coupon_table table {
+    table-layout: fixed;
+    width: 100%;
+    border-top: 1px solid var(--gray-600);
+    border-spacing: 0;
+    border-collapse: collapse;
+}
+
+.my_coupon_container .coupon_table table th {
+    padding: 22px 0;
+    border-bottom: 1px solid #DDD;
+    font-weight: 500;
+    line-height: 26px;
+}
+
+.my_coupon_container .coupon_table table td {
+    text-align: center;
+    font-size: 16px;
+    font-family: 'EB Garamond', 'Noto serif KR', sans-serif;
+    color: var(--gray-500);
+    border-bottom: 1px solid #DDD;
+}

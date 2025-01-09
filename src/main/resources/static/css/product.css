@@ -1,0 +1,472 @@
+.painting_list .content .inner {
+    width: calc(100% - 100px);
+    margin: 0 auto;
+    background: url("/images/product/ranking-bg.jpg") 50% 50% / 100%;
+}
+
+.painting_list .md_pick {
+    padding: 100px 40px 225px;
+    width: 1340px;
+    margin: 0 auto;
+}
+
+.painting_list .md_pick h2 {
+    font-size: 42px;
+    font-family: 'EB Garamond', "Noto Sans KR", sans-serif;
+    font-weight: 700;
+    line-height: 50px;
+}
+
+.painting_list .md_pick .swiper_bg {
+    position: relative;
+    margin-top: 65px;
+    height: 530px;
+    background: #fff;
+    width: 1340px;
+}
+
+.painting_list .swiper_bg .swiper-images {
+    left: -60px;
+    top: 60px;
+    overflow: visible;
+}
+
+.painting_list .swiper-images .swiper-wrapper {
+    display: flex;
+    overflow: hidden;
+}
+
+.painting_list .swiper-images a {
+    display: inline-block;
+    width: 700px;
+}
+
+.painting_list .swiper-images a > img {
+    object-fit: cover;
+    height: 530px;
+    width: 100%;
+}
+
+.painting_list .swiper-images .swiper-slide-active a > img {
+    animation: 6s ease-in swiperView;
+}
+
+.painting_list .swiper-images .swiper-button-prev {
+    cursor: pointer;
+    left: -100px;
+    top: 40%;
+}
+
+.painting_list .swiper-images .swiper-button-prev::after {
+    content: '';
+    width: 17px;
+    height: 36px;
+    background: url("/images/product/bu-slider-left.png") no-repeat 50% 50% / 100%;
+}
+
+.painting_list .swiper-images .swiper-button-next {
+    cursor: pointer;
+    right: -150px;
+    top: 40%;
+}
+
+.painting_list .swiper-images .swiper-button-next::after {
+    content: '';
+    width: 17px;
+    height: 36px;
+    background: url("/images/product/bu-slider-right.png") no-repeat 50% 50% / 100%;
+}
+
+.painting_list .swiper-pagination {
+    bottom: -60px;
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+}
+
+.painting_list .swiper-pagination-bullet {
+    width: 5px;
+    height: 5px;
+    background: var(--gray-500);
+    border-radius: 50%;
+    display: block;
+    cursor: pointer;
+}
+
+.painting_list .swiper-pagination-bullet.swiper-pagination-bullet-active {
+    width: 7px;
+    height: 7px;
+    background: var(--gray-600);
+}
+
+@keyframes swiperView {
+    0% {
+        transform: scale(110%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+
+.painting_list .swiper-text {
+    overflow: hidden;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.painting_list .swiper-text .swiper-wrapper {
+    display: flex;
+    width: 1340px;
+    height: 530px;
+}
+
+.painting_list .swiper-text .txt {
+    display: flex;
+    flex-direction: column;
+    height: 530px;
+    justify-content: center;
+    padding: 30px 50px 30px 720px;
+    width: 100%;
+    position: relative;
+}
+
+@keyframes activeFade {
+    0% {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+
+.painting_list .swiper-text .txt .page_num {
+    position: absolute;
+    left: 720px;
+    top: 90px;
+    display: flex;
+    gap: 60px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-weight: 500;
+}
+
+.painting_list .swiper-text .page_num .current {
+    font-size: 24px;
+    color: var(--point-color1);
+    position: relative;
+    line-height: 30px;
+}
+
+.painting_list .swiper-text .page_num .total {
+    color: #999;
+    line-height: 30px;
+}
+
+.painting_list .swiper-text .page_num .current::before {
+    position: absolute;
+    content: '';
+    left: calc(50% + 20px);
+    top: calc(50% - 1px);
+    width: 40px;
+    height: 1px;
+    background: #999;
+}
+
+.painting_list .swiper-text .page_num .current::after {
+    position: absolute;
+    content: '';
+    left: calc(50% + 20px);
+    top: calc(50% - 1px);
+    z-index: 999;
+    width: 40px;
+    height: 1px;
+    background: var(--point-color1);
+}
+
+.painting_list .swiper-text .swiper-slide-active .txt a {
+    animation: 0.7s ease-out activeFade;
+}
+
+.painting_list .swiper-text .swiper-slide-active .txt .gold {
+    animation: 0.7s ease-out activeFade;
+}
+
+.painting_list .swiper-text .swiper-slide-active .txt p {
+    animation: 0.7s ease-out activeFade;
+}
+
+.painting_list .swiper-text .txt a {
+    margin-top: 70px;
+    font-size: 30px;
+    line-height: 40px;
+    letter-spacing: -0.7px;
+    font-family: 'Noto Serif KR', serif;
+}
+
+.painting_list .swiper-text .txt .gold {
+    padding-top: 45px;
+    color: var(--point-color1);
+}
+
+.painting_list .swiper-text .txt p {
+    margin-top: 10px;
+    color: var(--gray-400);
+}
+
+.painting_list .swiper-text .txt .price {
+    margin-top: 50px;
+    font-size: 20px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    color: var(--gray-600);
+}
+
+.painting_list .swiper-text .txt .price strong {
+    font-size: 36px;
+    margin-right: 5px;
+}
+
+.painting_list .swiper-text .txt .price .sale_wrap .sale {
+    color: #888;
+    margin-right: 20px;
+    position: relative;
+}
+
+.painting_list .swiper-text .txt .price .sale::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 1px;
+    background: #888;
+}
+
+.painting_list .swiper-text .txt .price .sale strong {
+    font-size: 24px;
+}
+
+/* art */
+.painting_list .art_content {
+    padding: 110px 0 160px;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.painting_list .art_content h4 {
+    font-size: 42px;
+    font-family: 'EB Garamond', sans-serif;
+    margin-bottom: 60px;
+    font-weight: 700;
+    animation: 2.2s ease-out work_translate;
+}
+
+@keyframes work_translate {
+    0% {
+        transform: translatex(-60px);
+    }
+    100% {
+        transform: translateZ(0);
+    }
+}
+
+.painting_list .art_content .arts .info_wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+}
+
+.painting_list .art_content .arts .select_wrap {
+    display: flex;
+}
+
+.painting_list .art_content .arts .select_wrap div {
+    position: relative;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.painting_list .art_content .arts .select_wrap div span {
+    width: 230px;
+    display: block;
+    line-height: 52px;
+    padding: 0 60px 0 25px;
+    background: #f8f8f8;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.painting_list .art_content .arts .select_wrap span::after {
+    content: '';
+    background: url("/images/product/bu-grid-opt.png") no-repeat 50% 50% / 100%;
+    width: 16px;
+    height: 8px;
+    position: absolute;
+    right: 25px;
+    top: 22px;
+}
+
+.painting_list .art_content .arts .select_wrap div.on span::after {
+    transform: rotate(180deg);
+    transition: all 0.5s;
+}
+
+.painting_list .art_content .arts .select_wrap .view {
+    margin-left: 20px;
+}
+
+.painting_list .art_content .arts .select_wrap div ul {
+    position: absolute;
+    left: 0;
+    top: 54px;
+    border: 1px solid #eee;
+    z-index: 1000;
+    width: 230px;
+    display: none;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.painting_list .art_content .arts .select_wrap div.on ul {
+    display: block;
+}
+
+.painting_list .art_content .arts .select_wrap div ul li {
+    width: 100%;
+    line-height: 40px;
+    padding: 0 25px;
+    background: #fff;
+    transition: all 0.2s;
+}
+
+.painting_list .art_content .arts .select_wrap div ul li:hover {
+    background: #f8f8f8;
+}
+
+.painting_list .art_content .arts .info {
+    font-weight: 500;
+}
+
+.painting_list .art_content .arts .info span {
+    color: var(--point-color1);
+}
+
+.painting_list .art_content .arts .temp_wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 60px;
+}
+
+.painting_list .art_content .temp .image_wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+}
+
+.painting_list .art_content .temp .image_wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.painting_list .art_content .temp .image_wrap .cover {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    width: 0;
+    transition: all 0.3s;
+    height: calc(100% - 60px);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+}
+
+.painting_list .art_content .temp .image_wrap:hover .cover {
+    opacity: 1;
+    width: calc(100% - 60px);
+}
+
+.painting_list .art_content .temp .box_action a {
+    width: 160px;
+    line-height: 45px;
+    height: 45px;
+}
+
+.painting_list .art_content .temp .image_wrap .btn_wrap {
+    display: flex;
+    vertical-align: bottom;
+    gap: 42px;
+}
+
+.painting_list .art_content .temp .image_wrap .btn_wrap a {
+    display: block;
+    background: url("/images/artist/ico-sight.png") no-repeat 50% 50% / 100%;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.painting_list .art_content .temp .image_wrap .btn_wrap a:hover {
+    background: url("/images/artist/ico-sight-on.png") no-repeat 50% 50% / 100%;
+}
+
+.painting_list .art_content .temp .image_wrap .btn_wrap a:last-child::after {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 2px;
+    width: 2px;
+    height: 16px;
+    background: #aaa;
+}
+
+.painting_list .art_content .temp .image_wrap .btn_wrap a:last-child {
+    background: url("/images/artist/ico-like.png") no-repeat 50% 50% / 80%;
+}
+
+.painting_list .art_content .temp .image_wrap .btn_wrap a:last-child:hover {
+    background: url("/images/artist/ico-like-on.png") no-repeat 50% 50% / 80%;
+}
+
+/* template text*/
+.painting_list .art_content .temp_txt a {
+    padding-top: 30px;
+    font-size: 20px;
+    width: 100%;
+    display: inline-block;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+.painting_list .art_content .temp_txt span {
+    display: inline-block;
+    padding-top: 20px;
+    color: var(--point-color1);
+}
+
+.painting_list .art_content .temp_txt p {
+    padding-top: 10px;
+    color: #888888;
+    line-height: 20px;
+}
+
+.painting_list .art_content .temp_txt .price {
+    font-family: "Noto Serif KR", serif;
+    font-weight: 500;
+    color: var(--gray-600);
+    padding-top: 28px;
+}
+
+.painting_list .art_content .temp_txt .price strong {
+    font-size: 26px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+}

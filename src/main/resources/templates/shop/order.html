@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/cart.css">
+    <script src="/js/cart.js"></script>
+</head>
+<body>
+<main id="container" class="cart_container order" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle2('ORDER FORM')}"></div>
+
+    <!-- 내용 -->
+    <section class="cart_wrap">
+        <div class="inner">
+            <div class="cart_order">
+                <table>
+                    <caption>장바구니 리스트</caption>
+                    <thead>
+                    <tr>
+                        <th style="width: 100px;">No</th>
+                        <th>Product</th>
+                        <th style="width: 190px;">Unit price</th>
+                        <th style="width: 215px;">Quantity</th>
+                        <th style="width: 190px;">Subtotal</th>
+                    </tr>
+                    </thead>
+                    <tbody id="order_tbody"></tbody>
+                </table>
+            </div>
+            <div id="cart_order">
+                <div class="ordered_info">
+
+                    <div th:if="${user != null}">
+                        <h5>주문자 정보</h5>
+                        <table id="get_table">
+                            <tr>
+                                <th class="info_star">주문자</th>
+                                <td>
+                                    <input class="css500" type="text" th:value="${user?.name}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="info_star">핸드폰번호</th>
+                                <td>
+                                    <input class="css500" type="text" th:value="${user?.phone}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>전화번호</th>
+                                <td>
+                                    <input class="css500" type="text" th:value="${user?.tel}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="info_star">주소</th>
+                                <td class="cart_addr">
+                                    <div>
+                                        <input class="css500" id="or_zoneCode" type="text" placeholder="우편번호" th:value="${user?.zipcode}" readonly>
+<!--                                        <a id="or_addr_click" href="#">우편번호 검색</a>-->
+                                    </div>
+                                    <input class="css100p" id="or_addr1" type="text" placeholder="기본주소" th:value="${user?.addr1}" readonly>
+                                    <input class="css100p" id="or_addr2" type="text" placeholder="상세주소" th:value="${user?.addr2}" readonly>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="info_star">이메일</th>
+                                <td>
+                                    <input class="css100p" type="text" th:value="${user?.email}">
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="delivery_address">
+                        <h5>배송지 정보</h5>
+                        <form action="/shop/order" method="post">
+                            <table>
+                                <tr th:if="${user != null}">
+
+                                    <th class="info_star">배송지선택</th>
+                                    <td>
+                                        <div class="cart_radio">
+                                            <div>
+                                                <input id="same_addr" type="radio">
+                                                <label for="same_addr">주문자와 동일</label>
+                                            </div>
+                                            <div>
+                                                <input id="new_addr" type="radio">
+                                                <label for="new_addr">신규배송지</label>
+                                            </div>
+<!--                                            <a href="#">배송지 목록</a>-->
+                                        </div>
+                                    </td>
+                                </tr>
+<!--                                <tr>-->
+<!--                                    <th class="info_star">배송지명</th>-->
+<!--                                    <td>-->
+<!--                                        <div class="cart_chk">-->
+<!--                                            <input class="css500" type="text">-->
+<!--                                            <div class="checkbox_wrap">-->
+<!--                                                <input id="cart_check" type="checkbox">-->
+<!--                                                <label for="cart_check">기본배송지로 설정</label>-->
+<!--                                            </div>-->
+<!--                                        </div>-->
+<!--                                    </td>-->
+<!--                                </tr>-->
+                                <tr>
+                                    <th class="info_star">받으시는분</th>
+                                    <td>
+                                        <input id="same1" name="name" class="css500" type="text" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="info_star">핸드폰번호</th>
+                                    <td>
+                                        <input id="same2" name="phone" class="css500" type="text" required>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>전화번호</th>
+                                    <td>
+                                        <input id="same3" name="tel" class="css500" type="text">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th class="info_star">주소</th>
+                                    <td class="cart_addr">
+                                        <div>
+                                            <input class="css500" name="zipcode" id="same4" type="text" placeholder="우편번호" required readonly>
+                                            <a id="de_addr_click" href="#">우편번호 검색</a>
+                                        </div>
+                                        <input class="css100p" name="addr" id="same5" type="text" placeholder="기본주소" readonly required>
+                                        <input class="css100p" name="addr2" id="same6" type="text" placeholder="상세주소">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th>배송 요청사항</th>
+                                    <td>
+                                        <div class="order_request">
+                                            <input class="css100p" name="request" id="or_request" type="text" placeholder="배송시 요청사항을 선택해 주세요." readonly>
+                                            <ul class="select">
+                                                <li>직접 수령하겠습니다.</li>
+                                                <li>배송 전 연락바랍니다.</li>
+                                                <li>부재 시 경비실에 맡겨주세요.</li>
+                                                <li>부재 시 문 앞에 놓아주세요.</li>
+                                                <li>부재 시 택배함에 넣어주세요.</li>
+                                                <li>직접입력</li>
+                                            </ul>
+                                            <textarea class="css100p" id="or_textarea"></textarea>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <input type="hidden" name="member_id" th:value="${user?.id}">
+                            <input type="hidden" name="price" id="pay_price">
+                            <input type="hidden" name="cart_no" id="pay_product">
+                            <input type="hidden" name="pay_name" id="pay_name">
+                            <input type="submit" id="order_form_submit" class="blind">
+                        </form>
+                    </div>
+                </div>
+                <div class="receipt">
+                    <div class="final_price">
+                        <h6>최종 결제 금액</h6>
+                        <table>
+                            <tr>
+                                <th>상품 합계</th>
+                                <td>+ <strong id="total_pr">0</strong> 원</td>
+                            </tr>
+                            <tr>
+                                <th>배송비</th>
+                                <td>+ <strong id="total_de">0</strong> 원</td>
+                            </tr>
+                            <tr>
+                                <th>추가배송비</th>
+                                <td>
+                                    <div>
+                                        <strong>0</strong> 원
+                                    </div>
+                                    <p>(지역에 따라 추가되는 도선료 등의 배송비입니다.)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>쿠폰적용</th>
+                                <td>- <strong>0</strong> 원</td>
+                            </tr>
+                            <tr>
+                                <th>적립예상 마일리지</th>
+                                <td>+ <strong id="temp_mileage">0</strong> 점</td>
+                            </tr>
+                        </table>
+                        <div id="final_price_total">
+                            <p>최종 결제 금액</p>
+                            <p><span class="gold" id="final_total_pr">0</span> 원</p>
+                        </div>
+                    </div>
+                    <div class="pay_option">
+                        <h6>결제수단</h6>
+                        <div class="pay_dir">
+                            <p>* <strong>무통장입금</strong> 이외의 결제 수단으로 결제하시는 경우 마일리지를 적립해드리지 않습니다.</p>
+                            <a>무통장입금</a>
+                            <div>
+                                <p>00은행 1234-56-89012 예금주명</p>
+                                <div>
+                                    <label for="paying_name">입금자명</label>
+                                    <input id="paying_name" type="text" th:value="${user?.name}" required>
+                                </div>
+                            </div>
+                        </div>
+                        <th:block th:if="${user != null}">
+                            <div class="css_wrap">
+                                <table class="mileage">
+                                    <tr>
+                                        <th><strong>사용 마일리지</strong>(100점 단위)</th>
+                                        <td>
+                                            <input type="text" value="0"> 점
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>보유 마일리지</th>
+                                        <td><span th:text="${#numbers.formatInteger(credit, 3, 'COMMA')}"></span> 점</td>
+                                    </tr>
+                                    <tr>
+                                        <th>최대 사용 가능 마일리지</th>
+                                        <td><span class="gold" th:text="${#numbers.formatInteger(credit, 3, 'COMMA')}"></span> 점</td>
+                                </table>
+                            </div>
+                        </th:block>
+                        <div class="or_btn_wrap">
+                            <button>주문하기</button>
+                            <a href="/shop/cart">취소하기</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+</body>
+</html>

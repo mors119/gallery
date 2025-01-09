@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/faq.css">
+    <script src="/js/faq.js"></script>
+</head>
+<body>
+<main id="container" class="faq_container" layout:fragment="content">
+    <!-- FAQ 상단 -->
+    <div th:replace="~{fragments :: commonTitle('FAQ', '고객님의 궁금증을 빠르고 정확하게 도와드리겠습니다.')}"></div>
+
+    <!-- FAQ 리스트 -->
+    <section class="faq_list">
+        <div class="inner">
+            <div class="list_opt">
+                <div class="left">찾으시는 문의 내용이 없으시면 <a href="/qna/list" class="f_color">1:1 문의</a>를 이용해 주세요.</div>
+
+                <!-- 검색 -->
+                <form action="/faq/list" method="get">
+                    <div class="search_wrap">
+                        <label>
+                            <input type="text" name="keyword" class="inp_type01" size="15" maxlength="15"
+                                   placeholder="검색어를 입력해주세요." autocomplete="off" th:value="${param.keyword}">
+                        </label>
+                        <button type="submit" value="검색"><span class="blind">검색</span></button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 메뉴 -->
+            <nav class="faq_menu">
+                <h2 class="blind">자주하시는질문 분류</h2>
+                <ul>
+                    <li th:class="${param.cate == null ? 'action' : ''}"><a href="/faq/list">전체</a></li>
+                    <li th:class="${#strings.equals(param.cate, 'order') ? 'action' : ''}"><a href="/faq/list?cate=order">주문/결제</a></li>
+                    <li th:class="${#strings.equals(param.cate, 'delivery') ? 'action' : ''}"><a href="/faq/list?cate=delivery">배송관련</a></li>
+                    <li th:class="${#strings.equals(param.cate, 'transfer') ? 'action' : ''}"><a href="/faq/list?cate=transfer">교환/반품/환불</a></li>
+                    <li th:class="${#strings.equals(param.cate, 'member') ? 'action' : ''}"><a href="/faq/list?cate=member">회원/포인트</a></li>
+                    <li th:class="${#strings.equals(param.cate, 'site') ? 'action' : ''}"><a href="/faq/list?cate=site">사이트 이용</a></li>
+                    <li th:class="${#strings.equals(param.cate, 'etc') ? 'action' : ''}"><a href="/faq/list?cate=etc">기타</a></li>
+                </ul>
+            </nav>
+
+            <!-- 목록 -->
+            <div class="faq_content">
+                <ul>
+                    <!-- 비어있는 페이지 -->
+                    <li class="empty_faq_list" th:if="${#lists.isEmpty(list)}">
+                        <div class="faq_info">
+                            <img src="/images/common/ico-information-big.png" alt="안내메세지">
+                            <p>등록된 FAQ가 없습니다.</p>
+                        </div>
+                    </li>
+
+                    <!-- 질문 리스트 -->
+                    <li th:each="faq : ${list}">
+                        <div class="faq_title">
+                            <span class="faq_cate" th:text="${faq.cate}"></span>
+                            <div class="faq_txt"><p th:text="${faq.question}"></p></div>
+                            <button class="faq_open"><span class="blind">열기</span></button>
+                        </div>
+                        <div class="faq_con">
+                            <div class="faq_con_inner" th:utext="${faq.answer}"></div>
+                        </div>
+                    </li>
+                </ul>
+
+                <!-- 페이징 -->
+                <th:block th:utext="${paging}" />
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

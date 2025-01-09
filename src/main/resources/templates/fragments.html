@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>백상 갤러리샵</title>
+</head>
+<body>
+<!-- 타이틀 -->
+<section class="common_wrap" data-aos="fade-up" th:fragment="commonTitle(tit, txt)">
+    <div class="inner">
+        <span class="txt" th:text="${txt}"></span>
+        <h2 class="tit" th:text="${tit}"></h2>
+    </div>
+</section>
+
+<!-- 타이틀 -->
+<section class="common_wrap" data-aos="fade-up" th:fragment="commonTitle2(tit)">
+    <div class="inner">
+        <h2 class="tit" th:text="${tit}"></h2>
+    </div>
+</section>
+
+<!-- 버튼 -->
+<div class="box_action" th:fragment="btnAction(txt)">
+    <a href="#">
+        <svg>
+            <rect></rect>
+        </svg>
+        <span th:text="${txt}"></span>
+    </a>
+</div>
+
+<!-- 버튼 -->
+<div class="box_action" th:fragment="btnActionHref(txt, href)">
+    <a th:href="${href}">
+        <svg>
+            <rect></rect>
+        </svg>
+        <span th:text="${txt}"></span>
+    </a>
+</div>
+
+<!-- icon_wrap 공통 -->
+<div class="icon_wrap" th:fragment="iconWrap(no, wishList)">
+    <a th:href="|/shop/view/${no}|" class="sight_icon"></a>
+    <button th:if="${wishList}"
+            th:attr="data-no=${no}"
+            th:class="|like_icon ${#lists.contains(wishList, no) ? 'on' : ''}|">
+    </button>
+    <button th:unless="${wishList}" class="like_icon" th:attr="data-no=${no}"></button>
+</div>
+
+<!-- 마이페이지 상단 공통 -->
+<div class="my_page_info" th:fragment="my_info">
+    <div class="info_txt_wrap">
+        <div class="info_img">
+            <img src="/images/my_page/mypage-info.png" alt="">
+        </div>
+        <div class="info_txt">
+            <p>
+                <strong th:text="${session.user.name}"></strong>님, 안녕하세요!
+            </p>
+            <p>
+                고객님의 회원등급은
+                <span th:text="${#strings.equals(session.user.isadmin, 'Y') ? '관리자' : '개인회원'}"></span>
+                입니다.
+            </p>
+        </div>
+    </div>
+    <div class="info_mile">
+        <a href="/my/coupon" class="my_coupon">
+            <h3>사용 가능 쿠폰</h3>
+            <span th:text="${#lists.size(coupons) + '장'}"></span>
+        </a>
+        <a href="/my/mileage" class="my_mile">
+            <h3>적립금</h3>
+            <span th:text="${(credit != null and credit > 0) ?  (#numbers.formatInteger(credit, 3, 'COMMA') + 'P') : '0P'}"></span>
+        </a>
+    </div>
+</div>
+</body>
+</html>

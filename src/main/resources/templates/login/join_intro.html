@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/login.js"></script>
+</head>
+<body>
+<main id="container" class="intro_container intro_page" layout:fragment="content">
+    <div th:replace="~{fragments :: commonTitle2('JOIN')}"></div>
+
+    <div class="intro_content">
+        <img src="/images/login/ico-join-person.png" alt="인물스티커">
+        <p>일반회원으로 가입하기</p>
+        <a class="login_common_btn" href="/join_tos">회원가입</a>
+    </div>
+</main>

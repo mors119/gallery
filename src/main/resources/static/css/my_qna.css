@@ -1,0 +1,79 @@
+/* 1:1 문의 wrap */
+.my_qna_container .my_qna_total {
+    margin-bottom: 40px;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.my_qna_container .my_qna_total strong {
+    color: var(--point-color1);
+    font-weight: 500;
+}
+
+.my_qna_container tr:hover td {
+    background-color: #f7f6f5;
+}
+
+.my_qna_container .td_num {
+    color: var(--gray-500);
+    font-family: 'EB Garamond', sans-serif;
+}
+
+.my_qna_container .td_sub {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-align: left;
+}
+
+.my_qna_container .td_sub a {
+    position: relative;
+    padding-right: 25px;
+    color: var(--gray-600);
+    line-height: 26px;
+}
+
+.my_qna_container .td_sub a:hover {
+    color: var(--point-color1);
+    text-decoration: underline;
+}
+
+.my_qna_container .td_sub a img {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: 1px;
+    transform: translateY(-50%);
+}
+
+.my_qna_container .td_name {
+    color: var(--gray-400);
+}
+
+.my_qna_container .td_date {
+    color: var(--gray-400);
+    font-family: 'EB Garamond', sans-serif;
+}
+
+.my_qna_container .td_state {
+    padding: 0 20px;
+}
+
+.my_qna_container .td_state .answer_rdy {
+    display: block;
+    background: #ededed;
+    color: var(--gray-400);
+    border-radius: 40px;
+    line-height: 40px;
+}
+
+.my_qna_container .td_state .answer_rdy.complete {
+    color: var(--point-color1);
+}
+
+/* 글쓰기 버튼 */
+.my_qna_container .my_qna_table .box_action {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+}

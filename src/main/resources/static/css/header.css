@@ -1,0 +1,543 @@
+.scroll_down #header {
+    top: -100px;
+}
+
+.scroll_up #header {
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+#header {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 9000;
+    width: 100%;
+    height: 100px;
+    background-color: #fff;
+    transition: top 0.4s cubic-bezier(0.64, 0, 0.36, 1);
+}
+
+#header .logo {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -73px;
+    margin-top: -22.5px;
+}
+
+#header .logo a {
+    display: block;
+    width: 126px;
+    height: 50px;
+    background: url(/images/header/logo.png) no-repeat center;
+}
+
+/* 사이트맵 */
+#header .sitemap_wrap {
+    position: relative;
+    z-index: 9999;
+}
+
+#header .btn_sitemap_open {
+    position: absolute;
+    left: 50px;
+    top: 44px;
+    width: 23px;
+    height: 13px;
+    background: url(/images/header/ico-header-menu.png) no-repeat center;
+}
+
+#header .sitemap::after {
+    opacity: 0;
+    visibility: hidden;
+    content: '';
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    transition: all 0.5s ease-in-out;
+    cursor: pointer;
+}
+
+#header .sitemap.on::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+#header .sitemap .inner {
+    position: fixed;
+    left: -640px;
+    top: 0;
+    z-index: 100;
+    padding: 50px 50px 126px;
+    width: 640px;
+    height: 100%;
+    background-color: #fff;
+    transition: left 0.7s cubic-bezier(0.64, 0, 0.36, 1);
+}
+
+#header .sitemap.on > .inner {
+    left: 0;
+}
+
+#header .sitemap_logo {
+    position: absolute;
+    left: 50px;
+    top: 50px;
+}
+
+#header .sitemap_logo a {
+    display: block;
+    width: 146px;
+    height: 50px;
+    background: url(/images/header/logo.png) no-repeat center;
+}
+
+#header .all_menu_wrap {
+    padding-top: 145px;
+    padding-bottom: 50px;
+    height: 100%;
+}
+
+#header .all_menu {
+    overflow-y: auto;
+    height: 100%;
+}
+
+#header .all_menu > li {
+    position: relative;
+    padding-right: 300px;
+}
+
+#header .all_menu > li > a {
+    display: inline-block;
+    padding: 22px 0;
+    font-size: 30px;
+    font-weight: 700;
+    word-break: break-all;
+    line-height: 36px;
+    letter-spacing: -0.7px;
+    transition: all 0.4s ease;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+#header .all_menu > li.on > a {
+    font-style: italic;
+    color: var(--point-color1);
+}
+
+/* depth */
+#header .all_menu .depth {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    right: 0;
+    top: 30px;
+    z-index: 100;
+    width: 280px;
+    transition: opacity 0.2s ease, transform 0.4s ease;
+    transform: translateX(-10px);
+    padding-bottom: 150px;
+}
+
+#header .all_menu li.on .depth {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+}
+
+#header .all_menu .depth > li + li {
+    margin-top: 22px;
+}
+
+#header .all_menu .depth > li > a {
+    display: inline-block;
+    position: relative;
+    line-height: 24px;
+    letter-spacing: -0.5px;
+}
+
+#header .all_menu .depth > li > a:hover {
+    color: var(--point-color1);
+    font-weight: 500;
+}
+
+#header .all_menu .depth > li > a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--point-color1);
+    transition: width 0.3s ease;
+}
+
+#header .all_menu .depth > li > a:hover::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+
+/* 사이트맵 - 하위 */
+#header .info_menu_wrap {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f8f8;
+}
+
+#header .info_menu {
+    padding: 50px;
+}
+
+#header .info_menu li {
+    display: inline-block;
+    position: relative;
+    padding-left: 21px;
+    margin-left: 20px;
+    vertical-align: middle;
+}
+
+#header .info_menu li:nth-of-type(1) {
+    padding-left: 0;
+    margin-left: 0;
+}
+
+#header .info_menu li a {
+    display: inline-block;
+    color: var(--gray-500);
+    line-height: 26px;
+}
+
+#header .info_menu li a:hover {
+    color: var(--point-color1);
+}
+
+#header .info_menu li + li::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 9px;
+    width: 1px;
+    height: 10px;
+    background-color: var(--point-color1);
+}
+
+/* 사이트맵 닫기버튼 */
+#header .btn_sitemap_close {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    width: 18px;
+    height: 18px;
+    background: url(/images/header/ico-sitemap-close.png) no-repeat center;
+}
+
+/* GNB */
+#header .gnb_wrap {
+    position: absolute;
+    left: 125px;
+    top: 0;
+    height: 100%;
+}
+
+#header .gnb {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+#header .gnb > li + li {
+    margin-left: 37px;
+}
+
+#header .gnb > li > a {
+    display: block;
+    position: relative;
+    line-height: 20px;
+}
+
+#header .gnb > li:hover > a {
+    font-weight: 500;
+    color: var(--point-color1);
+}
+
+#header .gnb > li > a::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -5px;
+    width: 0;
+    height: 2px;
+    background-color: var(--point-color1);
+    transition: width 0.3s ease;
+}
+
+#header .gnb > li > a:hover::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+
+/* GNB INFO */
+#header .gnb_info_wrap {
+    position: absolute;
+    right: 100px;
+    top: 0;
+    height: 100%;
+}
+
+#header .gnb_info_wrap li > a {
+    font-weight: 500;
+}
+
+#header .gnb_info_wrap li > a .basket_num {
+    display: inline-block;
+    margin-left: 3px;
+    color: var(--point-color1);
+    line-height: 1;
+}
+
+/* 검색 */
+#header .all_search_wrap {
+    position: relative;
+    z-index: 9999;
+}
+
+#header .btn_all_search_open {
+    position: absolute;
+    right: 50px;
+    top: 41px;
+    width: 20px;
+    height: 20px;
+    background: url(/images/header/ico-header-search.png) no-repeat center;
+}
+
+/* 반응형 */
+@media (max-width: 1600px) {
+    #header .gnb > li + li {
+        margin-left: 25px;
+    }
+}
+
+@media (max-width: 1440px) {
+    #header .gnb_wrap {
+        display: none;
+    }
+
+    #header .gnb_info_wrap {
+        display: none;
+    }
+}
+
+@media (max-width: 767px) {
+    #header .logo {
+        margin-left: -55px;
+        margin-top: -17px;
+    }
+
+    #header .logo a {
+        width: 100px;
+        height: 38px;
+        background-size: 100%;
+    }
+}
+
+/* 검색 영역 */
+#search_wrap {
+    opacity: 0;
+    visibility: hidden;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: url(/images/common/all-search-bg.jpg) no-repeat center / cover;
+    transition: all .3s ease-in-out;
+    z-index: 9999;
+}
+
+#search_wrap.on {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* 좌측 */
+#search_wrap fieldset {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50px;
+    top: 50px;
+    right: 50px;
+    bottom: 50px;
+    background-color: rgba(255, 255, 255, .85);
+}
+
+#search_wrap .sch_word_box {
+    position: relative;
+    margin-bottom: 80px;
+    max-width: 1160px;
+    width: calc(100% - 100px);
+}
+
+#search_wrap #sch_str {
+    padding: 0;
+    width: 100%;
+    height: 96px;
+    border: none;
+    border-bottom: 2px solid var(--point-color1);
+    background-color: transparent;
+    font-size: 45px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;;
+    font-weight: 600;
+}
+
+#search_wrap #sch_str::placeholder {
+    color: var(--point-color1);
+    font-weight: 700;
+}
+
+#search_wrap #sch_str + button[type=submit] {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 10;
+    margin-top: -15px;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: url(/images/common/ico-header-search-big.png) no-repeat center;
+}
+
+/* 우측 */
+#search_wrap .sch_word_wrap {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1160px;
+    width: calc(100% - 100px);
+}
+
+#search_wrap .sch_recent_word {
+    padding-right: 60px;
+    width: 33%;
+    text-align: left;
+}
+
+#search_wrap h2 {
+    position: static;
+    padding-bottom: 30px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 600;
+    font-family: 'Noto Serif KR', 'Noto Sans KR', 'EB Garamond', sans-serif;
+}
+
+#search_wrap .sch_recent_word ul {
+    margin-top: -24px;
+    font-size: 0;
+}
+
+#search_wrap .sch_recent_word ul li {
+    display: block;
+    position: relative;
+    padding-right: 100px;
+    margin-top: 24px;
+    line-height: 22px;
+}
+
+#search_wrap .sch_recent_word .recent_word {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    display: inline-block;
+    max-width: 100%;
+    font-size: 16px;
+    color: var(--gray-500);
+    line-height: 22px;
+    vertical-align: middle;
+    word-break: break-all;
+}
+
+#search_wrap .sch_recent_word .recent_date {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    z-index: 1;
+    margin-top: -11px;
+    font-size: 16px;
+    color: var(--gray-400);
+    line-height: 22px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+#search_wrap .sch_recent_word .recent_delete {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    z-index: 1;
+    margin-top: -5px;
+    width: 10px;
+    height: 10px;
+    border: none;
+    font-size: 16px;
+    color: var(--gray-500);
+    line-height: 22px;
+    background: url(/images/common/ico-recent-word-delete.png) no-repeat center;
+}
+
+#search_wrap .sch_popular_word {
+    position: relative;
+    padding-left: 60px;
+    width: 67%;
+    text-align: left;
+}
+
+#search_wrap .sch_popular_word::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 2px;
+    height: calc(100% - 60px);
+    background: #d7c1a3;
+}
+
+#search_wrap .sch_popular_word ul {
+    position: relative;
+    margin-top: -24px;
+    margin-left: -2%;
+    min-height: 114px;
+    font-size: 0;
+}
+
+#search_wrap .sch_popular_word ul li {
+    display: inline-block;
+    margin-top: 24px;
+    margin-left: 2%;
+    min-width: 28%;
+}
+
+#search_wrap .sch_popular_word ul li a {
+    display: inline-block;
+    font-size: 16px;
+    color: var(--gray-500);
+    line-height: 22px;
+    vertical-align: middle;
+}
+
+#search_wrap .search_close_btn {
+    position: absolute;
+    right: 50px;
+    top: 50px;
+    width: 30px;
+    height: 30px;
+    background: url(/images/common/ico-header-search-close.png) no-repeat center;
+}

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/notice.css">
+    <script src="/js/notice.js"></script>
+</head>
+<body>
+<main id="container" class="notice_container" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle('NOTICE', '백상이 전하는 소식을 살펴보세요.')}"></div>
+
+    <!-- 본문 -->
+    <section class="notice_list">
+        <div class="inner">
+            <div class="list_opt">
+                <div class="left">총 <strong th:text="${total}"></strong>건</div>
+
+                <div class="right">
+                    <form action="/notice/list" method="get">
+                        <div class="select_deco">
+                            <span class="current"
+                                  th:text="${#strings.equals(param.searchType, 'content') ? '내용' :
+                                            (#strings.equals(param.searchType, 'all') ? '제목+내용' : '제목')}">
+                            </span>
+
+                            <ul>
+                                <li class="option" data-type="title">제목</li>
+                                <li class="option" data-type="content">내용</li>
+                                <li class="option" data-type="all">제목+내용</li>
+                            </ul>
+                            <input type="hidden" name="searchType" id="noticeSearchType" value="title">
+                        </div>
+                        <div>
+                            <input type="search" name="keyword" class="inp_type01" maxlength="20" autocomplete="off"
+                                   placeholder="검색어를 입력해주세요." size="15" th:value="${param.keyword}">
+                            <button type="submit" value="검색" aria-label="검색"><span class="blind">검색</span></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="list_cont">
+                <table>
+                    <caption>게시판 리스트</caption>
+                    <colgroup>
+                        <col style="width: 130px">
+                        <col>
+                        <col style="width: 240px">
+                    </colgroup>
+                    <tbody>
+                    <tr th:each="notice : ${list}" th:if="${!#lists.isEmpty(list)}">
+                        <td><span class="notic">NOTICE</span></td>
+                        <td class="td_sub"><a th:href="@{'/notice/view/' + ${notice.no}}" th:text="${notice.title}"></a>
+                        </td>
+                        <td class="td_date" th:text="${notice.regdate}">2022.05.12</td>
+                    </tr>
+                    <!-- 게시글이 없는 경우 -->
+                    <tr th:if="${#lists.isEmpty(list)}">
+                        <td colspan="3">등록된 게시글이 없습니다.</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <th:block th:if="${session.user != null and #strings.equals(session.user.isadmin, 'Y')}">
+                <div th:insert="~{fragments :: btnActionHref('글쓰기', '/notice/write')}" class="notice_write_wrap"></div>
+            </th:block>
+
+            <th:block th:utext="${paging}"/>
+        </div>
+    </section>
+</main>
+</body>
+</html>

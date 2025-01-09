@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/login.css">
+    <script src="/js/login.js"></script>
+    <!--  google reCaptcha  -->
+    <script src="/js/api.js" async defer></script>
+</head>
+<body>
+<main id="container" class="join_container join_page" layout:fragment="content">
+    <div th:replace="~{fragments :: commonTitle2('JOIN')}"></div>
+
+    <div class="content">
+        <div class="inner">
+            <div class="sub_tit" data-aos="fade-up">
+                <span>약관동의</span>
+                <span class="on"><i></i>정보입력</span>
+                <span><i></i>가입완료</span>
+            </div>
+            <form id="join" th:fragment="member_update(user)">
+                <div class="join_input">
+                    <div class="input_wrap">
+                        <h6>아이디</h6>
+                        <div class="input">
+                            <input type="text" id="input_text_id" name="id" placeholder="아이디" required th:value="${user != null ? user.id : ''}" th:readonly="${user != null}">
+                            <input id="id_check" type="button" value="중복확인">
+                            <p id="id_text">영문자, 숫자, _ 만 입력 가능. 최소 3자이상 입력하세요.</p>
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>비밀번호</h6>
+                        <div class="input">
+                            <input type="password" id="input_pw" name="pw" placeholder="비밀번호" required>
+                            <p>영문, 숫자, 특수문자를 포함하여 8자 이상으로 작성해주세요.</p>
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>비밀번호 확인</h6>
+                        <div class="input">
+                            <input type="password" id="input_pw_ch" placeholder="비밀번호확인" required>
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>이름</h6>
+                        <div class="input">
+                            <input type="text" id="input_name" name="name" placeholder="이름" required th:value="${user != null ? user.name : ''}">
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>E-Mail</h6>
+                        <div class="input">
+                            <input type="text" id="input_email" name="email" placeholder="E-Mail" required th:value="${user != null ? user.email : ''}">
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6 class="none">전화번호</h6>
+                        <div class="input">
+                            <input type="text" name="tel" placeholder="전화번호" th:value="${user != null ? user.tel : ''}">
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>휴대폰번호</h6>
+                        <div class="input">
+                            <input type="text" id="input_phone" name="phone" placeholder="휴대폰번호" required th:value="${user != null ? user.phone : ''}">
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>생년월일</h6>
+                        <div class="input_select" th:with="birthInfo=${user != null ? #strings.listSplit(user.birth, '-') : #strings.listSplit(#dates.format(new java.util.Date(), 'yyyy-MM-dd'), '-')}">
+                            <input type="date" class="blind" name="birth" id="input_birth" th:value="${user != null ? user.birth : ''}">
+                            <div class="select_wrap">
+                                <div class="select" id="year_select" th:text="${birthInfo.size() > 0 ? birthInfo[0] : ''}"></div>
+                                <ul id="join_year"></ul>
+                            </div>
+                            <span>년</span>
+                            <div class="select_wrap">
+                                <div class="select" id="month_select" th:text="${birthInfo.size() > 1 ? birthInfo[1] : ''}"></div>
+                                <ul id="join_month"></ul>
+                            </div>
+                            <span>월</span>
+                            <div class="select_wrap">
+                                <div class="select" id="day_select" th:text="${birthInfo.size() > 2 ? birthInfo[2] : ''}"></div>
+                                <ul id="join_day"></ul>
+                            </div>
+                            <span>일</span>
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>주소</h6>
+                        <div class="input">
+                            <input type="text" id="zoneCode" name="zipcode" placeholder="우편번호" required th:value="${user != null ? user.zipcode : ''}">
+                            <input type="button" id="click_post" value="주소 검색"><br>
+                            <div>
+                                <input class="margin20" type="text" id="address" name="addr1" placeholder="기본주소" required th:value="${user != null ? user.addr1 : ''}">
+                                <input class="margin20 address" type="text" name="addr2" placeholder="상세주소" required th:value="${user != null ? user.addr2 : ''}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>메일 수신</h6>
+                        <div class="input radios">
+                            <input type="hidden" id="radio_val" name="mailyn" th:value="${user != null ? user.mailyn : 'N'}">
+                            <input id="radio_yes" type="radio" th:checked="${user != null and #strings.equals(user.mailyn, 'Y')}">
+                            <label for="radio_yes">예</label>
+                            <input id="radio_no" type="radio" th:checked="${user == null or #strings.equals(user.mailyn, 'N')}">
+                            <label for="radio_no">아니오</label>
+                        </div>
+                    </div>
+                    <div class="input_wrap">
+                        <h6>자동등록방지</h6>
+                        <div class="input">
+                            <div>
+                                <div class="g-recaptcha" data-sitekey="6LdYq5gqAAAAABUBYvZ0VgWC91CtG2myxpbMm-Ly"></div>
+                                <span>체크박스를 클릭해주세요.</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="join_btn_wrap">
+                    <a class="silver" href="/login">취소</a>
+                    <input type="submit" class="gold" th:value="${user != null ? '수정' : '확인'}">
+                </div>
+            </form>
+        </div>
+    </div>
+</main>
+</body>
+</html>

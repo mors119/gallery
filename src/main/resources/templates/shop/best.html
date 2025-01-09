@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/goods.css">
+</head>
+<body>
+<main id="container" class="goods_container" layout:fragment="content">
+    <div class="goods_contents">
+        <div class="content_inner">
+            <!-- 타이틀 -->
+            <div th:replace="~{fragments :: commonTitle('BEST ART', '백상에서 가장 인기있는 작품을 소개합니다.')}"></div>
+
+            <!-- 상품 카테고리 -->
+            <div class="tit_wrap" data-aos="fade-right">
+                <h2 class="content_tit">Best Art</h2>
+            </div>
+
+            <div class="txt_wrap">
+                <p>총 <strong th:text="${#lists.size(list)}"></strong>개의 상품이 있습니다.</p>
+            </div>
+            <!-- 메인 상품리스트 -->
+            <div class="goods_list">
+                <div class="item_wrap" th:each="best : ${list}">
+                    <div class="img_wrap">
+                        <img th:src="@{'/images/goods/' + ${best.poster}}" th:alt="${best.title}">
+                        <div class="view_more_wrap">
+                            <div th:insert="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${best.no})}" class="view_move"></div>
+                            <div th:replace="~{fragments :: iconWrap(${best.no}, ${wishList})}"></div>
+                        </div>
+                    </div>
+                    <div class="detail_wrap">
+                        <a th:href="@{'/shop/view/' + ${best.no}}" th:text="${best.title}"></a>
+                        <div class="artist">
+                            <span th:text="${best.name_kr}"></span>
+                        </div>
+                        <div class="item_size">
+                            <p>30.0cm x 30.0cm</p>
+                        </div>
+                        <div class="item_price">
+                            <span><strong th:text="${#numbers.formatInteger(best.price, 3, 'COMMA')}"></strong>원</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

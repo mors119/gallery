@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/qna.css">
+    <script src="/js/qna.js"></script>
+</head>
+<body>
+<main id="container" class="qna_container" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle('Q&A', '백상 쇼핑몰에 궁금한 내용을 남겨주세요.')}"></div>
+
+    <!-- 본문 -->
+    <section class="qna_list">
+        <div class="inner">
+            <div class="list_opt">총 <strong th:text="${total}"></strong>건</div>
+
+            <div class="list_cont">
+                <table>
+                    <caption>게시판 리스트</caption>
+                    <colgroup>
+                        <col style="width: 120px;">
+                        <col>
+                        <col style="width: 140px;">
+                        <col style="width: 160px;">
+                        <col style="width: 160px;">
+                    </colgroup>
+                    <tbody>
+                    <tr th:if="${#lists.isEmpty(list)}">
+                        <td colspan="5" style="text-align: center;">게시글이 없습니다.</td>
+                    </tr>
+                    <tr th:each="qna : ${list}" th:if="${!#lists.isEmpty(list)}">
+                        <td class="td_num" th:text="${qna.no}"></td>
+                        <td class="td_sub">
+                            <a href="#" th:attr="data-no=${qna.no}">
+                                <span th:text="${qna.title}"></span>
+                                <img src="/images/qna/ico-secret-brown.png" alt="비밀글">
+                            </a>
+                        </td>
+                        <td class="td_name" th:text="${qna.id}"></td>
+                        <td class="td_date" th:text="${qna.regdate}"></td>
+                        <td class="td_state">
+                            <span class="answer_rdy complete" th:if="${qna.answer != null}">답변완료</span>
+                            <span class="answer_rdy" th:if="${qna.answer == null}">답변대기</span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div th:insert="~{fragments :: btnAction('글쓰기')}" class="qna_write_wrap" th:attr="data-islogin=${!#strings.isEmpty(session.user)}"></div>
+
+            <!-- 페이징 -->
+            <th:block th:utext="${paging}"></th:block>
+        </div>
+    </section>
+</main>
+</body>
+</html>

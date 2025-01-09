@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/my_wish.css">
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <script src="/js/my_page.js"></script>
+</head>
+<body>
+<main id="container" class="my_wish_container my_page_container" layout:fragment="content">
+    <section class="my_wish_wrap">
+        <div class="my_page_inner">
+            <!-- 좌측 네비게이션 -->
+            <div th:replace="~{my_page/nav :: nav}"></div>
+            <!-- 우측 회원 정보 -->
+            <div class="con_wrap">
+                <!-- 회원 등급, 쿠폰, 적립금 -->
+                <div th:replace="~{fragments :: my_info}"></div>
+
+                <!-- 찜 리스트 -->
+                <div class="wish">
+                    <div class="my_wish_tit">
+                        <h3>찜 리스트</h3>
+                    </div>
+                    <form action="#" name="fwish_list">
+                        <div class="table_wrap">
+                            <table>
+                                <caption class="blind">찜 리스트</caption>
+                                <colgroup>
+                                    <col width="60px">
+                                    <col width="*">
+                                    <col width="140px">
+                                    <col width="160px">
+                                </colgroup>
+                                <thead>
+                                <tr>
+                                    <th>
+                                        <div class="checkbox">
+                                            <input type="checkbox" name="check_all" value="1" id="check_all"
+                                                   class="all_check" autocomplete="off">
+                                            <label for="check_all">
+                                                <span class="blind">전체 선택</span>
+                                            </label>
+                                        </div>
+                                    </th>
+                                    <th>상품정보</th>
+                                    <th>상품금액</th>
+                                    <th>관리</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="wish, state : ${wishList}">
+                                    <td class="td_checkbox" th:attr="data-no=${wish.no}">
+                                        <div class="checkbox">
+                                            <input type="checkbox" th:id="${'check_one_' + state.index}" class="one_check" autocomplete="off">
+                                            <label th:for="${'check_one_' + state.index}">
+                                                <span class="blind">1개 선택</span>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td class="td_product">
+                                        <div class="product_box">
+                                            <div class="product_img">
+                                                <span class="tag_soldout" th:if="${wish.qty == 0}">품절</span>
+                                                <div th:style="'background-image:url(/images/goods/' + ${wish.poster} + ')'">
+                                                    <span class="blind">썸네일</span>
+                                                </div>
+                                            </div>
+                                            <div class="product_tit">
+                                                <a th:href="@{'/shop/view/' + ${wish.no}}">
+                                                    <strong th:text="${wish.title}"></strong>
+                                                    <span th:text="${wish.name_kr}"></span>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="td_price" th:text="${#numbers.formatInteger(wish.price, 3, 'COMMA') + '원'}"></td>
+                                    <td class="td_state">
+                                        <a href="#" class="delete_wish" th:attr="data-no=${wish.no}">삭제하기</a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="wish_opt_wrap">
+                            <button type="button" class="deleteWishBtn">선택 삭제</button>
+                            <button type="button" class="clearWishBtn">찜 리스트 비우기</button>
+                        </div>
+
+                        <!-- 페이지네이션 margin-top: 50px padding: 10px 0 -->
+                        <th:block th:utext="${paging}"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

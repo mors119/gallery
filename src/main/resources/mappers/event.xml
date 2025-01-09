@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    페이징 기본 구조
+    SELECT * FROM 테이블명
+    ORDER BY 정렬기준
+    LIMIT 페이지당_행수 OFFSET (페이지번호 - 1) * 페이지당_행수;
+-->
+<mapper namespace="com.bxgs.gallery.mapper.EventMapper">
+    <select id="selectAll" resultType="eventVO" parameterType="com.bxgs.gallery.common.Pagination">
+        select no
+             , title
+             , poster
+             , sub
+             , content
+             , startdate
+             , enddate
+             , regdate
+             , (case when now() > enddate then 'Y' else 'N' end) as isend
+          from event
+         order by no
+         limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <select id="totalCount" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*) from event
+    </select>
+
+    <select id="selectOne" resultType="eventVO">
+        select a.*
+        from (
+                 select no
+                      , title
+                      , poster
+                      , sub
+                      , content
+                      , startdate
+                      , enddate
+                      , regdate
+                      , lag(no)      over(order by no) as prev_no
+                      , lag(title)   over(order by no) as prev_title
+                      , lead(no)     over(order by no) as next_no
+                      , lead(title)  over(order by no) as next_title
+                 from event
+             ) a
+        where no = #{no}
+    </select>
+
+    <insert id="insert">
+--         insert into event(cate, question, answer) values(#{cate}, #{question}, #{answer})
+    </insert>
+
+    <update id="update">
+--         update event
+--            set cate = #{cate}
+--              , question = #{question}
+--              , answer = #{answer}
+--          where no = #{no}
+    </update>
+
+    <delete id="delete">
+        delete from event where no = #{no}
+    </delete>
+</mapper>

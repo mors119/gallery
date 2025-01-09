@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/gallery_list.css">
+    <script src="/js/artist.js"></script>
+</head>
+<body>
+<main id="container" class="artist_list" layout:fragment="content">
+    <!-- 타이틀 -->
+    <div th:replace="~{fragments :: commonTitle('ARTIST', '백상 갤러리에서 다양한 작가의 작품을 만나보세요.')}"></div>
+
+    <!-- 본문 -->
+    <div class="content">
+        <div class="inner">
+            <div class="main_content">
+                <div class="sticky_select">
+                    <h3>Artist List</h3>
+                    <ul class="select_wrap">
+                        <li class="all"><a href="/artist/list" th:class="${param.keyword == null ? 'on' : ''}"><span>All</span></a></li>
+                        <li>
+                            <a href="#" th:class="${(#strings.equals(param.keyword, '1100') or
+                                                     #strings.equals(param.keyword, '1105') or
+                                                     #strings.equals(param.keyword, '1108') or
+                                                     #strings.equals(param.keyword, '110C')) ? 'on' : ''}"><span>ㄱ ~ ㄹ</span></a>
+                            <ul class="sort_depth">
+                                <li><a href="/artist/list?keyword=1100"><span>ㄱ, ㄲ</span></a></li>
+                                <li><a href="/artist/list?keyword=1105"><span>ㄴ</span></a></li>
+                                <li><a href="/artist/list?keyword=1108"><span>ㄷ, ㄸ</span></a></li>
+                                <li><a href="/artist/list?keyword=110C"><span>ㄹ</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" th:class="${(#strings.equals(param.keyword, '110F') or
+                                                     #strings.equals(param.keyword, '1112') or
+                                                     #strings.equals(param.keyword, '1116') or
+                                                     #strings.equals(param.keyword, '111A')) ? 'on' : ''}">
+                                <span>ㅁ ~ ㅇ</span>
+                            </a>
+                            <ul class="sort_depth">
+                                <li><a href="/artist/list?keyword=110F"><span>ㅁ</span></a></li>
+                                <li><a href="/artist/list?keyword=1112"><span>ㅂ, ㅃ</span></a></li>
+                                <li><a href="/artist/list?keyword=1116"><span>ㅅ, ㅆ</span></a></li>
+                                <li><a href="/artist/list?keyword=111A"><span>ㅇ</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" th:class="${(#strings.equals(param.keyword, '111D') or
+                                                     #strings.equals(param.keyword, '1121') or
+                                                     #strings.equals(param.keyword, '1124') or
+                                                     #strings.equals(param.keyword, '1127')) ? 'on' : ''}">
+                                <span>ㅈ ~ ㅌ</span>
+                            </a>
+                            <ul class="sort_depth">
+                                <li><a href="/artist/list?keyword=111D"><span>ㅈ, ㅉ</span></a></li>
+                                <li><a href="/artist/list?keyword=1121"><span>ㅊ</span></a></li>
+                                <li><a href="/artist/list?keyword=1124"><span>ㅋ</span></a></li>
+                                <li><a href="/artist/list?keyword=1127"><span>ㅌ</span></a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#" th:class="${(#strings.equals(param.keyword, '112A') or
+                                                     #strings.equals(param.keyword, '112D')) ? 'on' : ''}">
+                                <span>ㅍ ~ ㅎ</span>
+                            </a>
+                            <ul class="sort_depth">
+                                <li><a href="/artist/list?keyword=112A"><span>ㅍ</span></a></li>
+                                <li><a href="/artist/list?keyword=112D"><span>ㅎ</span></a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <div class="artist">
+                        <p>총 <span th:text="${totalCount}"></span>명의 작가가 있습니다.</p>
+
+                        <div class="artist_template">
+                            <div class="template" th:each="author : ${list}">
+                                <div class="image_wrap">
+                                    <img th:src="@{'/images/artist/' + ${author.img}}" th:alt="${author.name_kr}">
+                                    <div>
+                                        <div class="cover">
+                                            <div th:replace="~{fragments :: btnActionHref('Read More', '/artist/info/' + ${author.no})}"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <h6><a th:href="@{'/artist/info/' + ${author.no}}" th:text="${author.name_kr}"></a></h6>
+                                <p th:text="${author.name_en}"></p>
+                            </div>
+                        </div>
+
+                        <!-- 페이징 -->
+                        <th:block th:utext="${paging}"></th:block>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

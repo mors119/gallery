@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/product.css">
+    <script src="/js/product.js"></script>
+</head>
+<body>
+<main id="container" class="painting_list" layout:fragment="content">
+    <div th:replace="~{fragments :: commonTitle('PAINTING', '백상 큐레이터가 선정한 추천 작품을 만나보세요.')}"></div>
+
+    <div class="content">
+        <div class="inner">
+            <div class="md_pick">
+                <h2>MD PICK</h2>
+                <div class="swiper_bg">
+                    <!-- 이미지 슬라이드 Swiper -->
+                    <div class="swiper swiper-images">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" th:each="item, state : ${list}" th:if="${state.index < 3}">
+                                <a href="#">
+                                    <img th:src="${'/images/goods/' + item.poster}" th:alt="${item.title}">
+                                </a>
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                        <div class="swiper-button-prev"></div>
+                        <div class="swiper-button-next"></div>
+                    </div>
+
+                    <!-- 텍스트 -->
+                    <div class="swiper swiper-text">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" th:each="item, state : ${list}" th:if="${state.index < 3}">
+                                <div class="txt">
+                                    <div class="page_num">
+                                        <span class="current">0<th:block th:text="${state.count}"/></span>
+                                        <span class="total">03</span>
+                                    </div>
+                                    <a th:href="@{'/shop/view/' + ${item.no}}" th:text="${item.title}"></a>
+                                    <span class="gold" th:text="${item.name_kr}"></span>
+                                    <p>30cm X 30cm (두께 2.5cm)</p>
+                                    <p class="price"><strong th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}"></strong>원</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="art_content" id="artContent">
+            <h4>Painting Art</h4>
+            <div class="arts">
+                <div class="info_wrap">
+                    <p class="info">
+                        총 <span th:text="${totalCount}"></span>개의 상품이 있습니다.
+                    </p>
+
+                    <div class="select_wrap">
+                        <div class="sort">
+                            <span th:text="${sort != null ? sort : '인기순'}">인기순</span>
+                            <ul>
+                                <li data-sort="pop">인기순</li>
+                                <li data-sort="review">후기순</li>
+                                <li data-sort="rating">평점순</li>
+                                <li data-sort="date">등록순</li>
+                                <li data-sort="high">높은가격순</li>
+                                <li data-sort="low">낮은가격순</li>
+                            </ul>
+                        </div>
+                        <div class="view">
+                            <span><th:block th:text="${cnt}"/>개씩 보기</span>
+                            <ul>
+                                <li data-cnt="9">9개씩 보기</li>
+                                <li data-cnt="12">12개씩 보기</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="temp_wrap">
+                    <div class="temp" th:each="pt : ${list}">
+                        <div class="image_wrap">
+                            <img th:src="${'/images/goods/' + pt.poster}" th:alt="${pt.title}">
+                            <div class="cover">
+                                <div></div>
+                                <div class="center" th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${pt.no})}"></div>
+                                <div class="btn_wrap">
+                                    <th:block th:replace="~{fragments :: iconWrap(${pt.no}, ${wishList})}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="temp_txt">
+                            <a th:href="@{'/shop/view/' + ${pt.no}}" th:text="${pt.title}"></a>
+                            <span th:text="${pt.name_kr}"></span>
+                            <p>30.0cm x 30.0cm</p>
+                            <p class="price">
+                                <strong th:text="${#numbers.formatInteger(pt.price, 3, 'COMMA')}"></strong>원
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 페이징 -->
+            <th:block th:utext="${paging}" />
+        </div>
+    </div>
+</main>
+</body>
+</html>

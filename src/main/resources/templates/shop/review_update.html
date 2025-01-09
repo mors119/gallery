@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백상 갤러리샵</title>
+    <link rel="shortcut icon" href="/images/common/favicon.ico">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/aos.css">
+    <link rel="stylesheet" href="/css/goods_qna_write.css">
+    <link rel="stylesheet" href="/css/quill.snow.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    <script src="/js/aos.js"></script>
+    <script src="/js/quill.min.js"></script>
+    <script src="/js/common.js"></script>
+    <script src="/js/goods_qna_write.js"></script>
+</head>
+<body>
+<main id="container" class="goods_qna_container goods_review_container">
+    <div id="qa_write">
+        <h1>상품 후기 쓰기</h1>
+        <form action="#" method="post" autocomplete="off" data-type="update">
+            <div class="qna_form">
+                <input type="hidden" name="no" th:value="${review['no']}">
+                <input type="hidden" name="member_id" th:value="${session.user.id}">
+
+                <ul>
+                    <li>
+                        <label for="name"></label>
+                        <input type="text" id="name" name="name" th:value="${session.user.name}" class="form_input"
+                               placeholder="이름">
+                        <span>※ 이름은 마이페이지에서 변경 가능합니다.</span>
+                    </li>
+                    <li>
+                        <div class="rating">
+                            <input type="hidden" class="rating__result" id="rating" name="rating" th:value="${review['rating']}">
+                            <i class="rating__star fas fa-star" th:each="i : ${#numbers.sequence(1, review['rating'])}"></i>
+                            <i class="rating__star far fa-star" th:each="i : ${#numbers.sequence(1, 5 - review['rating'])}" th:if="${review['rating'] < 5}"></i>
+                        </div>
+                        <span>※ 별점을 선택해주세요.</span>
+                    </li>
+                    <li>
+                        <label for="goods_q_tit"></label>
+                        <input type="text" id="goods_q_tit" name="goods_q_tit" value required class="form_input"
+                               minlength="2" maxlength="250" placeholder="제목" th:value="${review['title']}">
+                    </li>
+                    <div class="goods_question">
+                        <textarea name="content" id="qnaEditor" th:attr="data-editor=${review['content']}" th:utext="${review['content']}"></textarea>
+                    </div>
+                    <p>※ 사진 및 이미지는 드래그 & 드랍으로 업로드가 가능합니다.</p>
+                </ul>
+                <button type="submit" class="submit_btn">작성완료</button>
+                <button type="button" class="close_btn">
+                    <span class="blind">닫기</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</main>
+</body>
+</html>

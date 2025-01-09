@@ -1,0 +1,530 @@
+.artist_list .inner {
+    width: calc(100% - 100px);
+    margin: 0 auto;
+}
+
+.artist_list .main_content {
+    display: flex;
+    position: relative;
+}
+
+.artist_list .main_content .sticky_select {
+    width: 380px;
+    position: sticky;
+    top: 20px;
+    left: 0;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.artist_list .main_content .sticky_select h3 {
+    color: #fff;
+    background: var(--point-color1);
+    padding: 0 20px;
+    line-height: 80px;
+    font-family: 'EB Garamond', serif;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.artist_list .main_content .sticky_select .select_wrap {
+    border: 1px solid #ddd;
+    padding: 10px 20px;
+}
+
+.artist_list .main_content .sticky_select .select_wrap > li {
+    position: relative;
+}
+
+.artist_list .main_content .sticky_select .select_wrap a.on {
+    color: var(--point-color1);
+}
+
+.artist_list .main_content .sticky_select .select_wrap li span {
+    position: relative;
+}
+
+.artist_list .main_content .sticky_select .select_wrap > li > a {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 20px;
+    height: 68px;
+    border-top: 1px solid #ddd;
+    font-size: 18px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+    font-weight: 500;
+}
+
+.artist_list .main_content .sticky_select .select_wrap > li:nth-of-type(1) > a {
+    border-top: none;
+}
+
+.artist_list .main_content .sticky_select .select_wrap > li > a::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    margin-top: -7.5px;
+    width: 15px;
+    height: 15px;
+    transition: transform .4s ease;
+    background: url("/images/artist/ico-combine-sort.png") no-repeat center;
+}
+
+.artist_list .main_content .sticky_select .select_wrap > li > a.on::after {
+    background: url("/images/artist/ico-combine-sort-on.png") no-repeat center;
+    transform: rotate(180deg);
+}
+
+.artist_list .main_content .sticky_select .sort_depth {
+    background-color: #f8f8f8;
+    overflow: hidden;
+    visibility: hidden;
+    max-height: 0;
+    transition: max-height .4s cubic-bezier(0.22, 0.61, 0.36, 1), visibility .4s, margin-bottom .4s;
+}
+
+.artist_list .main_content .sticky_select .sort_depth > li {
+    padding: 0 20px;
+}
+
+.artist_list .main_content .sticky_select .sort_depth > li:first-child {
+    padding-top: 15px;
+}
+
+.artist_list .main_content .sticky_select .sort_depth > li:last-child {
+    padding-bottom: 15px;
+}
+
+.artist_list .main_content .sticky_select .select_wrap .on + .sort_depth {
+    visibility: visible;
+    max-height: 500px;
+    margin-bottom: 20px;
+    transition: max-height .4s cubic-bezier(1, 0.61, 0.36, 0.22), visibility .4s, margin-bottom .4s;
+}
+
+.artist_list .main_content .sticky_select .sort_depth > li > a {
+    display: block;
+    color: var(--gray-500);
+    line-height: 36px;
+}
+
+.artist_list .main_content .sticky_select .sort_depth > li > a:hover {
+    color: var(--point-color1);
+}
+
+
+/* artist */
+.artist_list .main_content > div:nth-of-type(2) {
+    width: calc(100% - 380px);
+}
+
+.artist_list .main_content .artist {
+    padding: 0 0 160px 120px;
+}
+
+.artist_list .main_content .artist p {
+    font-weight: 500;
+}
+
+.artist_list .main_content .artist p span {
+    color: var(--point-color1);
+}
+
+.artist_list .main_content .artist_template {
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 30px;
+    row-gap: 60px;
+}
+
+.artist_list .main_content .artist_template .template {
+    text-align: center;
+}
+
+.artist_list .main_content .artist_template .template .image_wrap {
+    position: relative;
+}
+
+.artist_list .main_content .artist_template .image_wrap .cover {
+    opacity: 0;
+    visibility: hidden;
+    transition: all .5s;
+    bottom: 30px;
+    right: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    clip-path: inset(0 100% 0 0);
+}
+
+.artist_list .main_content .artist_template .image_wrap .cover .box_action a {
+    width: 160px;
+    height: 45px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.artist_list .main_content .artist_template .image_wrap:hover .cover {
+    opacity: 1;
+    visibility: visible;
+    clip-path: inset(0 0 0 0);
+}
+
+.artist_list .main_content .artist_template img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    display: inline-block;
+    object-fit: cover;
+}
+
+.artist_list .main_content .artist_template .template h6 {
+    font-family: 'EB Garamond', 'Noto Serif KR', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-top: 30px;
+}
+
+.artist_list .main_content .artist_template .template h6 a {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.artist_list .main_content .artist_template .template p {
+    font-family: 'EB Garamond', serif;
+    color: var(--point-color1);
+    line-height: 20px;
+    margin-top: 10px;
+}
+
+
+/* -------------------------- artist_info ---------------------------- */
+.artist_info .inner {
+    margin: 0 auto;
+    width: calc(100% - 100px);
+}
+
+.artist_info .page_tit {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.artist_info .page_tit img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    animation: 5s imageScale;
+}
+
+@keyframes imageScale {
+    0% {
+        transform: scale(110%);
+    }
+    100% {
+        transform: scale(100%);
+    }
+}
+
+.artist_info .page_tit .title {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    font-size: 40px;
+    font-family: 'EB Garamond', sans-serif;
+    font-weight: 700;
+    line-height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 4px;
+}
+
+.artist_info .page_tit .title h1 {
+    position: relative;
+}
+
+.artist_info .page_tit .title .split_letter {
+    opacity: 0;
+    animation: 1.2s tit_fadeIn cubic-bezier(0.4, 0, 0.2, 1) both;
+}
+
+@keyframes tit_fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateX(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.artist_info .page_tit .title h1::before {
+    content: '';
+    position: absolute;
+    left: -100%;
+    top: 25px;
+    background: #fff;
+    width: 170px;
+    height: 1px;
+}
+
+.artist_info .page_tit .title h1::after {
+    content: '';
+    position: absolute;
+    right: -100%;
+    top: 25px;
+    width: 170px;
+    height: 1px;
+    background: #fff;
+}
+
+.artist_info .main_content {
+    display: flex;
+    justify-content: space-between;
+    padding: 150px 0 60px;
+    border-bottom: 1px solid #ddd;
+    max-width: 1400px;
+    min-height: 650px;
+    margin: 0 auto;
+    animation: 1.2s ease-out contentUp;
+}
+
+@keyframes contentUp {
+    0% {
+        transform: translateY(10%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.artist_info .main_content .image_wrap {
+    width: 476px;
+    margin: 30px 0 0 30px;
+    position: relative;
+}
+
+.artist_info .main_content .image_wrap span {
+    background: #f8f8f8;
+    position: absolute;
+    left: -30px;
+    top: -30px;
+    width: 100%;
+    height: 100%;
+}
+
+.artist_info .main_content .image_wrap img {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 446px;
+    height: 436px;
+    object-fit: cover;
+}
+
+.artist_info .main_content .main_txt {
+    padding: 60px 40px;
+    width: calc(100% - 595px);
+    border-top: 2px solid #333;
+}
+
+.artist_info .main_txt .flex_name {
+    display: flex;
+    gap: 20px;
+    line-height: 36px;
+    margin-bottom: 30px;
+}
+
+.artist_info .main_txt .flex_name h4 {
+    font-size: 26px;
+    font-family: "Noto Serif KR", serif;
+    font-weight: bold;
+    color: var(--point-color2);
+}
+
+.artist_info .main_txt .flex_name h5 {
+    font-family: "Noto Serif KR", 'EB Garamond', serif;
+    font-size: 18px;
+    color: var(--point-color1);
+    font-weight: bold;
+    vertical-align: text-bottom;
+}
+
+.artist_info .main_txt .flex {
+    display: flex;
+    line-height: 24px;
+    gap: 15px;
+}
+
+.artist_info .main_txt .flex h6 {
+    font-size: 18px;
+    font-weight: 500;
+    width: 105px;
+}
+
+.artist_info .main_txt .flex + .flex {
+    margin-top: 17px;
+}
+
+.artist_info .main_txt .ex_artist {
+    margin-top: 27px;
+    color: var(--gray-500);
+}
+
+/* -------- Work ------- */
+.artist_info .work_content {
+    padding: 110px 0 160px;
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.artist_info .work_content h4 {
+    font-size: 42px;
+    font-family: 'EB Garamond', sans-serif;
+    margin-bottom: 60px;
+    font-weight: 700;
+    animation: 2.2s ease-out work_translate;
+}
+
+@keyframes work_translate {
+    0% {
+        transform: translatex(-60px);
+    }
+    100% {
+        transform: translateZ(0);
+    }
+}
+
+.artist_info .work_content .works .info {
+    font-weight: 500;
+    margin-bottom: 40px;
+}
+
+.artist_info .work_content .works .info span {
+    color: var(--point-color1);
+}
+
+.artist_info .work_content .works .temp_wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-column-gap: 30px;
+    grid-row-gap: 60px;
+}
+
+.artist_info .work_content .temp .image_wrap {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    position: relative;
+}
+
+.artist_info .work_content .temp .image_wrap img {
+    width: 100%;
+    height: 100%;
+}
+
+.artist_info .work_content .temp .image_wrap .cover {
+    position: absolute;
+    left: 30px;
+    top: 30px;
+    background: rgba(255, 255, 255, 0.8);
+    width: 0;
+    transition: all 0.3s;
+    height: calc(100% - 60px);
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px;
+    font-family: 'EB Garamond', 'Noto Serif KR', 'Noto Sans KR', sans-serif;
+}
+
+.artist_info .work_content .temp .image_wrap:hover .cover {
+    opacity: 1;
+    width: calc(100% - 60px);
+}
+
+.artist_info .work_content .temp .image_wrap .btn_wrap {
+    display: flex;
+    vertical-align: bottom;
+    gap: 42px;
+}
+
+.artist_info .work_content .temp .image_wrap .btn_wrap a {
+    display: block;
+    background: url("/images/artist/ico-sight.png") no-repeat 50% 50% / 100%;
+    width: 20px;
+    height: 20px;
+    position: relative;
+    cursor: pointer;
+}
+
+.artist_info .work_content .temp .image_wrap .btn_wrap a:hover {
+    background: url("/images/artist/ico-sight-on.png") no-repeat 50% 50% / 100%;
+}
+
+.artist_info .work_content .temp .image_wrap .btn_wrap a:last-child::after {
+    content: '';
+    position: absolute;
+    left: -21px;
+    top: 2px;
+    width: 2px;
+    height: 16px;
+    background: #aaa;
+}
+
+.artist_info .work_content .temp .image_wrap .btn_wrap a:last-child {
+    background: url("/images/artist/ico-like.png") no-repeat 50% 50% / 80%;
+}
+
+.artist_info .work_content .temp .image_wrap .btn_wrap a:last-child:hover {
+    background: url("/images/artist/ico-like-on.png") no-repeat 50% 50% / 80%;
+}
+
+/* template text*/
+.artist_info .work_content .temp_txt a {
+    padding-top: 30px;
+    font-size: 20px;
+    width: 100%;
+    display: inline-block;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+    font-weight: 700;
+    line-height: 30px;
+}
+
+.artist_info .work_content .temp_txt span {
+    display: inline-block;
+    padding-top: 20px;
+    color: var(--point-color1);
+}
+
+.artist_info .work_content .temp_txt p {
+    padding-top: 10px;
+    color: #888888;
+    line-height: 20px;
+}
+
+.artist_info .work_content .temp_txt .price {
+    font-family: "Noto Serif KR", serif;
+    font-weight: 500;
+    color: var(--gray-600);
+    padding-top: 28px;
+}
+
+.artist_info .work_content .temp_txt .price strong {
+    font-size: 26px;
+    font-family: 'EB Garamond', "Noto Serif KR", serif;
+}

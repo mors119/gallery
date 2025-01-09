@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/my_qna.css">
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <script src="/js/my_page.js"></script>
+</head>
+<body>
+<main id="container" class="my_qna_container my_page_container" layout:fragment="content">
+    <section class="my_page_wrap">
+        <div class="my_page_inner">
+            <!-- 좌측 네비게이션 -->
+            <div th:replace="~{my_page/nav :: nav}"></div>
+
+            <!-- 우측 회원 정보 -->
+            <div class="con_wrap">
+                <!-- 회원 등급, 쿠폰, 적립금 -->
+                <div th:replace="~{fragments :: my_info}"></div>
+
+                <div class="my_qna_wrap">
+                    <div class="my_page_tit">
+                        <h3>1:1 문의</h3>
+                    </div>
+                    <div class="my_qna_total">
+                        총 <strong th:text="${totalCount}"></strong>건
+                    </div>
+                </div>
+                <div class="my_qna_table">
+                    <table>
+                        <colgroup>
+                            <col width="120px">
+                            <col width="*">
+                            <col width="140px">
+                            <col width="160px">
+                            <col width="160px">
+                        </colgroup>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(qnaList)}">
+                            <td colspan="5" class="empty_content">
+                                <img src="/images/my_page/ico-information-big.png" alt="알림">
+                                <p>게시물이 없습니다.</p>
+                            </td>
+                        </tr>
+                        <tr th:if="${!#lists.isEmpty(qnaList)}" th:each="qna : ${qnaList}">
+                            <td class="td_num" th:text="${qna.no}"></td>
+                            <td class="td_sub">
+                                <a th:href="@{'/qna/view/' + ${qna.no}}" th:attr="data-no=${qna.no}">
+                                    <span th:text="${qna.title}"></span>
+                                    <img src="/images/qna/ico-secret-brown.png" alt="비밀글">
+                                </a>
+                            </td>
+                            <td class="td_name" th:text="${qna.name}"></td>
+                            <td class="td_date" th:text="${qna.regdate}"></td>
+                            <td class="td_state">
+                                <span class="answer_rdy complete" th:if="${qna.answer != null}">답변완료</span>
+                                <span class="answer_rdy" th:if="${qna.answer == null}">답변대기</span>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+                    <div th:replace="~{fragments :: btnActionHref('글쓰기', '/qna/write')}"></div>
+                </div>
+
+                <th:block th:utext="${paging}"/>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

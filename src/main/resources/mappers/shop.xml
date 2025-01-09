@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--
+    페이징 기본 구조
+    SELECT * FROM 테이블명
+    ORDER BY 정렬기준
+    LIMIT 페이지당_행수 OFFSET (페이지번호 - 1) * 페이지당_행수;
+-->
+<mapper namespace="com.bxgs.gallery.mapper.ShopMapper">
+    <!-- 전체 조회 -->
+    <select id="selectAll" resultType="ShopVO" parameterType="com.bxgs.gallery.common.Pagination">
+        select g.no
+             , g.title
+             , g.poster
+             , g.price
+             , a.name_kr
+          from goods g
+         inner join author a
+            on g.author_no = a.no
+        <if test="searchMap != null">
+            where 1 = 1
+            <if test="searchMap.type != null and searchMap.type == 'goods'">
+                order by g.no desc
+            </if>
+            <if test="searchMap.type != null and searchMap.type == 'genre' and searchMap.keyword != null">
+                and genre = #{searchMap.keyword}
+            </if>
+            <if test="searchMap.type != null and searchMap.type == 'subject' and searchMap.keyword != null">
+                and subject = #{searchMap.keyword}
+            </if>
+            <if test="searchMap.type != null and searchMap.type == 'painting' or searchMap.type == 'picture'">
+                and g.type = #{searchMap.type}
+            </if>
+            <if test="searchMap.searchWord != null">
+                and (g.title like '%' || #{searchMap.searchWord} || '%'
+                or a.name_kr like '%' || #{searchMap.searchWord} || '%')
+            </if>
+            <if test="searchMap.sort != null">
+                <choose>
+                    <when test="searchMap.sort == 'pop'">
+                        order by (select avg(rating) from review where goods_no = g.no) desc nulls last
+                    </when>
+                    <when test="searchMap.sort == 'review'">
+                        order by (select count(*) from review where goods_no = g.no group by goods_no) desc nulls last
+                    </when>
+                    <when test="searchMap.sort == 'rating'">
+                        order by (select avg(rating) from review where goods_no = g.no) desc nulls last
+                    </when>
+                    <when test="searchMap.sort == 'date'">
+                        order by g.no desc
+                    </when>
+                    <when test="searchMap.sort == 'high'">
+                        order by g.price desc
+                    </when>
+                    <when test="searchMap.sort == 'low'">
+                        order by g.price asc
+                    </when>
+                </choose>
+            </if>
+        </if>
+        limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <!-- 아티스트 다른 그림 랜덤 조회 -->
+    <select id="randomPicture" resultType="ShopVO">
+        select g.no
+             , g.title
+             , g.price
+             , g.poster
+             , g.qty
+             , a.name_kr
+          from goods g
+         inner join author a
+            on g.author_no = a.no
+         where g.no != #{no}
+         order by random() limit 12
+    </select>
+
+    <!-- 상세 조회 -->
+    <select id="selectByGoods" parameterType="int" resultType="ShopVO">
+        select g.no
+             , g.title
+             , g.price
+             , g.poster
+             , g.qty
+             , a.img
+             , a.name_kr
+             , a.name_en
+             , a.loc
+             , a.born
+             , a.death
+             , a.pop
+             , a.descr
+        from goods g
+       inner join author a
+          on g.author_no = a.no
+       where g.no = #{no}
+    </select>
+
+    <select id="totalCount" parameterType="com.bxgs.gallery.common.Pagination" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from goods g
+         inner join author a
+            on g.author_no = a.no
+        <if test="searchMap != null">
+            where 1 = 1
+            <if test="searchMap.type != null and searchMap.type == 'genre' and searchMap.keyword != null">
+                and genre = #{searchMap.keyword}
+            </if>
+            <if test="searchMap.type != null and searchMap.type == 'subject' and searchMap.keyword != null">
+                and subject = #{searchMap.keyword}
+            </if>
+            <if test="searchMap.type != null and searchMap.type == 'painting' or searchMap.type == 'picture'">
+                and g.type = #{searchMap.type}
+            </if>
+            <if test="searchMap.searchWord != null">
+                and (g.title like '%' || #{searchMap.searchWord} || '%'
+                 or a.name_kr like '%' || #{searchMap.searchWord} || '%')
+            </if>
+        </if>
+    </select>
+
+    <select id="selectWish" parameterType="com.bxgs.gallery.common.Pagination" resultType="shopVO">
+        select g.*
+             , m.id
+          from wish w
+         inner join (
+                    select g.no
+                         , g.title
+                         , g.poster
+                         , g.price
+                         , a.name_kr
+                         , g.qty
+                      from goods g
+                     inner join author a
+                        on a.no = g.author_no
+                    ) g
+            on w.goods_no = g.no
+         inner join member m
+            on w.member_id = m.id
+         where m.id = #{searchMap.id}
+         limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <select id="totalCountWish" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from wish w
+         inner join (
+                    select g.no
+                         , g.title
+                         , g.poster
+                         , g.price
+                         , a.name_kr
+                         , g.qty
+                    from goods g
+                   inner join author a
+                     on a.no = g.author_no
+                   ) g
+            on w.goods_no = g.no
+         inner join member m
+            on w.member_id = m.id
+         where m.id = #{id}
+    </select>
+
+    <!--  상품 후기 작성  -->
+    <insert id="reviewInsert" parameterType="map">
+        insert into review (rating, title, content, member_id, goods_no)
+        values (
+              #{rating}::INTEGER
+            , #{goods_q_tit}
+            , #{content}
+            , #{member_id}
+            , #{goods_no}::INTEGER
+          )
+    </insert>
+
+    <!-- 상품 후기 수정 -->
+    <update id="reviewUpdate" parameterType="map">
+        update review
+           set rating = #{rating}::INTEGER
+             , title = #{goods_q_tit}
+             , content = #{content}
+        where no = #{no}::INTEGER
+    </update>
+
+    <!-- 상품 후기 삭제 -->
+    <delete id="reviewDelete">
+        delete
+          from review
+         where no = #{no}
+    </delete>
+
+    <!--  해당 상품후기 개수  -->
+    <select id="totalReview" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from review
+         where goods_no = #{no}
+    </select>
+
+    <!--  상품후기 전체 select  -->
+    <select id="selectAllReview" resultType="shopVO">
+        select r.no
+             , r.rating
+             , r.title
+             , r.content
+             , <![CDATA[ REGEXP_REPLACE((
+                select name
+                  from member
+                 where id = r.member_id), '(?<=.)(.)(?=.)', '*', 'g') ]]> as member_id
+             , r.regdate
+          from review r
+         inner join goods g
+            on r.goods_no = g.no
+           and r.goods_no = #{no}
+        <if test="order != null">
+            order by rating ${order}
+        </if>
+        <if test="order == null">
+            order by no desc
+        </if>
+    </select>
+
+    <!-- 상품후기 상세 -->
+    <select id="selectOneReview" resultType="map">
+        select *
+          from review
+         where no = #{no}
+    </select>
+
+    <!--  해당 상품문의 개수  -->
+    <select id="totalAsk" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from ask
+         where goods_no = #{no}
+    </select>
+
+    <!--  상품문의 select  -->
+    <select id="selectAllAsk" resultType="shopVO">
+        select a.no
+             , a.question
+             , a.answer
+             , a.content
+             , <![CDATA[REGEXP_REPLACE((
+                select name
+                  from member
+                 where id = a.member_id), '(?<=.)(.)(?=.)', '*', 'g') ]]> as member_id
+             , a.regdate
+          from ask a
+         inner join goods g
+            on a.goods_no = g.no
+         where a.goods_no = #{no}
+    </select>
+
+    <!--  상품문의 상세조회  -->
+    <select id="selectByAsk" resultType="map">
+        select no
+             , question
+             , answer
+             , member_id
+             , regdate
+             , goods_no
+             , email
+             , phone
+             , content
+          from ask
+         where no = #{no}
+    </select>
+
+    <!--  상품문의 수정  -->
+    <update id="askUpdate">
+        update ask
+           set email    = #{goods_q_email}
+             , phone    = #{goods_q_hp}
+             , question = #{goods_q_tit}
+             , content  = #{content}
+         where no = #{no}
+    </update>
+
+    <!--  상품문의 삭제  -->
+    <delete id="askDelete">
+        delete
+          from ask
+         where no = #{no}
+    </delete>
+
+    <!--  찜 리스트 select  -->
+    <select id="selectIsWish" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from wish
+         where goods_no = #{no}
+           and member_id = #{id}
+    </select>
+
+    <!--  찜 리스트 insert  -->
+    <insert id="insertWish">
+        insert into wish
+        values (#{no}, #{id})
+    </insert>
+
+    <!--  찜 리스트 delete  -->
+    <delete id="deleteWish">
+        delete
+          from wish
+         where member_id = #{id}
+          and goods_no in
+        <foreach item="item" index="index" collection="no" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+    <insert id="insertOrder" parameterType="orderVO" useGeneratedKeys="true" keyProperty="no">
+        insert into "order" (member_id, name, phone, tel, zipcode, addr, addr2, request, price, cart_no, pay_name)
+        values (
+             #{member_id},
+             #{name},
+             #{phone},
+             #{tel},
+             #{zipcode},
+             #{addr},
+             #{addr2},
+             #{request},
+             #{price},
+             CAST(#{cart_no} AS integer),
+             #{pay_name}
+         )
+    </insert>
+
+    <!--  상품문의 글쓰기  -->
+    <insert id="askInsert">
+        insert into ask (question, content, member_id, goods_no, email, phone)
+        values (
+             #{goods_q_tit},
+             #{content},
+             #{member_id},
+             #{goods_no},
+             #{goods_q_email},
+             #{goods_q_hp}
+         )
+    </insert>
+
+    <!--    주문 전체 조회-->
+    <select id="myOrderAll" parameterType="String" resultType="map">
+        SELECT o."no",
+                        o."name",
+                        o.price,
+                        o.states,
+                        o.regdate,
+                        string_agg(c.amount::text, ',') AS amounts,
+                        string_agg(g.title, ',')        as title,
+                        string_agg(g.no::text, ',')     as goods_no,
+                        string_agg(a.name_kr, ',')      as name_kr,
+                        string_agg(g.poster, ',')       as img
+                 FROM "order" o
+                          INNER JOIN
+                      cart c ON c.no = ANY ( CASE
+                                            WHEN o.cart_no IS NULL THEN '{}'::int[]
+                                            ELSE string_to_array(o.cart_no::text, ',')::int[]
+                                            END)
+                          INNER JOIN
+                      goods g ON c.goods_no::int = g.no
+        INNER JOIN
+        author a
+                 ON g.author_no:: int = a.no
+                 WHERE
+                     o.member_id = #{member_id}
+                 GROUP BY
+                     o."no", o.phone, o.tel, o.zipcode, o.addr, o.addr2, o.request,
+                     o.price, o.pay_name, o.states, o.regdate
+
+    </select>
+
+    <insert id="insertCart" parameterType="cartVO" useGeneratedKeys="true" keyProperty="no">
+        INSERT INTO cart (
+        amount,
+        blank,
+        frame,
+        media,
+        retouch,
+        size,
+        goods_no
+        ) VALUES
+            (
+            #{amount},
+            #{blank},
+            #{frame},
+            #{media},
+            #{retouch},
+            #{size},
+            CAST(#{goods_no} AS integer)
+            )
+    </insert>
+    <!--  주문 상세 조회  -->
+    <select id="orderOne" parameterType="String" resultType="map">
+        SELECT o."no",
+               o.phone,
+               o."name",
+               o.tel,
+               o.zipcode,
+               o.addr,
+               o.addr2,
+               o.request,
+               o.price,
+               o.pay_name,
+               o.states,
+               o.regdate,
+               string_agg(c.amount::text, ',') AS amounts,
+               string_agg(c.blank, ',')        AS blanks,
+               string_agg(c.frame, ',')        AS frames,
+               string_agg(c.media, ',')        AS media,
+               string_agg(c.retouch, ',')      AS retouches,
+               string_agg(c.size, ',')         AS sizes,
+               string_agg(g.price::text, ',')  as unit_price,
+               string_agg(g.title, ',')        as title,
+               string_agg(g.no::text, ',')     as goods_no,
+               string_agg(a.name_kr, ',')      as name_kr,
+               string_agg(g.poster, ',')          as img
+        FROM "order" o
+                 INNER JOIN
+             cart c ON c.no = ANY ( CASE
+                                    WHEN o.cart_no IS NULL THEN '{}'::int[]
+                                    ELSE string_to_array(o.cart_no::text, ',')::int[]
+                                    END)
+                 INNER JOIN
+             goods g ON c.goods_no::int = g.no
+INNER JOIN
+    author a
+        ON g.author_no:: int = a.no
+        WHERE
+            (o.no IS NULL OR o.no = #{no})
+        GROUP BY
+            o."no", o.phone, o.tel, o.zipcode, o.addr, o.addr2, o.request,
+            o.price, o.pay_name, o.states, o.regdate
+    </select>
+</mapper>

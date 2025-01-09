@@ -1,0 +1,192 @@
+/* inner 공통 */
+.faq_container .inner {
+    margin: 0 auto;
+    max-width: 1400px;
+}
+
+.faq_container .f_color {
+    position: relative;
+    color: var(--point-color1);
+}
+
+
+/* 리스트 */
+.faq_container .faq_list {
+    padding-bottom: 160px;
+}
+
+.faq_container .faq_list .list_opt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 40px;
+    color: var(--gray-600);
+    font-weight: 500;
+}
+
+.faq_container .list_opt .f_color::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: -1px;
+    width: 0;
+    height: 2px;
+    background-color: var(--point-color1);
+    transition: width 0.3s ease;
+}
+
+.faq_container .list_opt .f_color:hover::after {
+    left: 0;
+    right: auto;
+    width: 100%;
+}
+
+/* 검색 */
+.faq_container .faq_list .list_opt .search_wrap {
+    position: relative;
+}
+
+.faq_container .faq_list .list_opt .search_wrap .inp_type01 {
+    min-width: 360px;
+    height: 52px;
+    line-height: 52px;
+    padding: 0 20px;
+    border: 1px solid #f8f8f8;
+    background: #f8f8f8;
+    font-size: 15px;
+    color: var(--gray-600);
+    transition: all 0.4s ease;
+}
+
+.faq_container .faq_list .list_opt .search_wrap .inp_type01:focus {
+    border-color: var(--point-color1);
+    background-color: #fff;
+}
+
+.faq_container .faq_list .list_opt .search_wrap button[type=submit] {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 52px;
+    height: 52px;
+    background: url(/images/common/ico-search.png) no-repeat center;
+    border: none;
+}
+
+/* 메뉴 */
+.faq_container .faq_menu {
+    margin: 10px 0 30px;
+}
+
+.faq_container .faq_menu ul {
+    display: flex;
+    align-items: center;
+}
+
+.faq_container .faq_menu ul li a {
+    position: relative;
+    padding: 0 20px;
+    line-height: 28px;
+}
+
+.faq_container .faq_menu ul li:nth-of-type(1) a {
+    padding-left: 0;
+}
+
+.faq_container .faq_menu ul li.action a {
+    font-size: 18px;
+    color: var(--point-color1);
+}
+
+.faq_container .faq_menu ul li:nth-of-type(n + 2) a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    margin-top: -5px;
+    width: 1px;
+    height: 12px;
+    background: #ddd;
+}
+
+/* 목록 */
+.faq_container .faq_content {
+    border-top: 1px solid var(--gray-600);
+}
+
+.faq_container .faq_content ul li {
+    position: relative;
+    border-bottom: 1px solid #ececec;
+}
+
+.faq_container .faq_content .faq_title {
+    display: flex;
+    position: relative;
+    align-items: center;
+    padding: 30px 90px 30px 40px;
+}
+
+.faq_container .faq_content .faq_title .faq_cate {
+    display: block;
+    padding-left: 50px;
+    min-width: 195px;
+    width: 10%;
+    color: var(--point-color1);
+    line-height: 27px;
+    background: url(/images/common/ico-question.png) no-repeat left center;
+}
+
+.faq_container .faq_content .faq_title .faq_txt {
+    display: block;
+    width: 90%;
+    color: var(--gray-600);
+    line-height: 27px;
+}
+
+.faq_container .faq_content .faq_title .faq_open {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: url(/images/common/ico-arrow-down.png) no-repeat right 30px top 42px;
+    border: none;
+    transition: background-image .3s;
+}
+
+.faq_container .faq_content .faq_con {
+    max-height: 0;
+    padding: 0 40px;
+    background-color: #fafafa;
+    overflow: hidden;
+    /*transition: max-height 0.4s ease-in-out, padding 0.4s ease-in-out;*/
+    transition: max-height 0.4s cubic-bezier(.25, .1, .25, 1), padding 0.4s;
+}
+
+.faq_container .faq_content .faq_con .faq_con_inner {
+    padding-left: 50px;
+    background: url(/images/common/ico-answer.png) no-repeat left 3px;
+    line-height: 26px;
+}
+
+.faq_container .faq_content .faq_title.on + .faq_con {
+    max-height: 500px;
+    padding: 40px;
+    border-top: 1px solid #ddd;
+    transition: max-height 0.4s cubic-bezier(1, .25, .1, .25), padding 0.4s;
+}
+
+.faq_container .faq_content .faq_title.on > .faq_open {
+    background-image: url(/images/common/ico-arrow-up.png);
+}
+
+/* 안내메뉴 */
+.faq_container .empty_faq_list {
+    text-align: center;
+    padding: 75px 0;
+}
+
+.faq_container .empty_faq_list p {
+    margin-top: 20px;
+    line-height: 26px;
+}

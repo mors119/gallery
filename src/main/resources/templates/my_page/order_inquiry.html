@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+<!--    <link rel="stylesheet" href="/css/my_inquiry.css">-->
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <link rel="stylesheet" href="/css/my_inquiry.css">
+    <script src="/js/my_page.js"></script>
+</head>
+<body>
+<main id="container" class="my_inquiry_container my_page_container" layout:fragment="content">
+    <section class="my_page_wrap">
+        <div class="my_page_inner">
+            <!-- 좌측 네비게이션 -->
+            <div th:replace="~{my_page/nav :: nav}"></div>
+            <!-- 우측 회원 정보 -->
+            <div class="con_wrap">
+                <!-- 회원 등급, 쿠폰, 적립금 -->
+                <div th:replace="~{fragments :: my_info}"></div>
+                <div class="my_page_tit">
+                    <h3>주문목록/배송조회</h3>
+                </div>
+                <div class="order_search_wrap">
+                    <form action="/my/inquiry" method="get">
+                        <div class="order_search">
+                            <div class="period">
+                                <h4>조회기간</h4>
+                                <ul>
+                                    <li>
+                                        <button type="button" data-day="0">오늘</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-day="1">1개월</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-day="3">3개월</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-day="6">6개월</button>
+                                    </li>
+                                    <li>
+                                        <button type="button" data-day="12">1년</button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="order_date">
+                                    <div class="date_box_wrap">
+                                        <div class="date_box_left date_box">
+                                            <label for="sdate"></label>
+                                            <input type="date" id="sdate" name="startdate" value size="10" maxlength="10" autocomplete="off" th:value="${param.startdate}">
+                                        </div>
+                                        <div class="bar">~</div>
+                                        <div class="date_box_right date_box">
+                                            <label for="edate"></label>
+                                            <input type="date" id="edate" name="enddate" value size="10" maxlength="10" autocomplete="off" th:value="${param.enddate}">
+                                        </div>
+                                    </div>
+                                    <input type="submit" class="date_submit" value="조회" autocomplete="off">
+                                </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="total_order">
+                    총 <span>1</span>건
+                </div>
+                <div class="inquiry_table">
+                    <table>
+                        <caption class="blind">주문목록</caption>
+                        <colgroup>
+                            <col width="160px">
+                            <col width="*">
+                            <col width="80px">
+                            <col width="140px">
+                            <col width="150px">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>주문일/주문번호</th>
+                                <th>상품정보</th>
+                                <th>상품수</th>
+                                <th>주문금액</th>
+                                <th>주문상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="order_my_order" >
+                        <th:block th:unless="${parsedList != null and !#lists.isEmpty(parsedList)}">
+                            <tr>
+                                <td colspan="5" class="empty_content">
+                                    <img src="/images/my_page/ico-information-big.png" alt="알림">
+                                    <p>주문하신 내용이 없습니다.</p>
+                                </td>
+                            </tr>
+                        </th:block>
+                        <th:block th:if="${parsedList != null and !#lists.isEmpty(parsedList)}">
+                            <tr th:each="list : ${parsedList}">
+                                <td>
+<!--                                    <div class="td_date" th:text="${#dates.format(list['regdate'], 'yyyy-MM-dd')}">2024-12-27</div>-->
+                                    <a th:href="@{/shop/order_info(no=${list['no']})}" class="inquiry_num" th:text="${list['no']}"></a>
+                                </td>
+                                <td class="td_product">
+                                    <div class="product_box">
+                                        <div class="product_img">
+                                            <div>
+                                                <img th:src="@{/images/goods/${list['img']}}" alt="Product Image">
+                                            </div>
+                                        </div>
+                                        <div class="product_tit">
+                                            <strong th:text="${list['title']}">아를의 랑그루아 다리</strong>
+                                            <span th:text="${list['name_kr']}">빈센트 반 고흐</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="product_amount" th:text="${list['goods_no']}">1</td>
+                                <td class="product_price" th:text="${list['price']}">102,600</td>
+                                <td class="product_state">입금확인중</td>
+                            </tr>
+                        </th:block>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>

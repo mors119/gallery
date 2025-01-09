@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bxgs.gallery.mapper.NoticeMapper">
+    <select id="selectAll" parameterType="com.bxgs.gallery.common.Pagination" resultType="noticeVO">
+        select *
+          from notice
+        <if test="searchMap != null">
+            <where>
+                <choose>
+                    <when test="searchMap.searchType == 'all'">
+                        (title like '%' || #{searchMap.keyword} || '%' or content like '%' || #{searchMap.keyword} || '%')
+                    </when>
+                    <otherwise>
+                        ${searchMap.searchType} like '%' || #{searchMap.keyword} || '%'
+                    </otherwise>
+                </choose>
+            </where>
+        </if>
+        order by no desc
+        limit #{pageSize} offset (#{pageNum} - 1) * #{pageSize}
+    </select>
+
+    <select id="totalCount" parameterType="com.bxgs.gallery.common.Pagination" resultType="int">
+        select /*+ full(A) parallel(A 8) */ count(*)
+          from notice
+        <if test="searchMap != null">
+            <where>
+                <choose>
+                    <when test="searchMap.searchType == 'all'">
+                        (title like '%' || #{searchMap.keyword} || '%' or content like '%' || #{searchMap.keyword} || '%')
+                    </when>
+                    <otherwise>
+                        ${searchMap.searchType} like '%' || #{searchMap.keyword} || '%'
+                    </otherwise>
+                </choose>
+            </where>
+        </if>
+    </select>
+
+    <select id="selectOne" parameterType="int" resultType="noticeVO">
+        select a.*
+          from (
+                 select no
+                      , title
+                      , content
+                      , regdate
+                      , ofile
+                      , nfile
+                      , lag(no)      over(order by no) as prev_no
+                      , lag(title)   over(order by no) as prev_title
+                      , lead(no)     over(order by no) as next_no
+                      , lead(title)  over(order by no) as next_title
+                 from notice
+             ) a
+         where no = #{no}
+    </select>
+
+    <insert id="insert">
+        insert into notice (title, content, ofile, nfile) values (#{title}, #{content}, #{ofile}, #{nfile});
+    </insert>
+
+    <update id="update">
+        update notice
+           set title = #{title}
+             , content = #{content}
+           <if test="ofile != null and ofile != ''">
+             , ofile = #{ofile}
+           </if>
+           <if test="nfile != null and nfile != ''">
+             , nfile = #{nfile}
+           </if>
+         where no = #{no}
+    </update>
+
+    <delete id="delete">
+        delete
+          from notice
+         where no = #{no}
+    </delete>
+</mapper>

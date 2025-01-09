@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/gallery_list.css">
+    <script src="/js/artist.js"></script>
+</head>
+<body>
+<main id="container" class="artist_info" layout:fragment="content">
+    <div class="inner">
+        <div class="page_tit">
+            <img src="/images/artist/artist-view-bg.jpg" alt="배경">
+            <div class="title">
+                <h1 th:text="${author.name_en}"></h1>
+            </div>
+        </div>
+
+        <div class="main_content">
+            <div class="image_wrap">
+                <span></span>
+                <img th:src="@{'/images/artist/' + ${author.img}}" th:alt="${author.name_en}">
+            </div>
+            <div class="main_txt">
+                <div class="flex_name">
+                    <h4 th:text="${author.name_kr}"></h4>
+                    <h5 th:text="${author.name_en}"></h5>
+                </div>
+                <div class="flex">
+                    <h6>국적</h6>
+                    <p th:text="${author.loc}"></p>
+                </div>
+                <div class="flex">
+                    <h6>출생·사망</h6>
+                    <p th:text="${author.born} + ' ~ ' + ${author.death}">1877년 ~ 1953</p>
+                </div>
+                <div class="flex">
+                    <h6>주요작품</h6>
+                    <p th:text="${author.pop}"></p>
+                </div>
+                <p class="ex_artist" th:utext="${author.descr}"></p>
+            </div>
+        </div>
+
+        <div class="work_content">
+            <h4>Work</h4>
+            <div class="works">
+                <p class="info">
+                    총 <span th:text="${#lists.size(goods)}"></span>개의 상품이 있습니다.
+                </p>
+                <div class="temp_wrap">
+                    <div class="temp" th:each="item : ${goods}">
+                        <div class="image_wrap">
+                            <img th:src="@{'/images/goods/' + ${item.poster}}" th:alt="${item.title}">
+                            <div class="cover">
+                                <div></div>
+                                <div class="center" th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${item.no})}"></div>
+                                <div class="btn_wrap">
+                                    <th:block th:replace="~{fragments :: iconWrap(${item.no}, ${wishList})}"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="temp_txt">
+                            <a th:href="@{'/shop/view/' + ${item.no}}" th:text="${item.title}"></a>
+                            <span th:text="${author.name_kr}"></span>
+                            <p>30.0cm x 30.0cm</p>
+                            <p class="price">
+                                <strong th:text="${#numbers.formatInteger(item.price, 3, 'COMMA')}">76,000</strong>원
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

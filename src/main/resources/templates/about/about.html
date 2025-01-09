@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/about.css">
+    <script src="/js/about.js"></script>
+</head>
+<body>
+<main id="container" class="about_page about_container" layout:fragment="content">
+    <div class="inner">
+        <div class="main_bg">
+            <div class="background">
+                <img src="/images/about/about-bg.jpg" alt="배경">
+            </div>
+            <div class="main_bg_tit">
+                <strong>Brand Story</strong>
+                <h1 class="split_txt">BAEXANG GALLERY</h1>
+                <p>
+                    백상 갤러리는 모두에게 열려 있는 감성의 공간으로<br>
+                    익숙한 화가부터 신진 작가까지 한 자리에서 만날 수 있는 예술의 공간입니다.
+                </p>
+            </div>
+            <div class="scroll">SCROLL<i></i><i></i></div>
+        </div>
+        <div class="sub_tit">
+            <div class="left_tit">
+                <div class="left_inner" data-aos="fade-up">
+                    <span>Baexang gallery</span>
+                    <p>
+                        당신의 감성에<br>
+                        예술을 더하는<br>
+                        발걸음.
+                    </p>
+                </div>
+            </div>
+            <div class="right_photo" data-aos="fade-left" data-aos-offset="700"
+                 data-aos-duration="500">
+                <img src="/images/about/about-img01.jpg" alt="책상 그림">
+            </div>
+        </div>
+        <div class="info_txt">
+            <p data-aos="fade-up">
+                <strong>백상 갤러리</strong>는 모두에게 열려 있는 감성의 공간으로 익숙한 화가부터 신진 작가까지 한 자리에서 만날 수 있는 예술의 공간입니다.<br><br>
+
+                <strong>미술이 모두에게 허락될 수 있도록,</strong> <br>
+                <strong>방문하는 모두의 예술적 지평이 넓어질 수 있도록,</strong> <br>
+                양질의 문화 콘텐츠를 제공하기 위하여 노력할 것입니다.<br><br>
+
+                미술의 다양한 변신을 추구하여 대중들에게 접근성을 높이고, 역량 있는 작가들을 발굴하여 <br>
+                예술의 가능성을 확장시키는 공간을 만들겠습니다.
+            </p>
+            <div class="flow_left">
+                <div>Art · Design in BaeXang</div>
+                <div>Art · Design in BaeXang</div>
+                <div>Art · Design in BaeXang</div>
+                <div>Art · Design in BaeXang</div>
+            </div>
+        </div>
+        <div class="show_art_wrap">
+            <div class="text_wrap" data-aos="fade-up">
+                <p>백상의 다양한 작품들을 만나보세요.</p>
+                <h3>BAEXANG ART</h3>
+                <th:block th:replace="~{fragments :: btnActionHref('Read More', '/shop/best')}"></th:block>
+            </div>
+            <div class="show_wrap">
+                <div class="show_art">
+                    <div>
+                        <img class="art1" src="/images/about/about-slide-img01.jpg" alt="paint">
+                    </div>
+                    <div>
+                        <img class="art2" src="/images/about/about-slide-img02.jpg" alt="paint">
+                    </div>
+                    <div>
+                        <img class="art3" src="/images/about/about-slide-img03.jpg" alt="paint">
+                    </div>
+                    <div>
+                        <img class="art4" src="/images/about/about-slide-img04.jpg" alt="paint">
+                    </div>
+                </div>
+                <div class="show_art">
+                    <div>
+                        <img class="art1" src="/images/about/about-slide-img01.jpg" alt="paint">
+                    </div>
+                    <div>
+                        <img class="art2" src="/images/about/about-slide-img02.jpg" alt="paint">
+                    </div>
+                    <div>
+                        <img class="art3" src="/images/about/about-slide-img03.jpg" alt="paint">
+                    </div>
+                    <div>
+                        <img class="art4" src="/images/about/about-slide-img04.jpg" alt="paint">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/goods_view.css">
+    <script src="/js/goods_view.js"></script>
+</head>
+<body>
+<main id="container" class="goods_view_container" layout:fragment="content">
+    <!-- 주문 옵션 -->
+    <div id="order_wrap">
+        <div class="order_prev_wrap">
+            <div class="order_bg_prev"></div>
+            <div class="bg_prev_list">
+                <div class="bg_thumb on">
+                    <img src="/images/goods_view/item-detail-frame-bg01.jpg" alt="">
+                </div>
+                <div class="bg_thumb">
+                    <img src="/images/goods_view/item-detail-frame-bg02.jpg" alt="">
+                </div>
+                <div class="bg_thumb">
+                    <img src="/images/goods_view/item-detail-frame-bg03.jpg" alt="">
+                </div>
+                <div class="bg_thumb">
+                    <img src="/images/goods_view/item-detail-frame-bg04.jpg" alt="">
+                </div>
+                <div class="bg_thumb">
+                    <img src="/images/goods_view/item-detail-frame-bg05.jpg" alt="">
+                </div>
+            </div>
+        </div>
+        <div id="order_option_wrap">
+            <div class="order_frame">
+                <div class="frame_img" th:style="'background-image:url(/images/goods/' + ${viewOne.poster} + ')'"></div>
+            </div>
+            <div class="select_option">
+                <div class="order_tit_wrap">
+                    <h2 id="frame_tit" th:text="${viewOne.title}"></h2>
+                    <p th:text="${viewOne.name_kr}"></p>
+                </div>
+                <div class="share_sns">
+                    <button class="share_sns_btn"></button>
+                    <a href="#" title="찜 버튼" th:attr="data-no=${viewOne.no}"
+                       th:class="${isWish != null and isWish ? 'on' : ''}"></a>
+                </div>
+                <div class="sns_area">
+                    <h2>SNS 공유하기</h2>
+                    <button type="button" class="close_btn"></button>
+                    <div class="sns_link_list">
+                        <span>
+                            <a target="_blank"
+                               href="https://share.naver.com/web/shareView?url=https%253A%252F%252Fbxgs.co.kr%252Fshop%252Fitem.php%253Fit_id%253D1654133549&title=%25EB%25B0%25B1%25EC%2583%2581%2520%25EA%25B0%25A4%25EB%259F%25AC%25EB%25A6%25AC%25EC%2583%25B5"
+                               class="naver_btn">
+                                <img src="/images/goods_view/naver_square_40x40.png" alt="네이버 공유">
+                            </a>
+                        </span>
+                        <a href="#" class="kakao_btn">
+                            <img src="/images/goods_view/ico-social-login-kakao-on.png" alt="카카오 공유">
+                        </a>
+                    </div>
+                    <div class="sns_link_copy">
+                        <input type="text" name="link_copy" readonly
+                               value="http://bxgs.co.kr/shop/item.php?it_id=1654133549" autocomplete="off">
+                        <button type="button" id="sns_link_copy">URL 복사</button>
+                    </div>
+                </div>
+
+                <!-- 상품 옵션 선택 영역 -->
+                <div id="option_scroll">
+                    <!-- 그림 사이즈 선택 -->
+                    <div class="size_select">
+                        <div class="opt_tit">
+                            <h2>그림사이즈 선택</h2>
+                            <span><strong>*</strong>캔버스/래핑캔버스는 짧은변 최대 140cm</span>
+                        </div>
+                        <label for="opt1"></label>
+                        <select name="opt1" id="opt1"
+                                th:attr="data-no=${viewOne.no}, data-title=${viewOne.title}, data-name=${viewOne.name_kr}, data-poster=${viewOne.poster}, data-price=${viewOne.price}">
+                            <option value="">사이즈를 선택하세요</option>
+                            <option value="1">30.0cm x 30.0cm</option>
+                            <option value="2">35.0cm x 35.0cm</option>
+                        </select>
+                        <i></i>
+                    </div>
+                    <!-- 미디어 선택 -->
+                    <div class="media_select">
+                        <h2>미디어 선택</h2>
+                        <ul>
+                            <li>
+                                <label for="mopt1">
+                                    <input type="radio" name="mopt1" id="mopt1" checked value="1" autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step01-canvas.jpg" alt="캔버스">
+                                    </div>
+                                    <p>캔버스</p>
+                                </label>
+                            </li>
+                            <li>
+                                <label for="mopt2">
+                                    <input type="radio" name="mopt1" id="mopt2" value="2" autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step01-fineart.jpg" alt="파인아트">
+                                    </div>
+                                    <p>파인아트</p>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- 마띠에르 리터치 선택 -->
+                    <div class="retouch">
+                        <div class="opt_tit">
+                            <h2>마띠에르 리터치 선택</h2>
+                            <span><strong>*</strong>그림면 질감 리터칭.캔버스 전용</span>
+                        </div>
+                        <ul>
+                            <li>
+                                <input type="radio" id="retouch_select1" name="rtopt1" value="1" checked
+                                       autocomplete="off">
+                                <label for="retouch_select1">없음</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="retouch_select2" name="rtopt1" value="2" autocomplete="off">
+                                <label for="retouch_select2">선택</label>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="frame_select opt_tit">
+                        <h2>프레임 선택</h2>
+                        <span><strong>*</strong>스크롤 사용시 다양한 프레임을 확인하실 수 있습니다.</span>
+                    </div>
+                    <!-- 프레임 선택 -->
+                    <!-- 캔버스 선택시 -->
+                    <ul id="fopt1" class="fopt_wrap fopt1_wrap">
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" checked value="1" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-canvas-pannel.jpg" alt="캔버스판넬">
+                                </div>
+                                <p>캔버스판넬</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="2">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-wrapping-canvas.jpg" alt="래핑캔버스">
+                                </div>
+                                <p>래핑캔버스</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="3">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-float.jpg" alt="띄움">
+                                </div>
+                                <p>띄움</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="4">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-wood-float.jpg" alt="원목 띄움">
+                                </div>
+                                <p>원목 띄움</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="5">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-up-wood.jpg" alt="올림우드">
+                                </div>
+                                <p>올림우드</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="6">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-antique-d-sliver.jpg" alt="앤틱D실버">
+                                </div>
+                                <p>앤틱D실버</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="7">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-wood-beige.jpg" alt="원목베이지">
+                                </div>
+                                <p>원목베이지</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="8">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-box-white.jpg" alt="관화이트">
+                                </div>
+                                <p>관화이트</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="9">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-box-wood.jpg" alt="관우드">
+                                </div>
+                                <p>관우드</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt1" value="10">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-box-black.jpg" alt="관블랙">
+                                </div>
+                                <p>관블랙</p>
+                            </label>
+                        </li>
+                    </ul>
+                    <!-- 파인아트 선택 시 -->
+                    <ul id="fopt2" class="fopt_wrap fopt2_wrap">
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="3" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-float.jpg" alt="띄움">
+                                </div>
+                                <p>띄움</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="4" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-wood-float.jpg" alt="원목 띄움">
+                                </div>
+                                <p>원목 띄움</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="6" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-antique-d-sliver.jpg" alt="앤틱D실버">
+                                </div>
+                                <p>앤틱D실버</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="7" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-wood-beige.jpg" alt="원목베이지">
+                                </div>
+                                <p>원목베이지</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="8" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-box-white.jpg" alt="관화이트">
+                                </div>
+                                <p>관화이트</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="9" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-box-wood.jpg" alt="관우드">
+                                </div>
+                                <p>관우드</p>
+                            </label>
+                        </li>
+                        <li>
+                            <label>
+                                <input type="radio" name="fopt2" value="10" autocomplete="off">
+                                <div class="opt_thumb">
+                                    <img src="/images/goods_view/item-detail-step02-box-black.jpg" alt="관블랙">
+                                </div>
+                                <p>관블랙</p>
+                            </label>
+                        </li>
+                    </ul>
+                    <div class="mat_select">
+                        <div class="opt_tit">
+                            <h2>매트(여백) 선택</h2>
+                            <span><strong>*</strong>선택 가능한 경우에만 표시됩니다.</span>
+                        </div>
+                        <ul id="matopt1" class="matopt1_wrap">
+                            <li>
+                                <label>
+                                    <input type="radio" name="matopt1" value="1" checked autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step04-none.jpg" alt="없음">
+                                    </div>
+                                    <p>없음</p>
+                                </label>
+                            </li>
+                            <!-- 앤틱D실버, 원목베이지 용 -->
+                            <li style="display: none;">
+                                <label>
+                                    <input type="radio" name="matopt1" value="3" autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step04-3cm.jpg" alt="3cm">
+                                    </div>
+                                    <p>3cm</p>
+                                </label>
+                            </li>
+                            <li style="display: none;">
+                                <label>
+                                    <input type="radio" name="matopt1" value="4" autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step04-6cm.jpg" alt="6cm">
+                                    </div>
+                                    <p>6cm</p>
+                                </label>
+                            </li>
+                            <li style="display: none;">
+                                <label>
+                                    <input type="radio" name="matopt1" value="5" autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step04-11cm.jpg" alt="11cm">
+                                    </div>
+                                    <p>11cm</p>
+                                </label>
+                            </li>
+                            <li style="display: none;">
+                                <label>
+                                    <input type="radio" name="matopt1" value="6" autocomplete="off">
+                                    <div class="opt_thumb">
+                                        <img src="/images/goods_view/item-detail-step04-15cm.jpg" alt="15cm">
+                                    </div>
+                                    <p>15cm</p>
+                                </label>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div id="option_qty">
+                    <ul id="qty_area">
+                        <li class="qty_list">
+                            <div class="opt_name">
+                                <span th:text="${viewOne.title}"></span>
+                            </div>
+                            <div class="opt_count">
+                                <label for="opt_qty"></label>
+                                <button type="button" class="qty_minus">
+                                    <span class="blind">감소</span>
+                                </button>
+                                <input type="text" id="opt_qty" class="num_input" size="5" value="1">
+                                <button type="button" class="qty_plus">
+                                    <span class="blind">증가</span>
+                                </button>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div id="total_price">
+                    <span>총 금액</span>
+                    <span><strong id="realCost"></strong>원</span>
+                </div>
+                <div id="order_area">
+                    <div th:insert="~{fragments :: btnAction('장바구니')}" class="gray_btn box_action" id="go_cart"></div>
+                    <div th:insert="~{fragments :: btnAction('구매하기')}" class="order_btn box_action"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 다른 그림 추천 -->
+    <div id="recommend_pic">
+        <h2>아티스트 다른 그림</h2>
+        <div class="swiper">
+            <ul class="swiper-wrapper">
+                <li class="swiper-slide" th:each="random : ${randomPic}">
+                    <div class="item_wrap">
+                        <div class="img_wrap">
+                            <div class="item_img">
+                                <img th:src="${'/images/goods/' + random.poster}" th:alt="${random.title}">
+                                <span class="blind">백일초</span>
+                                <div class="view_more_wrap">
+                                    <div th:replace="~{fragments :: btnActionHref('VIEW MORE', '/shop/view/' + ${random.no})}"></div>
+                                    <div class="icon_wrap">
+                                        <a href="#" class="sight_icon"></a>
+                                        <button class="like_icon"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="item_detail">
+                            <div class="item_tit">
+                                <a href="#" th:text="${random.title}">백일초</a>
+                            </div>
+                            <div class="item_txt">
+                                <span th:text="${random.name_kr}"></span>
+                                <p>30.0cm x 30.0cm</p>
+                            </div>
+                            <div class="item_cost">
+                                <span><strong
+                                        th:text="${#numbers.formatInteger(random.price, 3, 'COMMA')}"></strong>원</span>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+    <!-- 상품 상세보기 하단 -->
+    <div id="view_bottom">
+        <div id="view_info">
+            <div class="shop_common_tab">
+                <ul>
+                    <li><a href="#view_info" class="tab_on">상품정보</a></li>
+                    <li><a href="#buy_must_read">구매정보</a></li>
+                    <li><a href="#review_anchor" th:text="|상품후기(${totalReview})|"></a></li>
+                    <li><a href="#item_qa" th:text="|상품문의(${totalAsk})|"></a></li>
+                </ul>
+            </div>
+            <!-- 상품 설명 -->
+            <div id="info_explan_wrap" class="shop_view_content">
+                <!-- 작품 설명 -->
+                <div class="goods_info_explan">
+                    <div class="shop_common_tit">
+                        <span class="common_tit" th:text="${viewOne.name_kr}"></span>
+                        <h2 class="item_tit" th:text="${viewOne.title}"></h2>
+                    </div>
+                    <div class="item_frame_wrap">
+                        <img th:src="${'/images/goods/' + viewOne.poster}" alt="" class="item_img">
+                    </div>
+                    <div class="item_desc_wrap">
+                        <div class="item_desc_tit">
+                            <strong class="item_name">아를의 랑그루아 다리</strong>
+                            <span class="artist_name_wrap">
+                                <span class="artist_name_en">Vincent van Gogh</span>
+                                <span class="artist_name_ko">빈센트 반 고흐</span>
+                            </span>
+                        </div>
+                        <div class="item_desc_con" th:utext="${viewOne.descr}">
+                        </div>
+                    </div>
+                </div>
+                <!-- 작가 설명 -->
+                <div class="artist_info_explan">
+                    <div class="artist_img_wrap">
+                        <img src="/images/goods_view/van_gogh.jpg" alt="작가 이미지">
+                    </div>
+                    <!-- 작가 wrap -->
+                    <div class="artist_info_wrap">
+                        <!-- 작가 이름 -->
+                        <div class="artist_name">
+                            <h2>빈센트 반 고흐</h2>
+                            <span>Vincent van Gogh</span>
+                        </div>
+                        <!-- 작가 프로필 -->
+                        <dl class="artist_pro">
+                            <dt>국적</dt>
+                            <dd>네덜란드</dd>
+                        </dl>
+                        <dl class="artist_pro">
+                            <dt>출생·사망</dt>
+                            <dd>1853-03-30 ~ 1890-07-29</dd>
+                        </dl>
+                        <dl class="artist_pro">
+                            <dt>주요작품</dt>
+                            <dd>[별이 빛나는 밤],[자화상],[아를르의 포룸 광장의 카페 테라스]</dd>
+                        </dl>
+                        <div class="artist_desc">
+                            <p>네덜란드의 후기 인상주의 화가. 짧은 생애였지만 가장 유명한 미술가로 남아있다.</p>
+                            <p>초기 작품은 어두운 색조의 작품이었고, 후기 작품은 표현주의의 경향을 보였다.</p>
+                            <p>고흐의 작품은 20세기 미술운동인 야수주의와 독일 표현주의가 발전할 수 있는 토대를 제공했다.</p>
+                        </div>
+                        <div class="artist_btn_wrap">
+                            <a href="#" class="artist_more_btn">Read More</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="print_method_explan">
+                    <img src="/images/goods_view/item-detail-contents.jpg" alt="프린팅 방법 특징">
+                </div>
+            </div>
+            <!-- 구매 정보 -->
+            <div id="buy_must_read" class="shop_view_content">
+                <div class="shop_common_tab">
+                    <ul>
+                        <li><a href="#view_info">상품정보</a></li>
+                        <li><a href="#buy_must_read" class="tab_on">구매정보</a></li>
+                        <li><a href="#review_anchor" th:text="|상품후기(${totalReview})|">상품후기(0)</a></li>
+                        <li><a href="#item_qa" th:text="|상품문의(${totalAsk})|"></a></li>
+                    </ul>
+                </div>
+                <!-- 상세보기 공통 주의사항 -->
+                <div id="buy_warning">
+                    <div class="shop_common_tit">
+                        <span class="common_tit">Purchase Notes</span>
+                        <h2 class="item_tit">구매 시 주의 사항</h2>
+                    </div>
+                    <!-- 상세보기 공통 주의사항 -->
+                    <div class="item_buy_con">
+                        <div class="con_inner">
+                            <dl>
+                                <dt><span>1</span>사이즈 오차</dt>
+                                <dd>
+                                    백상갤러리 그림액자는 수제작 상품 특성상 제조 과정에서 크기에 따라 1~3cm 사이즈 오차가 발생할 수 있으며 이는 상품 고유의 하자가 아닙니다.
+                                    동일 사이즈의 상품을 나란히 거치하시려는 경우 등 정밀 사이즈 제작이 필요하신 경우는 구매시 배송메세지, 1:1 상담게시판에 요청사항을
+                                    남겨주시거나 고객센터로 연락주세요.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><span>2</span>색감차이</dt>
+                                <dd>
+                                    화면에서 보는 상품기술서 상의 색감과 실제 상품의 색감은 모니터와 미디어라는 매체의 특성, 사용자 기기의 고유 특성에 따라 차이가 날 수 있으며 이는
+                                    상품의 하자가 아닙니다. 동일한 색상이라도 사람에 따라서 느끼는 색의 차이가 존재하며 계절, 관람공간의 색상 및 조명 등 수많은 요소에 따라 다르게
+                                    보일 수 있기 때문에 색감, 느낌 등의 사유로 인한 A/S 및 교환/반품이 불가한 점 양해 부탁드립니다.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><span>3</span>배송정책</dt>
+                                <dd>
+                                    백상갤러리 명화액자는 각 그림별 비율을 지키기 위한 개별 주문 수제작 상품으로 공장 상황에 따라 주문일로 부터 출고까지 영업일 기준 5일내외 (마띠에르
+                                    리터치 상품은 영업일 20일이내 소요)의 제작기간이 소요됩니다. 넉넉하게 여유를 가지고 주문해 주시기 바랍니다.<br><br>
+                                    * 주말 및 휴무일, 천재지변에 의한 기간은 배송기한에 포함되지 않습니다.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><span>4</span>배송비</dt>
+                                <dd>
+                                    백상갤러리의 배송비는 기본 4,000원이며 10만원 이상 구매시 무료로 배송됩니다. 액자류는 특성 및 크기에 따라 합포장이 어려우며, 배송비가 높은 점
+                                    양해 부탁드립니다.
+                                </dd>
+                            </dl>
+                            <dl>
+                                <dt><span>5</span>보증 및 A/S</dt>
+                                <dd>
+                                    백상갤러리 액자류 상품 AS기한은 구매일로부터 1년 입니다. 배송파손이나 초기 불량의 경우 무상 수리 또는 재제작 배송 처리되며, AS기간 이후는
+                                    소정의 비용으로 A/S 해드립니다. A/S신청 시 문제 부위의 사진을 잘 보이도록 촬영하여 카카오채널, 1:1상담, 휴대폰(010-0000-0000)
+                                    또는 이메일(baexang@baexang.co.kr)으로 보내주세요.
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                <!-- 상세보기 공통 교환 / 환불 -->
+                <div id="exchange_refund">
+                    <div class="con_inner">
+                        <div class="shop_common_tit">
+                            <span class="common_tit">Exchange / Refund</span>
+                            <h2 class="item_tit">교환 / 환불</h2>
+                        </div>
+                        <dl>
+                            <dt><span>1</span>교환 환불 정책</dt>
+                            <dd>
+                                백상갤러리의 그림액자는 그림, 미디어, 크기, 프레임 등을 고객이 지정하여 제작하는 주문제작 상품으로 제품 특성상 소비자의 변심에 의한 상품교환 또는 환불이
+                                불가합니다. 신중하게 구매해 주시기 바랍니다. 아크릴 압착 상품이 오배송 된 경우 보호필름을 제거하시면 상품성 상실로 반송 처리가 불가합니다. 오배송을
+                                확인하시면 절대로 보호필름을 제거하지 마시고, 배송된 포장재에 그대로 재 포장하여 고객센터로 수거를 요청 해 주세요.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><span>2</span>상품하자 / 오배송</dt>
+                            <dd>
+                                상품하자, 오배송의 경우 상품을 받으신 날로부터 7일 이내(신청일 기준) 교환 환불이 가능합니다. 배송중 파손 또는 상품 초기 불량의 경우 수거 후 AS처리
+                                되거나, 액자류 특성상 수거 없이 재제작 배송 될 수 있습니다. 상품하자, 오배송에 따른 임의 반송 시 액자류 특성상 상품이 파손되기 쉬으므로 반드시 받으신
+                                포장을 활용하여 재포장 해 주시고 고객센터로 수거를 요청 해 주세요.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><span>3</span>주문취소 / 환불</dt>
+                            <dd>
+                                주문제작상품 특성상 주문이 접수 이후 제작이 시작되면 배송 이전이라도 주문취소에 따른 전액 환불이 불가합니다. 반드시 주문을 취소하셔야 하는 경우, 인쇄공정
+                                진행시 상품금액의 30%, 프레임 공정 진행시 상품금액의 70%를 차감한 나머지 금액을 환불 받으실 수 있습니다.
+                            </dd>
+                        </dl>
+                        <dl>
+                            <dt><span>4</span>배송비</dt>
+                            <dd>
+                                상품의 하자로 인한 반품, A/S등을 위해 반송이 필요한 경우 반드시 고객센터에 문의/요청 해주세요. 임의 반송시 상품이 파손/훼손되기 쉬우며, 이경우
+                                고객과실로 반품, A/S등의 조치를 받기 어려울 수 있습니다.<br><br>
+                                * 반송주소 : 서울 강남구 강남대로 1234 (백상갤러리)
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <span id="review_anchor"></span>
+            </div>
+            <!-- 평점, 리뷰, 문의 -->
+            <div id="item_review" class="shop_view_content">
+                <div class="con_inner">
+                    <div class="shop_common_tab">
+                        <ul>
+                            <li><a href="#view_info">상품정보</a></li>
+                            <li><a href="#buy_must_read">구매정보</a></li>
+                            <li><a href="#review_anchor" class="tab_on" th:text="|상품후기(${totalReview})|"></a></li>
+                            <li><a href="#item_qa" th:text="|상품문의(${totalAsk})|"></a></li>
+                        </ul>
+                    </div>
+                    <!-- 전체 평점 -->
+                    <div id="item_grade">
+                        <div class="left">
+                            <strong class="total_grade" th:text="${avgRating}"></strong>
+                            <p><strong th:text="|${totalPersent}%|"></strong>의 구매자들이 이 상품을 좋아합니다.</p>
+                        </div>
+                        <div class="right">
+                            <ul>
+                                <li class="grade_item">
+                                    <div class="grade_star">
+                                        <img src="/images/goods_view/grade_star5.png" alt="별점5점">
+                                    </div>
+                                    <div class="grade_txt">아주 좋아요</div>
+                                    <div class="grade_graph">
+                                        <div class="grade_bar bar1" th:style="|width:${fivePersent}%|"></div>
+                                    </div>
+                                    <div class="percent" th:text="|${fivePersent}%|"></div>
+                                </li>
+                                <li class="grade_item">
+                                    <div class="grade_star">
+                                        <img src="/images/goods_view/grade_star4.png" alt="별점4점">
+                                    </div>
+                                    <div class="grade_txt">맘에 들어요</div>
+                                    <div class="grade_graph">
+                                        <div class="grade_bar bar2" th:style="|width:${fourPersent}%|"></div>
+                                    </div>
+                                    <div class="percent" th:text="|${fourPersent}%|"></div>
+                                </li>
+                                <li class="grade_item">
+                                    <div class="grade_star">
+                                        <img src="/images/goods_view/grade_star3.png" alt="별점3점">
+                                    </div>
+                                    <div class="grade_txt">보통이에요</div>
+                                    <div class="grade_graph">
+                                        <div class="grade_bar bar3" th:style="|width:${threePersent}%|"></div>
+                                    </div>
+                                    <div class="percent" th:text="|${threePersent}%|"></div>
+                                </li>
+                                <li class="grade_item">
+                                    <div class="grade_star">
+                                        <img src="/images/goods_view/grade_star2.png" alt="별점2점">
+                                    </div>
+                                    <div class="grade_txt">그냥 그래요</div>
+                                    <div class="grade_graph">
+                                        <div class="grade_bar bar4" th:style="|width:${twoPersent}%|"></div>
+                                    </div>
+                                    <div class="percent" th:text="|${twoPersent}%|"></div>
+                                </li>
+                                <li class="grade_item">
+                                    <div class="grade_star">
+                                        <img src="/images/goods_view/grade_star1.png" alt="별점1점">
+                                    </div>
+                                    <div class="grade_txt">별로에요</div>
+                                    <div class="grade_graph">
+                                        <div class="grade_bar bar5" th:style="|width:${onePersent}%|"></div>
+                                    </div>
+                                    <div class="percent" th:text="|${onePersent}%|"></div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- 상품 후기 -->
+                    <div id="user_review">
+                        <div class="review_tit">
+                            <h2>Review</h2>
+                            <div class="review_order">
+                                <ul>
+                                    <li th:class="${param.order == null ? 'on' : ''}">
+                                        <a th:href="@{'/shop/view/' + ${viewOne.no} + '#review_anchor'}">최신순</a>
+                                    </li>
+                                    <li th:class="${param.order != null and #strings.equals(param.order, 'DESC') ? 'on' : ''}">
+                                        <a th:href="@{'/shop/view/' + ${viewOne.no} + '?order=DESC#review_anchor'}">평점높은순</a>
+                                    </li>
+                                    <li th:class="${param.order != null and #strings.equals(param.order, 'ASC') ? 'on' : ''}">
+                                        <a th:href="@{'/shop/view/' + ${viewOne.no} + '?order=ASC#review_anchor'}">평점낮은순</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="review_list">
+                            <!-- 상품 후기가 없을 경우 -->
+                            <div class="empty_content"
+                                 th:style="|display:${#lists.isEmpty(reviewAll) ? 'block' : 'none'}|">
+                                <img src="/images/goods_view/ico-information-big.png" alt="알림 아이콘">
+                                <p>사용 후기가 없습니다.</p>
+                            </div>
+                            <div class="review_content"
+                                 th:style="|display:${#lists.isEmpty(reviewAll) ? 'none' : 'block'}|">
+                                <ol>
+                                    <li th:each="review : ${reviewAll}">
+                                        <div class="review_info">
+                                            <div class="rating">
+                                                <img th:src="@{'/images/goods_view/grade_star' + ${review.rating} + '.png'}" alt="별점">
+                                            </div>
+                                            <div class="title" th:text="${review.title}"></div>
+                                            <div class="writer" th:text="${review.member_id}"></div>
+                                            <div class="date"
+                                                 th:text="${#dates.format(review.regdate, 'yy-MM-dd')}"></div>
+                                        </div>
+                                        <div class="review_depth">
+                                            <div class="depth_p" th:utext="${review.content}"></div>
+                                            <div class="review_btn_wrap"
+                                                 th:if="${session.user != null and (#strings.equals(session.user.isadmin, 'Y') or #strings.equals(session.user.id, ask.member_id)) }">
+                                                <a th:href="|/shop/review_update/${review.no}|" class="modify_btn">수정</a>
+                                                <a th:href="|/rest/reviewDelete/${review.no}|" class="delete_btn">삭제</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                        <div class="right" th:attr="data-islogin=${session.user != null}">
+                            <div th:replace="~{fragments :: btnActionHref('사용후기 쓰기', '/shop/review_write/' + ${viewOne.no})}"></div>
+                        </div>
+                    </div>
+                    <!-- 상품 문의 -->
+                    <div id="item_qa">
+                        <div class="shop_common_tab">
+                            <ul>
+                                <li><a href="#view_info">상품정보</a></li>
+                                <li><a href="#buy_must_read">구매정보</a></li>
+                                <li><a href="#review_anchor" th:text="|상품후기(${totalReview})|"></a></li>
+                                <li><a href="#item_qa" class="tab_on" th:text="|상품문의(${totalAsk})|"></a></li>
+                            </ul>
+                        </div>
+                        <div class="qa_tit">
+                            <div class="left">
+                                <h2>Q&A</h2>
+                                <p>상품문의를 제외한 반품,교환,취소 등에 관한 문의는 <a href="#">고객센터 1:1 문의 게시판</a>을 이용해주시기 바랍니다.</p>
+                            </div>
+                            <div class="right" th:attr="data-islogin=${session.user != null}">
+                                <div th:replace="~{fragments :: btnActionHref('상품 문의하기', '/shop/qna_write/' + ${viewOne.no})}"></div>
+                            </div>
+                        </div>
+                        <!-- 상품문의가 없을 때 -->
+                        <div class="empty_content" th:style="|display:${#lists.isEmpty(askAll) ? 'block' : 'none'}|">
+                            <img src="/images/goods_view/ico-information-big.png" alt="알림 아이콘">
+                            <p>상품 문의가 없습니다.</p>
+                        </div>
+                        <div class="qa_content" th:style="|display:${#lists.isEmpty(askAll) ? 'none' : 'block'}|">
+                            <ol>
+                                <li th:each="ask : ${askAll}">
+                                    <div class="qa_info">
+                                        <div class="state">
+                                            <span th:if="${ask.answer == null}">답변대기</span>
+                                            <span class="complete_ask" th:if="${ask.answer != null}">답변완료</span>
+                                        </div>
+                                        <div class="question">
+                                            <span th:text="${ask.question}"></span>
+                                            <img src="/images/goods_view/ico-secret.png" alt="비밀글">
+                                        </div>
+                                        <div class="writer" th:text="${ask.member_id}"></div>
+                                        <div class="date"></div>
+                                    </div>
+                                    <div class="qa_depth_wrap" th:attr="data-chk=${session.user != null and (#strings.equals(session.user.isadmin, 'Y') or #strings.equals(session.user.id, ask.member_id))}">
+                                        <div class="qa_depth">
+                                            <div class="qa_q">
+                                                <span>
+                                                    <img src="/images/goods_view/ico-question.png" alt="">
+                                                </span>
+                                                <p th:utext="${ask.content}"></p>
+                                                <div class="qa_btn_wrap"
+                                                     th:if="${session.user != null and (#strings.equals(session.user.isadmin, 'Y') or #strings.equals(session.user.id, ask.member_id))}">
+                                                    <a th:href="|/shop/qna_update/${ask.no}|" class="modify_btn">수정</a>
+                                                    <a href="#" class="delete_btn" th:attr="data-no=${ask.no}">삭제</a>
+                                                </div>
+                                            </div>
+                                            <div class="qa_a">
+                                                <span>
+                                                    <img src="/images/goods_view/ico-answer.png" alt="">
+                                                </span>
+                                                <p th:if="${ask.answer == null}">답변등록이 대기중입니다.</p>
+                                                <p th:if="${ask.answer != null}" th:utext="${ask.answer}"></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

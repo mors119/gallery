@@ -1,0 +1,104 @@
+main#container {
+    padding: 0 !important;
+}
+
+.goods_qna_container #qa_write {
+    line-height: 1.267em;
+}
+
+.goods_qna_container #qa_write h1 {
+    padding: 20px;
+    border-bottom: 1px solid #DDD;
+    font-size: 22px;
+    font-weight: 700;
+    font-family: 'EB Garamond', 'Noto Serif KR', sans-serif;
+    color: #080808;
+    line-height: 29px;
+}
+
+.goods_qna_container #qa_write .qna_form {
+    margin: 10px;
+}
+
+.goods_qna_container #qa_write .form_input {
+    font-size: 14px;
+    max-width: 100%;
+    width: 100%;
+    height: 40px;
+    border: 1px solid #EEE;
+    background: #FFF;
+    color: #000;
+    vertical-align: middle;
+    padding: 5px;
+}
+
+.goods_qna_container #qa_write li > span {
+    display: block;
+    font-size: 14px;
+    color: var(--point-color1);
+    margin: 3px 0 10px;
+    line-height: 26px;
+}
+
+.goods_qna_container #qa_write .goods_question {
+    flex: 1;
+    margin-top: 30px;
+}
+
+.goods_qna_container #qa_write ul p {
+    color: #000;
+    margin: 10px 0;
+    font-size: 12px;
+}
+
+.goods_qna_container #qa_write .submit_btn {
+    display: block;
+    background: var(--point-color1);
+    color: #FFF;
+    margin: 10px 0 30px;
+    width: 100%;
+    border: none;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 3px;
+}
+
+.goods_qna_container #qa_write .close_btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0 !important;
+    margin: 0 !important;
+    width: 70px;
+    height: 70px;
+    border: none;
+    background: url(/images/goods_view/ico-pop-close.png) no-repeat center;
+    line-height: 0;
+}
+
+/* review_write 페이지 */
+/* 별점 */
+.rating {
+    position: relative;
+    width: 180px;
+    background: transparent;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: .3em;
+    padding: 5px;
+    overflow: hidden;
+    border-radius: 20px;
+    box-shadow: 0 0 2px #b3acac;
+}
+
+.rating__star {
+    font-size: 1.3em;
+    cursor: pointer;
+    color: var(--point-color1);
+    transition: filter linear .3s;
+}
+
+.rating__star:hover {
+    filter: drop-shadow(1px 1px 4px gold);
+}

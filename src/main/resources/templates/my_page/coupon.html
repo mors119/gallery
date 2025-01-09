@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout}">
+<head layout:fragment="config">
+    <title>백상 갤러리샵</title>
+    <link rel="stylesheet" href="/css/my_coupon.css">
+    <link rel="stylesheet" href="/css/my_page_common.css">
+    <script src="/js/my_page.js"></script>
+</head>
+<body>
+<main id="container" class="my_coupon_container my_page_container" layout:fragment="content">
+    <section class="my_page_wrap">
+        <div class="my_page_inner">
+            <!-- 좌측 네비게이션 -->
+            <div th:replace="~{my_page/nav :: nav}"></div>
+            <!-- 우측 회원 정보 -->
+            <div class="con_wrap">
+                <!-- 회원 등급, 쿠폰, 적립금 -->
+                <div th:replace="~{fragments :: my_info}"></div>
+
+                <div class="my_page_tit">
+                    <h3>쿠폰</h3>
+                </div>
+                <ul class="coupon_state">
+                    <li class="on"><a href="/my/coupon">사용가능쿠폰</a></li>
+                    <li><a href="/my/coupon_done">사용완료쿠폰</a></li>
+                </ul>
+                <div class="coupon_table">
+                    <table>
+                        <colgroup>
+                            <col class="col1" width="*">
+                            <col class="col2" width="35%">
+                            <col class="col3" width="25%">
+                            <col class="col4" width="25%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th>쿠폰번호</th>
+                            <th>쿠폰명</th>
+                            <th>혜택</th>
+                            <th>사용기간</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:if="${#lists.isEmpty(coupons)}">
+                            <td colspan="4" class="empty_content">
+                                <img src="/images/my_page/ico-information-big.png" alt="알림">
+                                <p>사용 가능한 쿠폰이 없습니다.</p>
+                            </td>
+                        </tr>
+                        <tr th:if="${!#lists.isEmpty(coupons)}" th:each="co : ${coupons}">
+                            <td th:text="${co.no}"></td>
+                            <td th:text="${co.name}"></td>
+                            <td th:text="${co.venefit}"></td>
+                            <td th:text="${co.startdate + ' ~ ' + #strings.defaultString(co.enddate, '')}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 페이징 -->
+            <th:block th:utext="${paing}"/>
+        </div>
+    </section>
+</main>
+</body>
+</html>

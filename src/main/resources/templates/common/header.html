@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Header</title>
+</head>
+<body>
+<header id="header" class="header_container" th:fragment="header">
+    <!-- 로고 -->
+    <h1 class="logo">
+        <a href="/"><span class="blind">백상 갤러리</span></a>
+    </h1>
+
+    <!-- 사이트맵 -->
+    <div class="sitemap_wrap">
+        <a href="#" class="btn_sitemap_open">
+            <span class="blind">전체 사이트맵 열기</span>
+        </a>
+
+        <div class="sitemap">
+            <div class="inner">
+                <h2 class="sitemap_logo">
+                    <a href="/"><span class="blind">백상 갤러리</span></a>
+                </h2>
+                <nav class="all_menu_wrap">
+                    <h2 class="blind">백상 갤러리 사이트맵</h2>
+                    <ul class="all_menu">
+                        <li>
+                            <a href="#">Product</a>
+                            <ul class="depth">
+                                <li><a href="/shop/best">베스트</a></li>
+                                <li><a href="/shop/goods">신상품</a></li>
+                                <li><a href="/shop/picture">사진작품</a></li>
+                                <li><a href="/shop/painting">그림작품</a></li>
+                                <li><a href="/artist/list">작가별</a></li>
+                                <li><a href="/shop/genre">장르별</a></li>
+                                <li><a href="/shop/subject">주제별</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">About Baexang</a>
+                            <ul class="depth">
+                                <li><a href="/about">회사소개</a></li>
+                                <li>
+                                    <a href="javascript:alert('준비중입니다.');">갤러리</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Community</a>
+                            <ul class="depth">
+                                <li>
+                                    <a href="/notice/list">공지사항</a>
+                                </li>
+                                <li><a href="/event/list">이벤트</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#">Service</a>
+                            <ul class="depth">
+                                <li><a href="/faq/list">FAQ</a></li>
+                                <li><a href="/support">제휴협찬문의</a></li>
+                                <li><a href="/qna/list">1:1 문의</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <nav class="info_menu_wrap">
+                    <h2 class="blind">로그인 관련 메뉴</h2>
+                    <ul class="info_menu">
+                        <li>
+                            <a th:if="${session.user != null}" href="/logout">로그아웃</a>
+                            <a th:unless="${session.user != null}" href="/login">로그인</a>
+                        </li>
+                        <li>
+                            <a th:if="${session.user != null}" href="/my/main">마이페이지</a>
+                            <a th:unless="${session.user != null}" href="/join_intro">회원가입</a>
+                        </li>
+                        <li><a href="#">개인결제창</a></li>
+                    </ul>
+                </nav>
+                <a href="#" class="btn_sitemap_close">
+                    <span class="blind">전체 사이트맵 닫기</span>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- GNB -->
+    <nav class="gnb_wrap">
+        <h2 class="blind">대메뉴</h2>
+        <ul class="gnb">
+            <li><a href="/shop/best">베스트</a></li>
+            <li><a href="/shop/goods">신상품</a></li>
+            <li><a href="/shop/picture">사진작품</a></li>
+            <li><a href="/shop/painting">그림작품</a></li>
+            <li><a href="/artist/list">작가별</a></li>
+            <li><a href="/shop/genre">장르별</a></li>
+            <li><a href="/shop/subject">주제별</a></li>
+        </ul>
+    </nav>
+
+    <!-- GNB INFO -->
+    <nav class="gnb_info_wrap">
+        <h2 class="blind">마이메뉴</h2>
+        <ul class="gnb">
+            <li>
+                <a th:if="${session.user != null}" href="/logout">로그아웃</a>
+                <a th:unless="${session.user != null}" href="/login">로그인</a>
+            </li>
+            <li>
+                <a th:if="${session.user != null}" href="/my/main">마이페이지</a>
+                <a th:unless="${session.user != null}" href="/join_intro">회원가입</a>
+            </li>
+            <li><a href="/shop/order_info">주문조회</a></li>
+            <li>
+                <a href="/shop/cart">장바구니<span class="basket_num">0</span></a>
+            </li>
+            <li><a href="/qna/list">고객센터</a></li>
+        </ul>
+    </nav>
+
+    <!-- Search -->
+    <div class="all_search_wrap">
+        <a href="#" class="btn_all_search_open">
+            <span class="blind">검색창 열기</span>
+        </a>
+
+        <aside id="search_wrap">
+            <form action="/search">
+                <fieldset>
+                    <legend>전체검색</legend>
+                    <div class="sch_word_box">
+                        <label for="sch_str" class="blind">검색어<strong class="blind">필수</strong></label>
+                        <input type="search" name="searchWord" id="sch_str" required placeholder="Search..."
+                               autocomplete="off">
+                        <button type="submit" value="검색"><span class="blind">검색</span></button>
+                    </div>
+                    <!-- 최근 검색어 -->
+                    <div class="sch_word_wrap">
+                        <div class="sch_recent_word">
+                            <h2>최근검색어</h2>
+                            <ul>
+                                <li>
+                                    <a href="#" class="recent_word">#클로드 모네</a>
+                                    <span class="recent_date">2024.12.24</span>
+                                    <button type="button" class="recent_delete"><span class="blind">삭제</span></button>
+                                </li>
+                                <li>
+                                    <a href="#" class="recent_word">#빈센트 반 고흐</a>
+                                    <span class="recent_date">2024.12.14</span>
+                                    <button type="button" class="recent_delete"><span class="blind">삭제</span></button>
+                                </li>
+                                <li>
+                                    <a href="#" class="recent_word">#앙티브의 아침</a>
+                                    <span class="recent_date">2024.12.13</span>
+                                    <button type="button" class="recent_delete"><span class="blind">삭제</span></button>
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- 인기 검색어-->
+                        <div class="sch_popular_word">
+                            <h2>인기검색어</h2>
+                            <ul>
+                                <li><a href="#">1. 클로드 모네</a></li>
+                                <li><a href="#">2. 앙티브의 아침</a></li>
+                                <li><a href="#">3. 빈센트 반 고흐</a></li>
+                                <li><a href="#">4. 세느강의 봄</a></li>
+                                <li><a href="#">5. 폴 고갱</a></li>
+                                <li><a href="#">6. 수확하는 사람</a></li>
+                                <li><a href="#">7. 백일초</a></li>
+                                <li><a href="#">8. 산지기의 집</a></li>
+                                <li><a href="#">9. 피에르 보나르</a></li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 닫기 버튼 -->
+                    <a href="#" class="search_close_btn"><span class="blind">검색창 닫기</span></a>
+                </fieldset>
+            </form>
+        </aside>
+    </div>
+</header>
+
+</body>
+</html>
